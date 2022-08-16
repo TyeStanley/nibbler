@@ -37,11 +37,11 @@ const RestSchema = new Schema ({
         type: String
     }
   }, 
+  // Add getter for date formatting
   {
     toJSON: {
         getters: true
-    },
-    id: false
+    }
   }
 );
 

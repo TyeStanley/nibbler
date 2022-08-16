@@ -22,11 +22,13 @@
     #intro-h2{
         font-size:18px;
         text-shadow: 2px 2px 4px rgb(32, 31, 31);
+        color: rgb(226, 226, 226);
 
     }
     #recentUploads{
         font-size: 22px;
-        box-shadow: 1px 15px 50px rgba(245, 240, 240, 0.555) ; 
+        border-bottom: 1px solid grey;
+        font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif
     }
 
       
@@ -35,24 +37,4 @@
     width: 90%;
     margin: auto;
 }
-.card{
-    box-shadow: 1px 5px 10px rgb(14, 13, 13);
-    color: rgb(230, 187, 132);
-    background-color: rgba(74, 75, 77, 0.973);
-    
- 
-    #rest-card-header{
-        background-color: rgba(74, 75, 77, 0.993);
-        text-shadow: 2px 2px 4px rgb(32, 31, 31);
 
-        
-    }
-    #card-img-container{
-        overflow-x: auto;
-        
-        background-color: rgba(74, 75, 77, 0.897);
-    }
-
-  
-  
-}

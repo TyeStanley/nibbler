@@ -1,14 +1,19 @@
-
+import React from 'react';
 import './App.scss';
-import Home from './pages/Home'
+import Header from './components/Header';
+import Home from './components/pages/Home';
+import Footer from './components/Footer';
 
 function App() {
+
   return (
-    <main>
-
-      <Home></Home>
-
-    </main>
+    <>
+      <Header />
+      <main>
+        <Home />
+      </main>
+      <Footer />
+    </>
   );
 }
 

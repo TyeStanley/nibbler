@@ -33,9 +33,12 @@ const RestSchema = new Schema ({
     foodDescript: {
         type: String
     },
-    comments: {
-        type: String
-    }
+    comments: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: 'Comment'
+        }
+    ]
   }, 
   // Add getter for date formatting
   {

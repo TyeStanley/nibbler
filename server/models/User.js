@@ -31,6 +31,12 @@ const UserSchema = new Schema(
                 type: Schema.Types.ObjectId,
                 ref: 'Restaurant'
             }
+        ], 
+        comments: [
+            {
+                type: Schema.Types.ObjectId,
+                ref: 'Comment'
+            }
         ]
     },
     {

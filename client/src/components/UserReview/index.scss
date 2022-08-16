@@ -1,0 +1,40 @@
+#desc-box{
+    
+    
+    margin: auto;
+    border-bottom: 2px solid rgb(78, 76, 76);
+    border-left: 2px solid rgb(78, 76, 76);
+    border-top: 2px solid rgb(78, 76, 76);
+    color: rgb(230, 187, 132);
+    text-shadow: 2px 2px 4px rgb(32, 31, 31);
+    font-size: 15px;
+    font-weight: bolder;
+    background-color: rgba(97, 98, 100, 0);
+    overflow-y: auto;
+    height: 15%;
+
+    #desc-box-title{
+        border-radius: 2px;
+        height: 38%;
+        text-align: left;
+
+    }
+    #userCommentImg{
+   
+        border-radius: 25%;
+        width: 15%;
+    }
+    #userName{
+        font-size: 22px
+    }
+    #resDesName{
+        font-size: 22px;
+    }
+
+
+
+
+}
+
+
+

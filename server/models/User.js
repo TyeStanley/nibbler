@@ -26,6 +26,12 @@ const UserSchema = new Schema(
                 ref: 'User'
             }
         ],
+        following: [ 
+            {
+                type: Schema.Types.ObjectId,
+                ref: 'User'
+            }
+        ],
         restaurants: [
             {
                 type: Schema.Types.ObjectId,
@@ -41,7 +47,7 @@ const UserSchema = new Schema(
     },
     {
         toJSON: {
-            getters: true
+            virtuals: true
         }
     }
 );
@@ -60,6 +66,16 @@ UserSchema.pre('save', async function(next) {
 UserSchema.methods.isCorrectPassword = async function(password) {
     return bcrypt.compare(password, this.password);
 };
+  
+// Create the virtual "followerCount" variable 
+UserSchema.virtual('followerCount').get(function() {
+    return this.followers.length;
+});
+
+// Create the virtual "followerCount" variable 
+UserSchema.virtual('followingCount').get(function() {
+    return this.following.length;
+});
   
 // Create the User model using UserSchema
 const User = model('User', UserSchema);

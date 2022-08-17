@@ -1,8 +1,8 @@
 const { Schema, model } = require('mongoose');
 const dateFormat = require('../utils/dateFormat');
 
-const RestSchema = new Schema ({
-    restName: {
+const DishSchema = new Schema ({
+    dishName: {
         type: String,
         required: true
     },
@@ -11,39 +11,33 @@ const RestSchema = new Schema ({
         default: Date.now,
         get: (createdAtVal) => dateFormat(createdAtVal)
     },
-    restAddress: {
+    dishCost: {
+        type: Number
+    },
+    dishRest: {
+
+    },
+    dishDescript: {
         type: String
     },
-    restCity: {
-        type: String
-    },
-    restState: {
-        type: String
-    },
-    restDescript: {
-        type: String
-    },
-    restPhotos: [],
-    restDescript: {
-        type: String
-    },
+    dishPhotos: [],
     user: {
         type: Schema.Types.ObjectId,
         ref: 'User'
     },
-    dishes: [
+    restaurants: [
         {
             type: Schema.Types.ObjectId,
-            ref: 'Dish'
+            ref: 'Restaurant'
         }
-    ],
+    ], 
     comments: [
         {
             type: Schema.Types.ObjectId,
             ref: 'Comment'
         }
     ]
-  }, 
+  },
   // Add getter for date formatting and virtual for heartsCount
   {
     toJSON: {
@@ -54,12 +48,12 @@ const RestSchema = new Schema ({
 );
 
 // Create the virtual "heartsCount" variable 
-RestSchema.virtual('heartsCount').get(function() {
+DishSchema.virtual('heartsCount').get(function() {
     return this.hearts.length;
 });
 
-// Create the Restaurant model using RestSchema
-const Rest = model('Rest', RestSchema);
+// Create the User model using UserSchema
+const Dish = model('Dish', DishSchema);
 
-// Export the Restaurnt model
-module.exports = Rest;
+// Export the User mode
+module.exports = Dish;

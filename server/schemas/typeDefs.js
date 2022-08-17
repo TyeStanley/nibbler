@@ -18,7 +18,7 @@ const typeDefs = gql`
         restName: String
         restAddress: String
         restDescript: String
-        restPhotos: []
+        restPhotos: [Photo]
         dishes: [Dish]
         comments: [Comment]
         heartsCount: Int
@@ -31,7 +31,7 @@ const typeDefs = gql`
         dishName: String
         dishCost: Int
         dishDescript: String
-        dishPhotos: []
+        dishPhotos: [Photo]
         comments: [Comment]
         heartsCount: Int
         hearts: [Heart]
@@ -52,6 +52,12 @@ const typeDefs = gql`
         userId: ID
     }
 
+    type Photo {
+        _id: ID
+        photoUrl: String
+        userId: ID
+    }
+
     type Auth {
         token: ID
         user: User
@@ -67,14 +73,14 @@ const typeDefs = gql`
         restaurants: [Restaurant]
         dishes(restName: String!): [Dish]
         dish(dishName: String!): [Dish]
-        favRests(userId: ID!): [Restaurant])    
+        favRests(userId: ID!): [Restaurant]    
     }
 
     type Mutation {
         login(email: String!, password: String!): User
         addUser(username: String!, email: String!, password: String!): User
-        addRest(restName: String!, restAddress: String!, restDescript: String!, restPhotos: []): Restaurant
-        addDish(dishRestId: ID!, dishName: String!, dishCost: Int!, dishDescript: String!, dishPhotos: []): Dish
+        addRest(restName: String!, restAddress: String!, restDescript: String!): Restaurant
+        addDish(dishRestId: ID!, dishName: String!, dishCost: Int!, dishDescript: String!): Dish
         commentRest(userId: ID, restId: ID, commentBody: String!, dishName: String!): Comment
         commentDish(userId: ID, dishId: ID, commentBody: String!): Comment
         commentComment(userId: ID, commentId: ID, commentBody: String!): Comment

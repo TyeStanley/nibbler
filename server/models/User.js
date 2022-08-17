@@ -32,7 +32,7 @@ const UserSchema = new Schema(
                 ref: 'User'
             }
         ],
-        restaurants: [
+        favRests: [
             {
                 type: Schema.Types.ObjectId,
                 ref: 'Restaurant'
@@ -45,6 +45,7 @@ const UserSchema = new Schema(
             }
         ]
     },
+    // Add virtuals for followerCount and followingCount
     {
         toJSON: {
             virtuals: true

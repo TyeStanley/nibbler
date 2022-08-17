@@ -6,10 +6,6 @@ const DishSchema = new Schema ({
         type: String,
         required: true
     },
-    username: {
-        type: String,
-        required: true
-    },
     createdAt: {
         type: Date,
         default: Date.now,
@@ -25,6 +21,10 @@ const DishSchema = new Schema ({
         type: String
     },
     dishPhotos: [],
+    user: {
+        type: Schema.Types.ObjectId,
+        ref: 'User'
+    },
     restaurants: [
         {
             type: Schema.Types.ObjectId,
@@ -38,12 +38,19 @@ const DishSchema = new Schema ({
         }
     ]
   },
+  // Add getter for date formatting and virtual for heartsCount
   {
     toJSON: {
-        getters: true
+        getters: true,
+        virtuals: true
     }
   }
 );
+
+// Create the virtual "heartsCount" variable 
+DishSchema.virtual('heartsCount').get(function() {
+    return this.hearts.length;
+});
 
 // Create the User model using UserSchema
 const Dish = model('Dish', DishSchema);

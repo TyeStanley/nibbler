@@ -14,18 +14,23 @@ const CommentSchema = new Schema(
             default: Date.now,
             get: timestamp => dateFormat(timestamp)        
         },
-        username: {
-            type: String,
-            required: true
+        user: {
+            type: Schema.Types.ObjectId,
+            ref: 'User'
         }
     },
-    // Add getter for date formatting
+    // Add getter for date formatting as well as virtual for heartsCount
     {
         toJSON: {
             getters: true
         }
     }
 );
+
+// Create the virtual "heartsCount" variable 
+CommentSchema.virtual('heartsCount').get(function() {
+    return this.hearts.length;
+});
 
 const Comment = model('Comment', CommentSchema);
 

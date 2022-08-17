@@ -6,10 +6,6 @@ const RestSchema = new Schema ({
         type: String,
         required: true
     },
-    username: {
-        type: String,
-        required: true
-    },
     createdAt: {
         type: Date,
         default: Date.now,
@@ -31,6 +27,10 @@ const RestSchema = new Schema ({
     restDescript: {
         type: String
     },
+    user: {
+        type: Schema.Types.ObjectId,
+        ref: 'User'
+    },
     dishes: [
         {
             type: Schema.Types.ObjectId,
@@ -44,13 +44,19 @@ const RestSchema = new Schema ({
         }
     ]
   }, 
-  // Add getter for date formatting
+  // Add getter for date formatting and virtual for heartsCount
   {
     toJSON: {
-        getters: true
+        getters: true,
+        virtuals: true
     }
   }
 );
+
+// Create the virtual "heartsCount" variable 
+RestSchema.virtual('heartsCount').get(function() {
+    return this.hearts.length;
+});
 
 // Create the Restaurant model using RestSchema
 const Rest = model('Rest', RestSchema);

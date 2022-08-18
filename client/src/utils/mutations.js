@@ -36,11 +36,19 @@ export const ADD_REST = gql`
         restCity
         restAddress
         restDescript
-        restPhotos
+        restPhotos {
+            _id
+            photoUrl
+            userId
+        }
         dishes {
             _id
             dishName
-            dishPhotos
+            dishPhotos {
+                _id
+                photoUrl
+                userId
+            }
         }
         comments {
             _id

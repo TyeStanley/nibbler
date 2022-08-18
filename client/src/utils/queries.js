@@ -26,7 +26,11 @@ export const QUERY_ME = gql `
                     _id
                     dishName
                     dishCost
-                    dishPhotos
+                    dishPhotos {
+                        _id
+                        photoUrl
+                        userId
+                    }
                 }
 
             }

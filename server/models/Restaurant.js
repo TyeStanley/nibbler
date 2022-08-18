@@ -45,6 +45,18 @@ const RestSchema = new Schema(
       },
     ],
   },
+        {
+            type: Schema.Types.ObjectId,
+            ref: 'Comment'
+        }
+    hearts: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: 'User'
+        }
+    ]
+  }, 
+>>>>>>> back-end/SD
   // Add getter for date formatting and virtual for heartsCount
   {
     toJSON: {

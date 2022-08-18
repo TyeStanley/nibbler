@@ -1,65 +1,66 @@
-const { Schema, model } = require('mongoose');
-const dateFormat = require('../utils/dateFormat');
+const { Schema, model } = require("mongoose");
+const dateFormat = require("../utils/dateFormat");
 
-const RestSchema = new Schema ({
+const RestSchema = new Schema(
+  {
     restName: {
-        type: String,
-        required: true
+      type: String,
+      required: true,
     },
     createdAt: {
-        type: Date,
-        default: Date.now,
-        get: (createdAtVal) => dateFormat(createdAtVal)
+      type: Date,
+      default: Date.now,
+      get: (createdAtVal) => dateFormat(createdAtVal),
     },
     restAddress: {
-        type: String
+      type: String,
     },
     restCity: {
-        type: String
+      type: String,
     },
     restState: {
-        type: String
+      type: String,
     },
     restDescript: {
-        type: String
+      type: String,
     },
     restPhotos: [],
     restDescript: {
-        type: String
+      type: String,
     },
     user: {
-        type: Schema.Types.ObjectId,
-        ref: 'User'
+      type: Schema.Types.ObjectId,
+      ref: "User",
     },
     dishes: [
-        {
-            type: Schema.Types.ObjectId,
-            ref: 'Dish'
-        }
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Dish",
+      },
     ],
     comments: [
-        {
-            type: Schema.Types.ObjectId,
-            ref: 'Comment'
-        }
-    ]
-  }, 
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Comment",
+      },
+    ],
+  },
   // Add getter for date formatting and virtual for heartsCount
   {
     toJSON: {
-        getters: true,
-        virtuals: true
-    }
+      getters: true,
+      virtuals: true,
+    },
   }
 );
 
-// Create the virtual "heartsCount" variable 
-RestSchema.virtual('heartsCount').get(function() {
-    return this.hearts.length;
+// Create the virtual "heartsCount" variable
+RestSchema.virtual("heartsCount").get(function () {
+  return this.hearts.length;
 });
 
 // Create the Restaurant model using RestSchema
-const Rest = model('Rest', RestSchema);
+const Rest = model("Rest", RestSchema);
 
 // Export the Restaurnt model
 module.exports = Rest;

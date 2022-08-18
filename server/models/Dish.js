@@ -20,7 +20,12 @@ const DishSchema = new Schema ({
     dishDescript: {
         type: String
     },
-    dishPhotos: [],
+    dishPhotos: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: 'Photo'
+        }
+    ],
     user: {
         type: Schema.Types.ObjectId,
         ref: 'User'

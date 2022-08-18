@@ -23,7 +23,12 @@ const RestSchema = new Schema ({
     restDescript: {
         type: String
     },
-    restPhotos: [],
+    restPhotos: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: 'Photo'
+        }
+    ],
     restDescript: {
         type: String
     },

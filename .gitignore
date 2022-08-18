@@ -1,5 +1,8 @@
 .DS_Store
 
+# Vs Code extensions
+.prettierrc
+
 # Logs
 logs
 *.log

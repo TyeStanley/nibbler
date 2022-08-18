@@ -1,13 +1,14 @@
 
 import './App.scss';
 import Home from './pages/Home'
-import Restaurant from './pages/Restaurant';
+import Restaurants from './pages/Restaurants';
 
 function App() {
   return (
     <main>
 
-      <Restaurant></Restaurant>
+      {/* <Restaurants></Restaurants> */}
+      <Home></Home>
 
     </main>
   );

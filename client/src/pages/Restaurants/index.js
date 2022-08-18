@@ -6,8 +6,9 @@ const Restaurants = () =>{
 
     return(
         <>
+        <h1>Restaurants</h1>
         
-        <section id='restSection'>
+        {/* <section id='restSection'>
                 <div>
                    <CategorySearchBar></CategorySearchBar>
                 </div>
@@ -15,7 +16,7 @@ const Restaurants = () =>{
                <h1>hello</h1>
             </section>
             
-        </section>
+        </section> */}
         
         
         

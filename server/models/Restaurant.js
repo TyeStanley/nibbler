@@ -42,6 +42,12 @@ const RestSchema = new Schema ({
             type: Schema.Types.ObjectId,
             ref: 'Comment'
         }
+    ],
+    hearts: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: 'User'
+        }
     ]
   }, 
   // Add getter for date formatting and virtual for heartsCount

@@ -17,7 +17,12 @@ const CommentSchema = new Schema(
         user: {
             type: Schema.Types.ObjectId,
             ref: 'User'
-        }
+        },
+        hearts:{
+                type: Schema.Types.ObjectId,
+                ref: 'Heart'
+
+            }
     },
     // Add getter for date formatting as well as virtual for heartsCount
     {

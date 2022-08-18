@@ -8,11 +8,21 @@ const Restaurants = () =>{
         <>
         
         <section id='restSection'>
+            
                 <div>
                    <CategorySearchBar></CategorySearchBar>
                 </div>
+
+
+
+
             <section className='d-flex justify-content-center'>
+
                <h1>hello</h1>
+
+
+
+
             </section>
             
         </section>

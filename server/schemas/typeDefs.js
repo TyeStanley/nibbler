@@ -5,6 +5,8 @@ const typeDefs = gql`
     _id: ID
     username: String
     email: String
+    tagline: String
+    profilePic: String
     followerCount: Int
     followingCount: Int
     followers: [User]
@@ -79,9 +81,16 @@ const typeDefs = gql`
   }
 
   type Mutation {
-    login(email: String!, password: String!): User
-    addUser(username: String!, email: String!, password: String!): User
-    followUser(userId: ID!, userToFollowId: ID!): User
+    login(email: String!, password: String!): Auth
+    addUser(
+      username: String!
+      email: String!
+      password: String!
+      tagline: String
+      profilePic: String
+    ): User
+    followUser(userToFollowId: ID!): User
+    unfollowUser(userToUnfollowId: ID!): User
     addRest(
       restName: String!
       restState: String!

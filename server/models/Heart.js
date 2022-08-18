@@ -11,8 +11,8 @@ const HeartSchema = new Schema(
 
 );
 
-// Create the Restaurant model using RestSchema
+// Create the Heart model using HeartSchema
 const Heart = model('Heart', HeartSchema);
 
-// Export the Restaurnt model
+// Export the Heart model
 module.exports = Heart;

@@ -67,5 +67,5 @@ RestSchema.virtual('heartsCount').get(function() {
 // Create the Restaurant model using RestSchema
 const Rest = model('Rest', RestSchema);
 
-// Export the Restaurnt model
+// Export the Restaurant model
 module.exports = Rest;

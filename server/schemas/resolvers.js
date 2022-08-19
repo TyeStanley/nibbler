@@ -144,13 +144,19 @@ const resolvers = {
     // add a new dish
     addDish: async (parent, args, context) => {
       if (context.user) {
-        const dish = await Dish.create({ ...args, userId: context.user._id });
         const rest = await Rest.findById(args.restId);
+        const dish = await Dish.create({
+          dishRest: rest.restName,
+          restId: rest._id,
+          ...args, // required input (dishName, dishPrice, dishDescript)
+          userId: context.user._id,
+          username: context.user.username
+        });
 
         rest.dishes.push(dish);
         rest.save();
 
-        return dish, rest, context.user;
+        return dish;
       }
 
       throw new AuthenticationError('You need to be logged in!');
@@ -184,6 +190,17 @@ const resolvers = {
       }
 
       throw new AuthenticationError('You need to be logged in!');
+    },
+
+    // delete a comment
+    deleteComment: async (parent, { commentId }, context) => {
+      if (context.user) {
+        const comment = await Comment.findByIdAndDelete(commentId);
+
+        return comment;
+      }
+
+      throw new AuthenticationError('You need to be logged in');
     }
   }
 };

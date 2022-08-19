@@ -16,6 +16,9 @@ const DishSchema = new Schema(
       type: Number
     },
     dishRest: {
+      type: String
+    },
+    restId: {
       type: Schema.Types.ObjectId,
       ref: 'Rest'
     },
@@ -23,14 +26,17 @@ const DishSchema = new Schema(
       type: String
     },
     dishPhotos: [
-        {
-            type: Schema.Types.ObjectId,
-            ref: 'Photo'
-        }
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'Photo'
+      }
     ],
-    user: {
+    userId: {
       type: Schema.Types.ObjectId,
       ref: 'User'
+    },
+    username: {
+      type: String
     },
     comments: [
       {

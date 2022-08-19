@@ -18,7 +18,7 @@ const Restaurants = () =>{
 
 
             <section className='d-flex justify-content-center'>
-                <h1></h1>
+                
 
                {seeds.map(({imgLinks, name})=>(
                 <PopResCard imgLinks={imgLinks} name={name}></PopResCard>

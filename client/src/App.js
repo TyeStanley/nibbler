@@ -26,25 +26,21 @@ function App() {
   return (
     <ApolloProvider  client ={client}>
     <main>
-    <Router>
+ 
       <Navbar/>
       <Routes>
-    
-
               <Route 
                 exact path="/" 
                 element={<Home/>} 
               />
+
               <Route 
                 path="/restaurants" 
                 element={<Restaurants/>} 
               />
-            
-            </Routes>
+        </Routes>
       
-      {/* <Restaurants></Restaurants> */}
-      
-      </Router>
+
     </main>
     </ApolloProvider>
   );

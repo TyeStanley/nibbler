@@ -74,7 +74,12 @@ UserSchema.pre('save', async function(next) {
 UserSchema.methods.isCorrectPassword = async function(password) {
     return bcrypt.compare(password, this.password);
 };
-  
+
+// Create the virtual "commentsCount" variable 
+UserSchema.virtual('commentsCount').get(function() {
+    return this.comments.length;
+});
+
 // Create the virtual "followerCount" variable 
 UserSchema.virtual('followerCount').get(function() {
     return this.followers.length;

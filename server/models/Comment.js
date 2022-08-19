@@ -21,6 +21,12 @@ const CommentSchema = new Schema(
         username: {
             type: String,
         },
+        comments: [
+            {
+              type: Schema.Types.ObjectId,
+              ref: "Comment",
+            },
+          ],      
         hearts:[
             {
                 type: Schema.Types.ObjectId,
@@ -39,6 +45,11 @@ const CommentSchema = new Schema(
 // Create the virtual "heartsCount" variable 
 CommentSchema.virtual('heartsCount').get(function() {
     return this.hearts.length;
+});
+
+// Create the virtual "commentsCount" variable 
+CommentSchema.virtual('commentsCount').get(function() {
+    return this.comments.length;
 });
 
 const Comment = model('Comment', CommentSchema);

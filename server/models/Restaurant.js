@@ -70,6 +70,11 @@ RestSchema.virtual("heartsCount").get(function () {
   return this.hearts.length;
 });
 
+// Create the virtual "commentsCount" variable
+RestSchema.virtual("commentsCount").get(function () {
+  return this.comments.length;
+});
+
 // Create the Restaurant model using RestSchema
 const Rest = model("Rest", RestSchema);
 

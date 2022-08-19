@@ -59,6 +59,11 @@ DishSchema.virtual('heartsCount').get(function () {
   return this.hearts.length;
 });
 
+// Create the virtual "commentsCount" variable
+DishSchema.virtual('commentsCount').get(function () {
+  return this.comments.length;
+});
+
 // Create the User model using UserSchema
 const Dish = model('Dish', DishSchema);
 

@@ -1,5 +1,5 @@
 const { AuthenticationError } = require('apollo-server-express');
-const { User, Rest, Dish } = require('../models');
+const { User, Rest, Dish, Comment } = require('../models');
 const { signToken } = require('../utils/auth');
 
 const resolvers = {
@@ -35,12 +35,24 @@ const resolvers = {
 
     // get all restaurants
     restaurants: async () => {
-      return await Rest.find().select('-__v').populate('comments');
+      return await Rest.find()
+        .select('-__v')
+        .populate('comments')
+        .populate('dishes');
     },
 
     // get restaurant by name
     restaurant: async (parent, { restName }) => {
-      return await Rest.find({ restName }).select('-__v').populate('comments');
+      return await Rest.find({ restName })
+        .select('-__v')
+        .populate({
+          path: 'comments',
+          populate: {
+            path: 'user',
+            select: '-__v -password'
+          }
+        })
+        .populate('dishes');
     }
   },
 
@@ -132,9 +144,43 @@ const resolvers = {
     // add a new dish
     addDish: async (parent, args, context) => {
       if (context.user) {
-        const dish = await Dish.create(args);
+        const dish = await Dish.create({ ...args, userId: context.user._id });
+        const rest = await Rest.findById(args.restId);
+
+        rest.dishes.push(dish);
+        rest.save();
+
+        return dish, rest, context.user;
+      }
+
+      throw new AuthenticationError('You need to be logged in!');
+    },
+
+    // delete a dish
+    deleteDish: async (parent, { dishId }, context) => {
+      if (context.user) {
+        const dish = await Dish.findByIdAndDelete(dishId);
 
         return dish;
+      }
+
+      throw new AuthenticationError('You need to be logged in');
+    },
+
+    // comment on a restaurant
+    commentRest: async (parent, { restId, commentText }, context) => {
+      if (context.user) {
+        const comment = await Comment.create({
+          commentText,
+          userId: context.user._id,
+          username: context.user.username
+        });
+
+        const rest = await Rest.findById(restId);
+        rest.comments.push(comment);
+        rest.save();
+
+        return comment;
       }
 
       throw new AuthenticationError('You need to be logged in!');

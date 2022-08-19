@@ -33,8 +33,9 @@ const typeDefs = gql`
     _id: ID
     dishRest: Restaurant
     dishName: String
-    dishCost: Int
+    dishCost: Float
     dishDescript: String
+    user: ID
     dishPhotos: [Photo]
     comments: [Comment]
     heartsCount: Int
@@ -43,7 +44,7 @@ const typeDefs = gql`
 
   type Comment {
     _id: ID
-    commentBody: String
+    commentText: String
     createdAt: String
     username: String
     comments: [Comment]
@@ -100,19 +101,15 @@ const typeDefs = gql`
     ): Restaurant
     deleteRest(restId: ID!): Restaurant
     addDish(
-      dishRestId: ID!
+      restId: ID!
       dishName: String!
-      dishCost: Int!
+      dishCost: Float!
       dishDescript: String!
     ): Dish
-    commentRest(
-      userId: ID
-      restId: ID
-      commentBody: String!
-      dishName: String!
-    ): Comment
-    commentDish(userId: ID, dishId: ID, commentBody: String!): Comment
-    commentComment(userId: ID, commentId: ID, commentBody: String!): Comment
+    deleteDish(dishId: ID!, restId: ID!): Dish
+    commentRest(restId: ID!, commentText: String!): Comment
+    commentDish(dishId: ID!, commentBody: String!): Comment
+    commentComment(commentId: ID!, commentBody: String!): Comment
     removeComment(commentId: ID!): Comment
     heartRest(userId: ID!, restId: ID!): Restaurant
     heartDish(userId: ID!, dishId: ID!): Dish

@@ -32,8 +32,8 @@ const typeDefs = gql`
 
   type Dish {
     _id: ID
-    dishRest: String
-    restId: ID
+    restName: String
+    dishRest: Restaurant
     dishName: String
     dishCost: Float
     dishDescript: String
@@ -48,6 +48,8 @@ const typeDefs = gql`
 
   type Comment {
     _id: ID
+    targetId: ID
+    targetType: String
     commentText: String
     createdAt: String
     username: String
@@ -81,8 +83,10 @@ const typeDefs = gql`
     following(username: String!): [User]
     restaurant(restName: String!): [Restaurant]
     restaurants: [Restaurant]
-    dishes(restName: String!): [Dish]
-    dish(dishName: String!): [Dish]
+    dishesByRest(restName: String!): [Dish]
+    dishesByName(dishName: String!): [Dish]
+    dish(dishId: ID!): Dish
+    comment(commentId: ID!): Comment
     favRests(userId: ID!): [Restaurant]
   }
 
@@ -113,8 +117,8 @@ const typeDefs = gql`
     ): Dish
     deleteDish(dishId: ID!): Dish
     commentRest(restId: ID!, commentText: String!): Comment
-    commentDish(dishId: ID!, commentBody: String!): Comment
-    commentComment(commentId: ID!, commentBody: String!): Comment
+    commentDish(dishId: ID!, commentText: String!): Comment
+    commentComment(commentId: ID!, commentText: String!): Comment
     deleteComment(commentId: ID!): Comment
     heartRest(userId: ID!, restId: ID!): Restaurant
     heartDish(userId: ID!, dishId: ID!): Dish

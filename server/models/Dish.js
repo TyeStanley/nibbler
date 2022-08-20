@@ -16,11 +16,11 @@ const DishSchema = new Schema(
       type: Number
     },
     dishRest: {
-      type: String
-    },
-    restId: {
       type: Schema.Types.ObjectId,
       ref: 'Rest'
+    },
+    restName: {
+      type: String
     },
     dishDescript: {
       type: String

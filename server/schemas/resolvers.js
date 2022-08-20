@@ -50,9 +50,51 @@ const resolvers = {
           populate: {
             path: 'user',
             select: '-__v -password'
-          }
+          },
+          options: { sort: { createdAt: -1 } }
         })
         .populate('dishes');
+    },
+
+    // get all dishes from a restaurant
+    dishesByRest: async (parent, { restName }) => {
+      return await Dish.find({ restName })
+        .select('-__v')
+        .populate({
+          path: 'comments',
+          populate: [
+            {
+              path: 'user',
+              select: '-__v -password'
+            }
+          ],
+          options: { sort: { createdAt: -1 } }
+        })
+        .populate('dishRest');
+    },
+
+    // get dish by name
+    dishesByName: async (parent, { dishName }) => {
+      return await Dish.find({ dishName })
+        .select('-__v')
+        .populate('comments')
+        .populate('dishRest');
+    },
+
+    // get dish by id
+    dish: async (parent, { dishId }) => {
+      return await Dish.findById(dishId)
+        .select('-__v')
+        .populate('comments')
+        .populate('dishRest');
+    },
+
+    // get comment
+    comment: async (parent, { commentId }) => {
+      return await Comment.findById(commentId)
+        .select('-__v')
+        .populate('comments')
+        .populate('user');
     }
   },
 
@@ -146,8 +188,8 @@ const resolvers = {
       if (context.user) {
         const rest = await Rest.findById(args.restId);
         const dish = await Dish.create({
-          dishRest: rest.restName,
-          restId: rest._id,
+          restName: rest.restName,
+          dishRest: rest,
           ...args, // required input (dishName, dishPrice, dishDescript)
           userId: context.user._id,
           username: context.user.username
@@ -176,13 +218,15 @@ const resolvers = {
     // comment on a restaurant
     commentRest: async (parent, { restId, commentText }, context) => {
       if (context.user) {
+        const rest = await Rest.findById(restId);
         const comment = await Comment.create({
+          targetId: rest._id,
+          targetType: 'rest',
           commentText,
           userId: context.user._id,
           username: context.user.username
         });
 
-        const rest = await Rest.findById(restId);
         rest.comments.push(comment);
         rest.save();
 
@@ -192,10 +236,76 @@ const resolvers = {
       throw new AuthenticationError('You need to be logged in!');
     },
 
+    // comment on a dish
+    commentDish: async (parent, { dishId, commentText }, context) => {
+      if (context.user) {
+        const dish = await Dish.findById(dishId);
+        const comment = await Comment.create({
+          targetId: dish._id,
+          targetType: 'dish',
+          commentText,
+          userId: context.user._id,
+          username: context.user.username
+        });
+
+        dish.comments.push(comment);
+        dish.save();
+
+        return comment;
+      }
+
+      throw new AuthenticationError('You need to be logged in!');
+    },
+
+    // comment on a comment
+    commentComment: async (parent, { commentId, commentText }, context) => {
+      if (context.user) {
+        const comment = await Comment.findById(commentId);
+        const commentReply = await Comment.create({
+          targetId: comment._id,
+          targetType: 'comment',
+          commentText,
+          userId: context.user._id,
+          username: context.user.username
+        });
+
+        comment.comments.push(commentReply);
+        comment.save();
+
+        return commentReply;
+      }
+    },
+
     // delete a comment
     deleteComment: async (parent, { commentId }, context) => {
       if (context.user) {
         const comment = await Comment.findByIdAndDelete(commentId);
+
+        // place holder for delete cascade
+        let target = null;
+
+        // assign target to remove comment from and update based on type
+        switch (comment.targetType) {
+          case 'rest':
+            target = await Rest.findById(comment.targetId);
+            break;
+
+          case 'dish':
+            target = await Dish.findById(comment.targetId);
+            break;
+
+          case 'comment':
+            target = await Comment.findById(comment.targetId);
+            break;
+
+          default:
+            console.log(comment.targetType);
+            break;
+        }
+
+        // update target with comment removed
+        target.comments.pull(comment);
+        target.save();
 
         return comment;
       }

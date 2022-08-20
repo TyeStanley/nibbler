@@ -1,14 +1,42 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { MDBCol, MDBContainer, MDBRow, MDBCard, MDBCardText, MDBCardImage, MDBBtn, MDBTypography } from 'mdb-react-ui-kit';
-import { Nav, Modal, Tab, Button } from 'react-bootstrap';
+import { Nav, Modal, Tab, Button, Container, CardGroup, Card } from 'react-bootstrap';
 import RestaurantCard from '../../components/RestaurantCard';
+import Auth from '../../utils/auth';
+import { getMe } from '../../utils/API';
 import AddResturant from '../../components/AddRestaurant';
 import { Form,  Alert } from 'react-bootstrap';
 
-const Profile= () =>{
+const Profile= () => {
   const [showModal, setShowModal] = useState(false);
+  const [userData, setUserData] = useState({});
   
-  
+  const userDataLength = Object.keys(userData).length;
+
+  useEffect(() => {
+    const getUserData = async () => {
+      try {
+        const token = Auth.loggedIn() ? Auth.getToken() : null;
+
+        if (!token) {
+          return false;
+        }
+
+        const response = await getMe(token);
+
+        if (!response.ok) {
+          throw new Error('something went wrong!');
+        }
+
+        const user = await response.json();
+        setUserData(user);
+      } catch (err) {
+        console.error(err);
+      }
+    };
+
+    getUserData();
+  }, [userDataLength]);
   
     return (
 
@@ -53,11 +81,37 @@ const Profile= () =>{
 
 
       <section class = 'container d-flex flex-row justify-content-between'>
-        <div className='col-12 col-md-8 text-center d-flex flex-wrap' id='recent-uploads-div'>
+      <div className='col-12 col-md-8 text-center d-flex flex-wrap' id='recent-uploads-div'>
           <RestaurantCard></RestaurantCard>
         </div>
         <div>
-            <Button  onClick={() => setShowModal(true)} outline color="dark" style={{height: '36px', overflow: 'visible'}}>
+      
+      {/* <Container>
+        <h2>
+          {userData.savedRestaurants.length
+            ? `Viewing ${userData.savedRestaurants.length} saved ${userData.savedRestaurants.length === 1 ? 'restaurant' : 'restaurants'}:`
+            : 'You have no saved restaurants!'}
+        </h2>
+        <CardGroup>
+          {userData.savedRestaurants.map((book) => {
+            return (
+              <Card key={restaurant.restaurantId} border='dark'>
+                {book.image ? <Card.Img src={restaurant.image} alt={`The cover for ${restaurant.title}`} variant='top' /> : null}
+                <Card.Body>
+                  <Card.Title>{restaurant.restTitle}</Card.Title>
+                  <Card.Text>{restaurant.restState}</Card.Text>
+                  <Card.Text>{restaurant.restAddress}</Card.Text>
+                  <Card.Text>{restaurant.restDescript}</Card.Text>
+                  <Button className='btn-block btn-danger' onClick={() => handleRestaurant(restaurant.restaurantId)}>
+                    Delete this Restaurant!
+                  </Button>
+                </Card.Body>
+              </Card>
+            );
+          })}
+        </CardGroup>
+      </Container> */}
+                <Button  onClick={() => setShowModal(true)} outline color="dark" style={{height: '36px', overflow: 'visible'}}>
                     Add Restaurant
                   </Button>
             </div>
@@ -86,12 +140,9 @@ const Profile= () =>{
           </Modal.Body>
           </Tab.Container>
       </Modal>
-    
-            </section>
-
-          
-            
-      </main>
+      
+</section>
+</main>
 
 
   );

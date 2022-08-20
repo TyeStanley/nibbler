@@ -38,7 +38,8 @@ const resolvers = {
       return await Rest.find()
         .select('-__v')
         .populate('comments')
-        .populate('dishes');
+        .populate('dishes')
+        .populate('restPhotos');
     },
 
     // get restaurant by name
@@ -71,7 +72,8 @@ const resolvers = {
           ],
           options: { sort: { createdAt: -1 } }
         })
-        .populate('dishRest');
+        .populate('dishRest')
+        .populate('dishPhotos');
     },
 
     // get dish by name
@@ -79,7 +81,8 @@ const resolvers = {
       return await Dish.find({ dishName })
         .select('-__v')
         .populate('comments')
-        .populate('dishRest');
+        .populate('dishRest')
+        .populate('dishPhotos');
     },
 
     // get dish by id
@@ -87,7 +90,8 @@ const resolvers = {
       return await Dish.findById(dishId)
         .select('-__v')
         .populate('comments')
-        .populate('dishRest');
+        .populate('dishRest')
+        .populate('dishPhotos');
     },
 
     // get comment
@@ -327,6 +331,26 @@ const resolvers = {
 
         rest.restPhotos.push(photo);
         rest.save();
+
+        return photo;
+      }
+
+      throw new AuthenticationError('You need to be logged in!');
+    },
+
+    // add a photo to a dish
+    addPhotoDish: async (parent, { dishId, photoUrl }, context) => {
+      if (context.user) {
+        const dish = await Dish.findById(dishId);
+        const photo = await Photo.create({
+          targetId: dish._id,
+          targetType: 'dish',
+          photoUrl,
+          userId: context.user._id
+        });
+
+        dish.dishPhotos.push(photo);
+        dish.save();
 
         return photo;
       }

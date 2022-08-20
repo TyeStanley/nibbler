@@ -123,6 +123,7 @@ const typeDefs = gql`
     commentComment(commentId: ID!, commentText: String!): Comment
     deleteComment(commentId: ID!): Comment
     addPhotoRest(photoUrl: String!, restId: ID!): Photo
+    addPhotoDish(photoUrl: String!, dishId: ID!): Photo
     heartRest(userId: ID!, restId: ID!): Restaurant
     heartDish(userId: ID!, dishId: ID!): Dish
     heartComment(userId: ID!, commentId: ID!): Comment

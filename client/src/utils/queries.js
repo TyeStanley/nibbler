@@ -38,3 +38,19 @@ export const QUERY_ME = gql`
     }
   }
 `;
+export const QUERY_RESTAURANTS = gql `
+  {
+    restaurants {
+      restName
+      restState
+      restCity
+      restAddress
+      restDescript
+      restPhotos 
+      comments {
+        username
+        commentText
+      }
+    }
+  }
+`

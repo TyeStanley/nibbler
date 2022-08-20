@@ -25,10 +25,9 @@ const RestSchema = new Schema(
       type: String,
     },
     restPhotos: [
-        {
-            type: Schema.Types.ObjectId,
-            ref: 'Photo'
-        }
+      {
+          type: String,
+      }
     ],
     restDescript: {
       type: String,

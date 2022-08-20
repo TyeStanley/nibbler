@@ -15,18 +15,16 @@ export const LOGIN_USER = gql`
 `;
 
 export const ADD_USER = gql`
-  mutation addUser($username: String!, $email: String!, $password: String!) {
-    addUser(username: $username, email: $email, password: $password) {
-      token
-      user {
-        _id
-        username
-        tagline
-        profilePic
+    mutation addUser($username: String!, $email: String!, $password: String!) {
+      addUser(username: $username, email: $email, password: $password) {
+          token
+    user{ 
+          _id
+          username
+         }
       }
     }
-  }
-`;
+  `;
 
 export const ADD_REST = gql`
   mutation addRest(
@@ -36,13 +34,7 @@ export const ADD_REST = gql`
     $restAddress: String!
     $restDescript: String!
   ) {
-    addRest(
-      restName: $restName
-      restState: $restState
-      restCity: $restCity
-      restAddress: $restAddress
-      restDescript: $restDescript
-    ) {
+    addRest( restName: $restName restState: $restState restCity: $restCity restAddress: $restAddress restDescript: $restDescript) {
       _id
       restName
       restState

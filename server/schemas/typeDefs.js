@@ -22,7 +22,7 @@ const typeDefs = gql`
     restCity: String
     restAddress: String
     restDescript: String
-    restPhotos: [Photo]
+    restPhotos: [String]
     dishes: [Dish]
     comments: [Comment]
     heartsCount: Int
@@ -64,7 +64,7 @@ const typeDefs = gql`
   }
 
   type Auth {
-    token: ID
+    token: ID!
     user: User
   }
 
@@ -89,16 +89,22 @@ const typeDefs = gql`
       password: String!
       tagline: String
       profilePic: String
-    ): User
+    ): Auth
+
     followUser(userToFollowId: ID!): User
     unfollowUser(userToUnfollowId: ID!): User
+
+
     addRest(
       restName: String!
       restState: String!
       restCity: String!
       restAddress: String!
       restDescript: String!
+      restPhotos: [String]!
     ): Restaurant
+
+
     deleteRest(restId: ID!): Restaurant
     addDish(
       restId: ID!

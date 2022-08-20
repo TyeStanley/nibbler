@@ -1,0 +1,15 @@
+[
+    {
+      "username": "John Doe",
+      "email": "test@gmail.com",
+      "password": "test123",
+      "tagline": "casual foodie",
+      "profilePic": null,
+      "follower": null,
+      "following":[],
+      "favRests": [],
+      "comments": []
+    }
+   
+  ]
+  

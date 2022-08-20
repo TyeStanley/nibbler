@@ -22,12 +22,9 @@ const DishSchema = new Schema(
     dishDescript: {
       type: String
     },
-    dishPhotos: [
-        {
-            type: Schema.Types.ObjectId,
-            ref: 'Photo'
-        }
-    ],
+    dishPhotos: {
+      type: String
+    },
     user: {
       type: Schema.Types.ObjectId,
       ref: 'User'

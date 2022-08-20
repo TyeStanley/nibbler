@@ -62,7 +62,7 @@ const resolvers = {
       const user = await User.create(args);
       const token = signToken(user);
 
-      return user;
+      return { token, user };
     },
 
     // login user
@@ -143,7 +143,7 @@ const resolvers = {
 
     // add a new dish
     addDish: async (parent, args, context) => {
-      if (context.user) {
+      
         const dish = await Dish.create({ ...args, userId: context.user._id });
         const rest = await Rest.findById(args.restId);
 
@@ -151,7 +151,7 @@ const resolvers = {
         rest.save();
 
         return dish, rest, context.user;
-      }
+   
 
       throw new AuthenticationError('You need to be logged in!');
     },

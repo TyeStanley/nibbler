@@ -1,28 +1,32 @@
+
 import './index.scss';
-import images from '../../pages/Home/seeds'
 
 
 
-const RestaurantCard = () =>{
+const RestaurantCard = ({restaurants}) =>{
+  
 
-    return(
+
+  return(
         <>
-                {images.map(({name, imgLinks}) =>(
+                {restaurants.map(({restName,restPhotos}) =>(
+                  
                     
                         <>
-                        <div className="card col-12 col-md-12 m-1 border border-dark ">
-                            <h5 className="card-header" id='rest-card-header'>{name}</h5>
-                            <div className="" id='restCardBody'>
-                              <div id='card-img-container' className='d-flex carousel slide' data-ride='carousel'>  
-                              {imgLinks.map((link) => (
-                                <img src={link} className='col-8 col-md-4 p-1' alt={name} id='card-img'></img>
-                              ))}
-                              
-                              </div>   
-                              <div className id='pop-res-bottom'> <i id='heart-svg' className="fa-solid fa-heart p-2 mx-2"></i><span id='heart-span'>34000</span></div>
-                            </div>
-                        </div>
+                        <div className="card m-1 border border-dark ">
+                         
+                              <h5 className="card-header" id='rest-card-header'>{restName}</h5>
+                                <div className="" id='rest-card-body'>
+                                  <div id='card-img-container' className='d-flex carousel slide' data-ride='carousel'>  
+                                    {restPhotos && restPhotos.map((photo) => (
+                                      <img src={`/${photo + '.jpg'}`} className='col-8 col-md-4 p-1 card-photo' alt={photo} ></img>
+                                        ))}
+                                    </div>   
+                                <div className id='pop-res-bottom'> <i id='heart-svg' className="fa-solid fa-heart p-2 mx-2"></i><span id='heart-span'>34000</span></div>
+                              </div>
+                          </div>
                         
+                       
                        </>
 
                 ))}

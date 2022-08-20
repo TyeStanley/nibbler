@@ -33,9 +33,9 @@ const Home = () =>{
             <h3 className='p-3' id='recentUploads'> Recent Uploads </h3>
          </section>
 
-         <section  id="intro-restaurants" className='border-primary d-flex flex-wrap'>
+         <section  id="intro-restaurants" className='border-primary d-flex flex-column'>
 
-            <div className=' col-12 col-md-6 text-center d-flex flex-column' id='recent-uploads-div'>
+            <div className=' d-flex flex-column' id='recent-uploads-div'>
          
              {restaurants && <RestaurantCard restaurants={restaurants} ></RestaurantCard> }
               
@@ -44,8 +44,6 @@ const Home = () =>{
   
             </div>
           
-            {/* <UserReview></UserReview> */}
-
          </section>
 
       </>

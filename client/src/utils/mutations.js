@@ -24,3 +24,8 @@ export const ADD_USER = gql`
   }
 `;
 
+export const ADD_RESTAURANT = gql`
+mutation AddRestuarant($restName: String!, $restState: String!, $restCity: String!, $restAddress: String!, $restDescript: String!, $restPhotos: [String]!) {
+  addRest(restName: $restName, restState: $restState, restCity: $restCity, restAddress: $restAddress, restDescript: $restDescript)
+}
+`;

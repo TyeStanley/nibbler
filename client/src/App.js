@@ -4,8 +4,7 @@ import Home from './pages/Home'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Restaurants from './pages/Restaurants';
 import Navbar from './components/Navbar';
-import LoginForm from './components/LoginForm';
-import SignUpForm from './components/SignUpForm';
+import Profile from './pages/Profile'
 import { ApolloProvider }  from '@apollo/react-hooks';
 import ApolloClient from 'apollo-boost'
 
@@ -38,6 +37,10 @@ function App() {
               <Route 
                 path="/restaurants" 
                 element={<Restaurants/>} 
+              />
+              <Route 
+                path="/myprofile" 
+                element={<Profile/>} 
               />
             
             </Routes>

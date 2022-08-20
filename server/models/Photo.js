@@ -1,17 +1,23 @@
 const { Schema, model } = require('mongoose');
 
-const PhotoSchema = new Schema(
-    {
-        photoUrl: {
-            type: String
-        },
-        user: {
-            type: Schema.Types.ObjectId,
-            ref: 'User'
-        }
-
-    }
-);
+const PhotoSchema = new Schema({
+  targetId: {
+    type: Schema.Types.ObjectId,
+    required: true
+  },
+  targetType: {
+    type: String,
+    enum: ['rest', 'dish'],
+    required: true
+  },
+  photoUrl: {
+    type: String
+  },
+  userId: {
+    type: Schema.Types.ObjectId,
+    ref: 'User'
+  }
+});
 
 // Create the Photo model using PhotoSchema
 const Photo = model('Photo', PhotoSchema);

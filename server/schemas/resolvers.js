@@ -1,5 +1,5 @@
 const { AuthenticationError } = require('apollo-server-express');
-const { User, Rest, Dish, Comment } = require('../models');
+const { User, Rest, Dish, Comment, Photo } = require('../models');
 const { signToken } = require('../utils/auth');
 
 const resolvers = {
@@ -53,7 +53,8 @@ const resolvers = {
           },
           options: { sort: { createdAt: -1 } }
         })
-        .populate('dishes');
+        .populate('dishes')
+        .populate('restPhotos');
     },
 
     // get all dishes from a restaurant
@@ -311,6 +312,26 @@ const resolvers = {
       }
 
       throw new AuthenticationError('You need to be logged in');
+    },
+
+    // add a photo to a restaurant
+    addPhotoRest: async (parent, { restId, photoUrl }, context) => {
+      if (context.user) {
+        const rest = await Rest.findById(restId);
+        const photo = await Photo.create({
+          targetId: rest._id,
+          targetType: 'rest',
+          photoUrl,
+          userId: context.user._id
+        });
+
+        rest.restPhotos.push(photo);
+        rest.save();
+
+        return photo;
+      }
+
+      throw new AuthenticationError('You need to be logged in!');
     }
   }
 };

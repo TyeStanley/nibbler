@@ -66,6 +66,8 @@ const typeDefs = gql`
 
   type Photo {
     _id: ID
+    targetId: ID
+    targetType: String
     photoUrl: String
     userId: ID
   }
@@ -120,6 +122,7 @@ const typeDefs = gql`
     commentDish(dishId: ID!, commentText: String!): Comment
     commentComment(commentId: ID!, commentText: String!): Comment
     deleteComment(commentId: ID!): Comment
+    addPhotoRest(photoUrl: String!, restId: ID!): Photo
     heartRest(userId: ID!, restId: ID!): Restaurant
     heartDish(userId: ID!, dishId: ID!): Dish
     heartComment(userId: ID!, commentId: ID!): Comment

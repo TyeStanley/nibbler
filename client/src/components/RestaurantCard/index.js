@@ -17,8 +17,9 @@ const RestaurantCard = () =>{
                               {imgLinks.map((link) => (
                                 <img src={link} className='col-8 col-md-4 p-1' alt={name} id='card-img'></img>
                               ))}
+                              
                               </div>   
-    
+                              <div className id='pop-res-bottom'> <i id='heart-svg' className="fa-solid fa-heart p-2 mx-2"></i><span id='heart-span'>34000</span></div>
                             </div>
                         </div>
                         

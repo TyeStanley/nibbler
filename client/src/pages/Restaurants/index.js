@@ -1,28 +1,38 @@
 import './index.scss'
 import RestaurantCard from '../../components/RestaurantCard';
 import CategorySearchBar from '../../components/CategorySearchBar';
-import PopResCard from '../../components/PopResCard';
 import seeds from '../Home/seeds'
 
 const Restaurants = () =>{
 
     return(
         <>
-        
-        <section id='restSection'>
-                <div>
+        <div>
                    <CategorySearchBar></CategorySearchBar>
-                </div>
-
-
-
-
-            <section className='d-flex justify-content-center'>
+        </div>
+        <section className='d-flex justify-content-center' id='restSection'>
                 
 
-               {seeds.map(({imgLinks, name})=>(
-                <PopResCard imgLinks={imgLinks} name={name}></PopResCard>
-               ))}
+
+
+
+            <section className='d-flex flex-wrap restaurant-containers mx-2'  >
+
+                <h2 className='col-12 text-center mt-5 flex-wrap'>Most Popular</h2>
+                
+              
+               <RestaurantCard></RestaurantCard>
+
+
+
+
+            </section>
+            <section className='d-flex flex-wrap restaurant-containers'  >
+
+                <h2 className='col-12 text-center mt-5 flex-wrap'>Most Recent</h2>
+
+
+                <RestaurantCard></RestaurantCard>
 
 
 

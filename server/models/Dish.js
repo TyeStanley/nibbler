@@ -70,6 +70,11 @@ DishSchema.virtual('commentsCount').get(function () {
   return this.comments.length;
 });
 
+// Create the virtual "dishphotosCount" variable
+DishSchema.virtual('dishphotosCount').get(function () {
+  return this.dishPhotos.length;
+});
+
 // Create the User model using UserSchema
 const Dish = model('Dish', DishSchema);
 

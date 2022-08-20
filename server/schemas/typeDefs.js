@@ -98,7 +98,7 @@ const typeDefs = gql`
       password: String!
       tagline: String
       profilePic: String
-    ): User
+    ): Auth
     followUser(userToFollowId: ID!): User
     unfollowUser(userToUnfollowId: ID!): User
     addRest(

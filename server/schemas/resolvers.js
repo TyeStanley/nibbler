@@ -104,7 +104,7 @@ const resolvers = {
       const user = await User.create(args);
       const token = signToken(user);
 
-      return user;
+      return { user, token };
     },
 
     // login user

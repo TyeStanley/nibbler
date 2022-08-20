@@ -75,6 +75,16 @@ RestSchema.virtual("commentsCount").get(function () {
   return this.comments.length;
 });
 
+// Create the virtual "restPhotosCount" variable
+RestSchema.virtual("restPhotosCount").get(function () {
+  return this.restPhotos.length;
+});
+
+// Create the virtual "dishesCount" variable
+RestSchema.virtual("dishesCount").get(function () {
+  return this.dishes.length;
+});
+
 // Create the Restaurant model using RestSchema
 const Rest = model("Rest", RestSchema);
 

@@ -1,0 +1,29 @@
+footer {
+  box-sizing: border-box;
+  text-align: center;
+  color: white;
+  padding: 15px 40px 0px 40px;
+  
+
+  .borderOutline {
+    border: 2px solid white;
+    border-bottom: 0px;
+
+
+
+  }
+
+  .GitHubNameContainer {
+    background-color: black;
+    padding: 20px 20px 20px 20px;
+  }
+
+  a {
+    text-decoration: none;
+    color: rgb(230, 187, 132);
+  }
+  
+  a:hover {
+    color: white;
+  }
+}

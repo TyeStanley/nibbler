@@ -26,37 +26,38 @@ export const ADD_USER = gql`
     }
   `;
 
-export const SAVE_BOOK = gql`
-  mutation saveBook($book: SavedBookInput!) {
-    saveBook(book: $book) {
-      username
-      email
-      bookCount
-      savedBooks {
-        authors
-        description
-        bookId
-        image
-        link
-        title
+export const ADD_RESTAURANT = gql`
+  mutation addRest(
+    $restName: String!
+    $restState: String!
+    $restCity: String!
+    $restAddress: String!
+    $restDescript: String!
+  ) {
+    addRest( restName: $restName restState: $restState restCity: $restCity restAddress: $restAddress restDescript: $restDescript) {
+      _id
+      restName
+      restState
+      restCity
+      restAddress
+      restDescript
+      restPhotos {
+        _id
+        photoUrl
+        userId
       }
-    }
-  }
-`;
-
-export const REMOVE_BOOK = gql`
-  mutation removeBook($bookId: String!) {
-    removeBook(bookId: $bookId) {
-      username
-      email
-      bookCount
-      savedBooks {
-        authors
-        description
-        bookId
-        image
-        link
-        title
+      dishes {
+        _id
+        dishName
+        dishPhotos {
+          _id
+          photoUrl
+          userId
+        }
+      }
+      comments {
+        _id
+        commentBody
       }
     }
   }

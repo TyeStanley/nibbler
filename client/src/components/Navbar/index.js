@@ -25,12 +25,12 @@ const AppNavbar = () => {
                 {/* if user is logged in show saved books and logout */}
                 {Auth.loggedIn() ? (
                   <>
-                    <Nav.Link as={Link} to=''>
+                    <Nav.Link as={Link} to='/profile'>
                       My Profile
                     </Nav.Link>
-                    <Nav.Link as={Link} to=''>
+                    {/* <Nav.Link as={Link} to=''>
                       Profiles
-                    </Nav.Link>
+                    </Nav.Link> */}
                     <Nav.Link onClick={Auth.logout}>Logout</Nav.Link>
                   </>
                 ) : (

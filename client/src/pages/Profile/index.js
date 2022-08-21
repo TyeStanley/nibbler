@@ -4,11 +4,15 @@ import { Nav, Modal, Tab, Button } from 'react-bootstrap';
 import RestaurantCard from '../../components/RestaurantCard';
 import AddResturant from '../../components/AddRestaurant';
 import { Form,  Alert } from 'react-bootstrap';
+import { useQuery } from '@apollo/client';
+import { QUERY_RESTAURANTS } from '../../utils/queries';
 
 const Profile= () =>{
   const [showModal, setShowModal] = useState(false);
   
-  
+  const { data} = useQuery(QUERY_RESTAURANTS)
+
+  let restaurants =  data?.restaurants;
   
     return (
 
@@ -52,14 +56,14 @@ const Profile= () =>{
       </MDBContainer>
 
 
-      <section class = 'container d-flex flex-row justify-content-between'>
-        <div className='col-12 col-md-8 text-center d-flex flex-wrap' id='recent-uploads-div'>
-          <RestaurantCard></RestaurantCard>
+      <section className = 'container d-flex flex-row justify-content-between'>
+        <div className='col-12 col-md-8 text-center d-flex flex-column' id='recent-uploads-div'>
+        {/* {restaurants && <RestaurantCard restaurants={restaurants} ></RestaurantCard> } */}
         </div>
         <div>
-            <Button  onClick={() => setShowModal(true)} outline color="dark" style={{height: '36px', overflow: 'visible'}}>
+            <Button  onClick={() => setShowModal(true)} style={{height: '36px', overflow: 'visible'}}>
                     Add Restaurant
-                  </Button>
+              </Button>
             </div>
             <Modal
         size='lg'
@@ -69,13 +73,7 @@ const Profile= () =>{
         {/* tab container to do either signup or login component */}
         <Tab.Container defaultActiveKey='addrestaurant'>
           <Modal.Header closeButton>
-            <Modal.Title id='restaurant-modal'>
-            <Nav variant='pills'>
-            <Nav.Item>
-                  <Nav.Link eventKey='addrestaurant'>Add Restaurant</Nav.Link>
-                </Nav.Item>
-            </Nav>
-              </Modal.Title>
+            
           </Modal.Header>
           <Modal.Body>
             <Tab.Content>

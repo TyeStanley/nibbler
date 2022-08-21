@@ -1,4 +1,3 @@
-
 import './App.scss';
 import Home from './pages/Home'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
@@ -6,20 +5,34 @@ import Restaurants from './pages/Restaurants';
 import Navbar from './components/Navbar';
 import LoginForm from './components/LoginForm';
 import SignUpForm from './components/SignUpForm';
-import { ApolloProvider }  from '@apollo/react-hooks';
-import ApolloClient from 'apollo-boost'
+import {
+  ApolloClient,
+  InMemoryCache,
+  ApolloProvider,
+  createHttpLink,
+} from '@apollo/client';
+import { setContext } from '@apollo/client/link/context';
 
 const httpLink = createHttpLink({
   uri: '/graphql',
 });
 
-    operation.setContext({
-      headers: {
-        authorization: token ? `Bearer ${token}` : "",
-      },
-    });
-  },
-  uri: "/graphql",
+const authLink = setContext((_, { headers }) => {
+  const token = localStorage.getItem('id_token');
+  return {
+    headers: {
+      ...headers,
+      authorization: token ? `Bearer ${token}` : '',
+    },
+  };
+});
+
+import Profile from './pages/Profile'
+
+
+const client = new ApolloClient({
+  link: authLink.concat(httpLink),
+  cache: new InMemoryCache(),
 });
 
 function App() {
@@ -38,11 +51,13 @@ function App() {
                 path="/restaurants" 
                 element={<Restaurants/>} 
               />
+            <Route 
+                path="/profile" 
+                element={<Profile/>} 
+             />
             
             </Routes>
-      
-
-    </main>
+</main>
     </ApolloProvider>
   );
 }

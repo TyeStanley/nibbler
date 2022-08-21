@@ -101,7 +101,6 @@ const typeDefs = gql`
       restCity: String!
       restAddress: String!
       restDescript: String!
-      restPhotos: [String]!
     ): Restaurant
 
 

@@ -34,7 +34,12 @@
       
 }
 #intro-restaurants{
-    width: 90%;
+    width: 75%;
     margin: auto;
 }
 
+@media only screen and (max-width: 600px) {
+    #intro-restaurants {
+      width: 100%;
+    }
+  }

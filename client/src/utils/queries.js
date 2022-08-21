@@ -1,20 +1,66 @@
-import gql from "graphql-tag";
+/** @format */
 
-export const GET_ME = gql`
-  {
-    me {
+import { gql } from "@apollo/client";
+
+export const QUERY_ME = gql`
+  query me($_id: ID!) {
+    me(_id: $id) {
       _id
       username
-      email
-      bookCount
-      savedBooks {
-        bookId
-        authors
-        description
-        title
-        image
-        link
+      tagline
+      profilePic
+      favRests {
+        _id
+        restName
+        createdAt
+        restPhotos {
+          _id
+          photoUrl
+          userId
+        }
+        comments {
+          _id
+          commentBody
+          createdAt
+          heartsCount
+        }
+        dishes {
+          _id
+          dishName
+          dishCost
+          dishPhotos {
+            _id
+            photoUrl
+            userId
+          }
+        }
       }
     }
   }
 `;
+export const QUERY_RESTAURANTS = gql `
+  {
+    restaurants {
+      restName
+      restState
+      restCity
+      restAddress
+      restDescript
+      restPhotos{
+        photoUrl
+      } 
+      comments {
+        user{
+          _id
+          username
+          
+        }
+      }
+      heartsCount
+      hearts {
+      _id
+      userId
+    }
+    }
+  }
+`

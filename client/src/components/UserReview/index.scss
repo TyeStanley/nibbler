@@ -1,28 +1,18 @@
+#comment-box{
+    background-color: rgb(102, 104, 107);
+    border-top: 1px solid rgb(73, 70, 70);
+    overflow-x: hidden;
+    overflow-y: scroll;
+}
+
 #desc-box{
     
     
-    margin: auto;
-    border-bottom: 2px solid rgb(78, 76, 76);
-    border-left: 2px solid rgb(78, 76, 76);
-    border-top: 2px solid rgb(78, 76, 76);
-    color: rgb(230, 187, 132);
-    text-shadow: 2px 2px 4px rgb(32, 31, 31);
-    font-size: 15px;
-    font-weight: bolder;
-    background-color: rgba(97, 98, 100, 0);
-    overflow-y: auto;
-    height: 14%;
-
-    #desc-box-title{
-        border-radius: 2px;
-        height: 25%;
-        text-align: left;
-
-    }
     #userCommentImg{
    
-        border-radius: 25%;
-        width: 15%;
+        border-radius: 50%;
+        
+        
     }
     #userName{
         font-size: 22px

@@ -8,13 +8,10 @@ footer {
   .borderOutline {
     border: 2px solid white;
     border-bottom: 0px;
-
-
-
   }
 
   .GitHubNameContainer {
-    background-color: black;
+    background-color: #212529;
     padding: 20px 20px 20px 20px;
   }
 
@@ -25,5 +22,49 @@ footer {
   
   a:hover {
     color: white;
+  }
+
+  .back-to-top {
+    position: fixed;
+    bottom: 80px;
+    right: 20px;
+    background: gray;
+    color: white;
+    cursor: pointer;
+    border-radius: 2px;
+    border: none;
+    opacity: 0.8;
+    animation: zoom-in 1s linear;
+    transform: scale(1.4, 1.4);
+  }
+
+  .back-to-top:hover {
+    opacity: 1;
+  }
+  @keyframes zoom-in {
+    0% {
+      transform: scale(0, 0);
+      right: -10px;
+    }
+    20% {
+      transform: scale(0.3, 0.3);
+      right: -5px;
+    }
+    40% {
+      transform: scale(0.7, 0.7);
+      right: 0px;
+    }
+    60% {
+      transform: scale(1, 1);
+      right: 5px;
+    }
+    80% {
+      transform: scale(1.2, 1.2);
+      right: 10px;
+    }
+    100% {
+      transform: scale(1.4, 1.4);
+      right: 20px;
+    }
   }
 }

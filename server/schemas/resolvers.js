@@ -7,9 +7,18 @@ const resolvers = {
     // get logged in user
     me: async (parent, args, context) => {
       if (context.user) {
-        const userData = await User.findOne({ _id: context.user._id }).select(
-          '-__v -password'
-        );
+        const userData = await User.findOne({ _id: context.user._id })
+          .select('-__v -password')
+          .populate('following')
+          .populate('followers')
+          .populate({
+            path: 'comments',
+            populate: {
+              path: 'user',
+              select: '-__v -password'
+            },
+            options: { sort: { createdAt: -1 } }
+          });
 
         return userData;
       }

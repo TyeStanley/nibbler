@@ -1,17 +1,19 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useQuery } from 'react';
 import { MDBCol, MDBContainer, MDBRow, MDBCard, MDBCardText, MDBCardImage, MDBBtn, MDBTypography } from 'mdb-react-ui-kit';
-import { Nav, Modal, Tab, Button, Container, CardGroup, Card } from 'react-bootstrap';
+import { Nav, Modal, Tab, Button} from 'react-bootstrap';
 import RestaurantCard from '../../components/RestaurantCard';
 import Auth from '../../utils/auth';
-import { getMe } from '../../utils/API';
 import AddResturant from '../../components/AddRestaurant';
-import { Form,  Alert } from 'react-bootstrap';
+import { GET_ME } from '../../utils/queries';
+
 
 const Profile= () => {
   const [showModal, setShowModal] = useState(false);
   const [userData, setUserData] = useState({});
+  const { data } = useQuery(GET_ME)
   
   const userDataLength = Object.keys(userData).length;
+  let restaurantslist =  data?.restaurants;
 
   useEffect(() => {
     const getUserData = async () => {
@@ -82,35 +84,11 @@ const Profile= () => {
 
       <section class = 'container d-flex flex-row justify-content-between'>
       <div className='col-12 col-md-8 text-center d-flex flex-wrap' id='recent-uploads-div'>
-          <RestaurantCard></RestaurantCard>
+          <RestaurantCard restaurants={restaurantslist}></RestaurantCard>
         </div>
         <div>
       
-      {/* <Container>
-        <h2>
-          {userData.savedRestaurants.length
-            ? `Viewing ${userData.savedRestaurants.length} saved ${userData.savedRestaurants.length === 1 ? 'restaurant' : 'restaurants'}:`
-            : 'You have no saved restaurants!'}
-        </h2>
-        <CardGroup>
-          {userData.savedRestaurants.map((book) => {
-            return (
-              <Card key={restaurant.restaurantId} border='dark'>
-                {book.image ? <Card.Img src={restaurant.image} alt={`The cover for ${restaurant.title}`} variant='top' /> : null}
-                <Card.Body>
-                  <Card.Title>{restaurant.restTitle}</Card.Title>
-                  <Card.Text>{restaurant.restState}</Card.Text>
-                  <Card.Text>{restaurant.restAddress}</Card.Text>
-                  <Card.Text>{restaurant.restDescript}</Card.Text>
-                  <Button className='btn-block btn-danger' onClick={() => handleRestaurant(restaurant.restaurantId)}>
-                    Delete this Restaurant!
-                  </Button>
-                </Card.Body>
-              </Card>
-            );
-          })}
-        </CardGroup>
-      </Container> */}
+      
                 <Button  onClick={() => setShowModal(true)} outline color="dark" style={{height: '36px', overflow: 'visible'}}>
                     Add Restaurant
                   </Button>

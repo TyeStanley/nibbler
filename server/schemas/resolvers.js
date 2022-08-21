@@ -22,7 +22,14 @@ const resolvers = {
       return await User.find()
         .select('-__v -password')
         .populate('following')
-        .populate('comments');
+        .populate({
+          path: 'comments',
+          populate: {
+            path: 'user',
+            select: '-__v -password'
+          },
+          options: { sort: { createdAt: -1 } }
+        });
     },
 
     // get user by username
@@ -30,14 +37,28 @@ const resolvers = {
       return await User.findOne({ username })
         .select('-__v -password')
         .populate('following')
-        .populate('comments');
+        .populate({
+          path: 'comments',
+          populate: {
+            path: 'user',
+            select: '-__v -password'
+          },
+          options: { sort: { createdAt: -1 } }
+        });
     },
 
     // get all restaurants
     restaurants: async () => {
       return await Rest.find()
         .select('-__v')
-        .populate('comments')
+        .populate({
+          path: 'comments',
+          populate: {
+            path: 'user',
+            select: '-__v -password'
+          },
+          options: { sort: { createdAt: -1 } }
+        })
         .populate('dishes')
         .populate('restPhotos');
     },
@@ -80,7 +101,14 @@ const resolvers = {
     dishesByName: async (parent, { dishName }) => {
       return await Dish.find({ dishName })
         .select('-__v')
-        .populate('comments')
+        .populate({
+          path: 'comments',
+          populate: {
+            path: 'user',
+            select: '-__v -password'
+          },
+          options: { sort: { createdAt: -1 } }
+        })
         .populate('dishRest')
         .populate('dishPhotos');
     },
@@ -89,7 +117,13 @@ const resolvers = {
     dish: async (parent, { dishId }) => {
       return await Dish.findById(dishId)
         .select('-__v')
-        .populate('comments')
+        .populate({
+          path: 'comments',
+          populate: {
+            path: 'user',
+            select: '-__v -password'
+          }
+        })
         .populate('dishRest')
         .populate('dishPhotos');
     },
@@ -98,7 +132,14 @@ const resolvers = {
     comment: async (parent, { commentId }) => {
       return await Comment.findById(commentId)
         .select('-__v')
-        .populate('comments')
+        .populate({
+          path: 'comments',
+          populate: {
+            path: 'user',
+            select: '-__v -password'
+          },
+          options: { sort: { createdAt: -1 } }
+        })
         .populate('user');
     }
   },
@@ -249,7 +290,7 @@ const resolvers = {
           targetId: dish._id,
           targetType: 'dish',
           commentText,
-          userId: context.user._id,
+          user: await User.findById(context.user._id),
           username: context.user.username
         });
 
@@ -270,7 +311,7 @@ const resolvers = {
           targetId: comment._id,
           targetType: 'comment',
           commentText,
-          userId: context.user._id,
+          user: await User.findById(context.user._id),
           username: context.user.username
         });
 
@@ -384,7 +425,10 @@ const resolvers = {
 
         return photo;
       }
-    }
+    },
+
+    // heart a restaurant (add to user's favorites)
+    heartRest: async (parent, { restId }, context) => {}
   }
 };
 

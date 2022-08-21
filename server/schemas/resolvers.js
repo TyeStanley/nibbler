@@ -228,7 +228,7 @@ const resolvers = {
           targetId: rest._id,
           targetType: 'rest',
           commentText,
-          userId: context.user._id,
+          user: await User.findById(context.user._id),
           username: context.user.username
         });
 
@@ -356,6 +356,34 @@ const resolvers = {
       }
 
       throw new AuthenticationError('You need to be logged in!');
+    },
+
+    // delete a photo
+    deletePhoto: async (parent, { photoId, targetId }, context) => {
+      if (context.user) {
+        const photo = await Photo.findByIdAndDelete(photoId);
+        let target = null;
+
+        // assign target to remove photo from and update based on type
+        switch (photo.targetType) {
+          case 'rest':
+            target = await Rest.findById(targetId);
+            target.restPhotos.pull(photo);
+            target.save();
+            break;
+
+          case 'dish':
+            target = await Dish.findById(targetId);
+            target.dishPhotos.pull(photo);
+            break;
+
+          default:
+            console.log(photo.targetType);
+            break;
+        }
+
+        return photo;
+      }
     }
   }
 };

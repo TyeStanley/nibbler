@@ -3,8 +3,7 @@ import { MDBCol, MDBContainer, MDBRow, MDBCard, MDBCardText, MDBCardImage, MDBBt
 import { Nav, Modal, Tab, Button, Container, CardGroup, Card } from 'react-bootstrap';
 import RestaurantCard from '../../components/RestaurantCard';
 import Auth from '../../utils/auth';
-import { getMe } from '../../utils/API';
-import AddResturant from '../../components/AddRestaurant';
+import AddRestaurant from '../../components/AddRestaurant';
 import { Form,  Alert } from 'react-bootstrap';
 import { useQuery } from '@apollo/client';
 import { QUERY_RESTAURANTS } from '../../utils/queries';
@@ -58,7 +57,7 @@ const Profile= () => {
 
       <section class = 'container d-flex flex-row justify-content-between'>
         <div className='col-12 col-md-8 text-center d-flex flex-wrap' id='recent-uploads-div'>
-          <RestaurantCard></RestaurantCard>
+          {/* <RestaurantCard></RestaurantCard> */}
         </div>
         <div>
             <Button  onClick={() => setShowModal(true)} outline color="dark" style={{height: '36px', overflow: 'visible'}}>
@@ -78,7 +77,7 @@ const Profile= () => {
           <Modal.Body>
             <Tab.Content>
               <Tab.Pane eventKey='addrestaurant'>
-                <AddResturant handleModalClose={() => setShowModal(false)} />
+                <AddRestaurant handleModalClose={() => setShowModal(false)} />
               </Tab.Pane>
             </Tab.Content>
           </Modal.Body>

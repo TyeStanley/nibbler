@@ -1,10 +1,5 @@
 import './App.scss';
-import Home from './pages/Home'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Restaurants from './pages/Restaurants';
-import Navbar from './components/Navbar';
-import LoginForm from './components/LoginForm';
-import SignUpForm from './components/SignUpForm';
 import {
   ApolloClient,
   InMemoryCache,
@@ -12,6 +7,12 @@ import {
   createHttpLink,
 } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
+import Restaurants from './pages/Restaurants';
+import Navbar from './components/Navbar';
+import LoginForm from './components/LoginForm';
+import SignUpForm from './components/SignUpForm';
+import Home from './pages/Home'
+import Profile from './pages/Profile'
 
 const httpLink = createHttpLink({
   uri: '/graphql',
@@ -27,7 +28,7 @@ const authLink = setContext((_, { headers }) => {
   };
 });
 
-import Profile from './pages/Profile'
+
 
 
 const client = new ApolloClient({

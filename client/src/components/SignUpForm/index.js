@@ -17,6 +17,7 @@ const SignupForm = () => {
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
+
     setUserFormData({ ...userFormData, [name]: value });
   };
 

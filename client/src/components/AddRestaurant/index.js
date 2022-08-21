@@ -1,25 +1,23 @@
+// see SignupForm.js for comments
 import React, { useState } from 'react';
 import { Form, Button, Alert } from 'react-bootstrap';
+
 import Auth from '../../utils/auth';
 import { useMutation } from '@apollo/client';
 import { ADD_RESTAURANT } from '../../utils/mutations';
 
-
-
-
-const RestaurantForm= () => {
-  // set initial form state
-  const [userFormData, setUserFormData] = useState({ restName: '', email: '', password: '' });
-  // set state for form validation
+const RestaurantForm = () => {
+  const [restaurantFormData, setRestaurantFormData] = useState({ restName: '', restState: '', restAddress:'', restDescript:''});
   const [validated] = useState(false);
-  // set state for alert
   const [showAlert, setShowAlert] = useState(false);
-  // define mutation for adding a user
-  const [createUser] = useMutation(ADD_RESTAURANT);
+  const [addRestaurant] = useMutation(ADD_RESTAURANT);
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
-    setUserFormData({ ...userFormData, [name]: value });
+    console.log(name +" "+ value) 
+    console.log(event.target)
+    
+    setRestaurantFormData({...restaurantFormData, [name]: value });
   };
 
   const handleFormSubmit = async (event) => {
@@ -30,76 +28,89 @@ const RestaurantForm= () => {
     if (form.checkValidity() === false) {
       event.preventDefault();
       event.stopPropagation();
+    
     }
 
     try {
-      const { data } = await createUser({
-        variables: { ...userFormData }
+      const { data } = await addRestaurant({
+        variables: {...restaurantFormData} 
       });
 
-      Auth.login(data.addUser.token);
-      
+      Auth.login(data.login.token);
     } catch (err) {
       console.error(err);
       setShowAlert(true);
     }
 
-    setUserFormData({
-      restName: '',
-      email: '',
-      password: '',
+    setRestaurantFormData({
+        restName: '', 
+        restState: '', 
+        restAddress:'', 
+        restDescript:''
     });
   };
 
   return (
     <>
-      {/* This is needed for the validation functionality above */}
       <Form noValidate validated={validated} onSubmit={handleFormSubmit}>
-        {/* show alert if server response is bad */}
         <Alert dismissible onClose={() => setShowAlert(false)} show={showAlert} variant='danger'>
-          Something went wrong with your signup!
+          Something went wrong with your login credentials!
         </Alert>
-
         <Form.Group>
-          <Form.Label htmlFor='username'>Username</Form.Label>
+          <Form.Label htmlFor='name'>Name</Form.Label>
           <Form.Control
             type='text'
-            placeholder='Your username'
-            name='username'
+            placeholder='Restaurant Name'
+            name='restName'
             onChange={handleInputChange}
-            value={userFormData.restName}
+            value={restaurantFormData.restName}
             required
           />
-          <Form.Control.Feedback type='invalid'>Username is required!</Form.Control.Feedback>
+          <Form.Control.Feedback type='invalid'>Restaurant name is required!</Form.Control.Feedback>
         </Form.Group>
 
         <Form.Group>
-          <Form.Label htmlFor='email'>Email</Form.Label>
+          <Form.Label htmlFor='state'>State</Form.Label>
           <Form.Control
-            type='email'
-            placeholder='Your email address'
-            name='email'
+            type='text'
+            placeholder='State'
+            name='restState'
             onChange={handleInputChange}
-            value={userFormData.email}
+            value={restaurantFormData.restState}
             required
           />
-          <Form.Control.Feedback type='invalid'>Email is required!</Form.Control.Feedback>
+          <Form.Control.Feedback type='invalid'>State is required!</Form.Control.Feedback>
+        </Form.Group>
+        
+        <Form.Group>
+          <Form.Label htmlFor='address'>Address</Form.Label>
+          <Form.Control
+            type='text'
+            placeholder='Address'
+            name='restAddress'
+            onChange={handleInputChange}
+            value={restaurantFormData.restAddress}
+            required
+          />
+          <Form.Control.Feedback type='invalid'>Address is required!</Form.Control.Feedback>
+        </Form.Group>
+        
+        <Form.Group>
+          <Form.Label htmlFor='description'>Description</Form.Label>
+          <Form.Control
+            type='text'
+            placeholder='Description'
+            name='restDescript'
+            onChange={handleInputChange}
+            value={restaurantFormData.restDescript}
+            required
+          />
+          <Form.Control.Feedback type='invalid'>Description is required!</Form.Control.Feedback>
         </Form.Group>
 
-        <Form.Group>
-          <Form.Label htmlFor='password'>Password</Form.Label>
-          <Form.Control
-            type='password'
-            placeholder='Your password'
-            name='password'
-            onChange={handleInputChange}
-            value={userFormData.password}
-            required
-          />
-          <Form.Control.Feedback type='invalid'>Password is required!</Form.Control.Feedback>
-        </Form.Group>
+        
         <Button
-          disabled={!(userFormData.username && userFormData.email && userFormData.password)}
+          disabled={!(restaurantFormData.restName && restaurantFormData.restAddress && restaurantFormData.restState && restaurantFormData.restDescript )}
           type='submit'
           variant='success'>
           Submit
@@ -108,7 +119,5 @@ const RestaurantForm= () => {
     </>
   );
 };
-
-
 
 export default RestaurantForm;

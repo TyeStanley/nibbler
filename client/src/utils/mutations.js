@@ -41,28 +41,19 @@ export const ADD_RESTAURANT = gql`
       restCity
       restAddress
       restDescript
-      restPhotos {
-        _id
-        photoUrl
-        userId
-      }
-      dishes {
-        _id
-        dishName
-        dishPhotos {
-          _id
-          photoUrl
-          userId
-        }
-      }
-      comments {
-        _id
-        commentBody
-      }
+      
     }
   }
 
 `;
 
+export const ADD_REST_PHOTO =gql`
+  mutation Mutation($photoUrl: String!, $restId: ID!) {
+    addPhotoRest(photoUrl: $photoUrl, restId: $restId) {
+      _id
+      photoUrl
+    }
+  }
 
+`
 

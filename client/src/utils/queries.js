@@ -46,10 +46,15 @@ export const QUERY_RESTAURANTS = gql `
       restCity
       restAddress
       restDescript
-      restPhotos 
+      restPhotos{
+        photoUrl
+      } 
       comments {
-        username
-        commentText
+        user{
+          _id
+          username
+          
+        }
       }
       heartsCount
       hearts {

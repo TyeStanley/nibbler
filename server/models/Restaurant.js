@@ -25,9 +25,10 @@ const RestSchema = new Schema(
       type: String,
     },
     restPhotos: [
-      {
-          type: String,
-      }
+        {
+            type: Schema.Types.ObjectId,
+            ref: 'Photo'
+        }
     ],
     restDescript: {
       type: String,
@@ -72,6 +73,16 @@ RestSchema.virtual("heartsCount").get(function () {
 // Create the virtual "commentsCount" variable
 RestSchema.virtual("commentsCount").get(function () {
   return this.comments.length;
+});
+
+// Create the virtual "restPhotosCount" variable
+RestSchema.virtual("restPhotosCount").get(function () {
+  return this.restPhotos.length;
+});
+
+// Create the virtual "dishesCount" variable
+RestSchema.virtual("dishesCount").get(function () {
+  return this.dishes.length;
 });
 
 // Create the Restaurant model using RestSchema

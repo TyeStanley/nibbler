@@ -20,10 +20,11 @@ const RestaurantCard = ({restaurants}) =>{
                                 <div className="" id='rest-card-body'>
                                   <div id='card-img-container' className='d-flex carousel slide' data-ride='carousel' key={restName}>  
                                     {restPhotos && restPhotos.map((photo) => (
+                                      
                                       <img src={`/${photo + '.jpg'}`} className='col-8 col-md-4 p-1 card-photo' alt={photo} key={photo} ></img>
                                         ))}
                                     </div>   
-                                    {comments && <UserReview comments={comments}></UserReview> }
+                                    {/* {comments && <UserReview comments={comments}></UserReview> } */}
                                 <div className id='pop-res-bottom'> <i id='heart-svg' className="fa-solid fa-heart p-2 mx-1" key={restName}></i><span id='heart-span'>{`${heartsCount}`}</span></div>
                                 
                               </div>

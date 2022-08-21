@@ -38,7 +38,7 @@ const Restaurants = () =>{
 
                 <h2 className='col-12 text-center mt-5 flex-wrap'>Most Popular</h2>
                 
-                <RestaurantCard restaurants={mostPop} ></RestaurantCard>
+                {mostPop && <RestaurantCard restaurants={mostPop} ></RestaurantCard> }
                
 
 
@@ -50,7 +50,7 @@ const Restaurants = () =>{
                 <h2 className='col-12 text-center mt-5 flex-wrap'>Most Recent</h2>
 
 
-                <RestaurantCard restaurants={restaurants} ></RestaurantCard>
+                {restaurants && <RestaurantCard restaurants={restaurants} ></RestaurantCard>}
 
 
 

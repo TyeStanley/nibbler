@@ -7,7 +7,7 @@ import { useMutation } from '@apollo/client';
 import { ADD_RESTAURANT } from '../../utils/mutations';
 
 const RestaurantForm = () => {
-  const [restaurantFormData, setRestaurantFormData] = useState({ restName: '', restState: '', restAddress:'', restDescript:''});
+  const [restaurantFormData, setRestaurantFormData] = useState({ restName: '', restState: '', restAddress:'', restDescript:'', restCity: ''});
   const [validated] = useState(false);
   const [showAlert, setShowAlert] = useState(false);
   const [addRestaurant] = useMutation(ADD_RESTAURANT);
@@ -41,7 +41,7 @@ const RestaurantForm = () => {
       console.error(err);
       setShowAlert(true);
     }
-
+    
     setRestaurantFormData({
         restName: '', 
         restState: '', 
@@ -53,9 +53,7 @@ const RestaurantForm = () => {
   return (
     <>
       <Form noValidate validated={validated} onSubmit={handleFormSubmit}>
-        <Alert dismissible onClose={() => setShowAlert(false)} show={showAlert} variant='danger'>
-          Something went wrong with your login credentials!
-        </Alert>
+      
         <Form.Group>
           <Form.Label htmlFor='name'>Name</Form.Label>
           <Form.Control
@@ -80,6 +78,18 @@ const RestaurantForm = () => {
             required
           />
           <Form.Control.Feedback type='invalid'>State is required!</Form.Control.Feedback>
+        </Form.Group>
+        <Form.Group>
+          <Form.Label htmlFor='city'>City</Form.Label>
+          <Form.Control
+            type='text'
+            placeholder='City'
+            name='restCity'
+            onChange={handleInputChange}
+            value={restaurantFormData.restCity}
+            required
+          />
+          <Form.Control.Feedback type='invalid'>City is Missing!</Form.Control.Feedback>
         </Form.Group>
         
         <Form.Group>

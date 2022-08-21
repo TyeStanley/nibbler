@@ -1,11 +1,12 @@
 import React, { useState, useEffect, useQuery } from 'react';
 import { MDBCol, MDBContainer, MDBRow, MDBCard, MDBCardText, MDBCardImage, MDBBtn, MDBTypography } from 'mdb-react-ui-kit';
-import { Nav, Modal, Tab, Button} from 'react-bootstrap';
+import { Nav, Modal, Tab, Button, Container, CardGroup, Card } from 'react-bootstrap';
 import RestaurantCard from '../../components/RestaurantCard';
 import Auth from '../../utils/auth';
-import AddResturant from '../../components/AddRestaurant';
-import { GET_ME } from '../../utils/queries';
-
+import AddRestaurant from '../../components/AddRestaurant';
+import { Form,  Alert } from 'react-bootstrap';
+import { useQuery } from '@apollo/client';
+import { QUERY_RESTAURANTS } from '../../utils/queries';
 
 const Profile= () => {
   const [showModal, setShowModal] = useState(false);
@@ -91,7 +92,7 @@ const Profile= () => {
       
                 <Button  onClick={() => setShowModal(true)} outline color="dark" style={{height: '36px', overflow: 'visible'}}>
                     Add Restaurant
-                  </Button>
+              </Button>
             </div>
             <Modal
         size='lg'
@@ -101,18 +102,12 @@ const Profile= () => {
         {/* tab container to do either signup or login component */}
         <Tab.Container defaultActiveKey='addrestaurant'>
           <Modal.Header closeButton>
-            <Modal.Title id='restaurant-modal'>
-            <Nav variant='pills'>
-            <Nav.Item>
-                  <Nav.Link eventKey='addrestaurant'>Add Restaurant</Nav.Link>
-                </Nav.Item>
-            </Nav>
-              </Modal.Title>
+            
           </Modal.Header>
           <Modal.Body>
             <Tab.Content>
               <Tab.Pane eventKey='addrestaurant'>
-                <AddResturant handleModalClose={() => setShowModal(false)} />
+                <AddRestaurant handleModalClose={() => setShowModal(false)} />
               </Tab.Pane>
             </Tab.Content>
           </Modal.Body>

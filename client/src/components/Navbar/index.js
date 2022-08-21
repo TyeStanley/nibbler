@@ -13,6 +13,9 @@ const AppNavbar = () => {
       <>
         <Navbar bg='dark' variant='dark' expand='lg'>
           <Container fluid>
+          <Link  style={{paddingLeft: 13, textDecoration: 'none'}}   to="/">
+            <h1 id='nav-header'>FoodFan</h1>
+          </Link>
             <Navbar.Toggle aria-controls='navbar' />
             <Navbar.Collapse id='navbar'>
               <Nav className='ms-auto'>
@@ -22,12 +25,12 @@ const AppNavbar = () => {
                 {/* if user is logged in show saved books and logout */}
                 {Auth.loggedIn() ? (
                   <>
-                    <Nav.Link as={Link} to=''>
+                    <Nav.Link as={Link} to='/profile'>
                       My Profile
                     </Nav.Link>
-                    <Nav.Link as={Link} to=''>
+                    {/* <Nav.Link as={Link} to=''>
                       Profiles
-                    </Nav.Link>
+                    </Nav.Link> */}
                     <Nav.Link onClick={Auth.logout}>Logout</Nav.Link>
                   </>
                 ) : (

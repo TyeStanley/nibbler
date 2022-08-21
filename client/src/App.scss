@@ -1,12 +1,13 @@
 main{
   margin: 0;
   padding: 0;
-  background-color: rgba(44, 47, 49, 0.993);
-
+  background-color: rgba(68, 75, 80, 0.993);
   
+}
+html{
+  background-color: rgba(68, 75, 80, 0.993);
 
 }
-
 /* width */
 ::-webkit-scrollbar {
   width: 15px;
@@ -27,6 +28,14 @@ main{
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
   background: #008fb3; 
+}
+
+#nav-header{
+  color:rgb(158, 151, 151);
+  &:hover{
+    color: white;
+    
+  }
 }
 
 @import url('https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@1,700&display=swap');

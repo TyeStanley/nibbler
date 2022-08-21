@@ -62,8 +62,8 @@ const typeDefs = gql`
   type Heart {
     _id: ID
     targetId: ID
-    userId: ID
-    username: String
+    targetType: String
+    user: User
   }
 
   type Photo {
@@ -91,6 +91,7 @@ const typeDefs = gql`
     dishesByName(dishName: String!): [Dish]
     dish(dishId: ID!): Dish
     comment(commentId: ID!): Comment
+    viewHearts(targetId: ID!): [Heart]
     favRests(userId: ID!): [Restaurant]
   }
 
@@ -127,10 +128,10 @@ const typeDefs = gql`
     addPhotoRest(photoUrl: String!, restId: ID!): Photo
     addPhotoDish(photoUrl: String!, dishId: ID!): Photo
     deletePhoto(targetId: ID!, photoId: ID!): Photo
-    heartRest(restId: ID!): Restaurant
-    heartDish(userId: ID!, dishId: ID!): Dish
+    heartRest(restId: ID!): Heart
+    heartDish(dishId: ID!): Heart
     heartComment(userId: ID!, commentId: ID!): Comment
-    unheartRest(userId: ID!, restId: ID!): Restaurant
+    unheartRest(heartId: ID!): Heart
     unheartDish(userId: ID!, dishId: ID!): Dish
     unheartComment(userId: ID!, commentId: ID!): Comment
   }

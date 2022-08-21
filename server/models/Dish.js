@@ -38,6 +38,7 @@ const DishSchema = new Schema(
     username: {
       type: String
     },
+    
     comments: [
       {
         type: Schema.Types.ObjectId,

@@ -1,5 +1,5 @@
 const { AuthenticationError } = require('apollo-server-express');
-const { User, Rest, Dish, Comment, Photo } = require('../models');
+const { User, Rest, Dish, Comment, Photo, Heart } = require('../models');
 const { signToken } = require('../utils/auth');
 
 const resolvers = {
@@ -18,7 +18,8 @@ const resolvers = {
               select: '-__v -password'
             },
             options: { sort: { createdAt: -1 } }
-          });
+          })
+          .populate('favRests');
 
         return userData;
       }
@@ -38,7 +39,8 @@ const resolvers = {
             select: '-__v -password'
           },
           options: { sort: { createdAt: -1 } }
-        });
+        })
+        .populate('favRests');
     },
 
     // get user by username
@@ -53,7 +55,8 @@ const resolvers = {
             select: '-__v -password'
           },
           options: { sort: { createdAt: -1 } }
-        });
+        })
+        .populate('favRests');
     },
 
     // get all restaurants
@@ -69,13 +72,19 @@ const resolvers = {
           options: { sort: { createdAt: -1 } }
         })
         .populate('dishes')
-        .populate('restPhotos');
+        .populate('restPhotos')
+        .populate({
+          path: 'hearts',
+          populate: {
+            path: 'user',
+            select: '-__v -password'
+          }
+        });
     },
 
     // get restaurant by name
     restaurant: async (parent, { restName }) => {
       return await Rest.find({ restName })
-        .select('-__v')
         .populate({
           path: 'comments',
           populate: {
@@ -85,7 +94,14 @@ const resolvers = {
           options: { sort: { createdAt: -1 } }
         })
         .populate('dishes')
-        .populate('restPhotos');
+        .populate('restPhotos')
+        .populate({
+          path: 'hearts',
+          populate: {
+            path: 'user',
+            select: '-__v -password'
+          }
+        });
     },
 
     // get all dishes from a restaurant
@@ -103,7 +119,14 @@ const resolvers = {
           options: { sort: { createdAt: -1 } }
         })
         .populate('dishRest')
-        .populate('dishPhotos');
+        .populate('dishPhotos')
+        .populate({
+          path: 'hearts',
+          populate: {
+            path: 'user',
+            select: '-__v -password'
+          }
+        });
     },
 
     // get dish by name
@@ -119,7 +142,14 @@ const resolvers = {
           options: { sort: { createdAt: -1 } }
         })
         .populate('dishRest')
-        .populate('dishPhotos');
+        .populate('dishPhotos')
+        .populate({
+          path: 'hearts',
+          populate: {
+            path: 'user',
+            select: '-__v -password'
+          }
+        });
     },
 
     // get dish by id
@@ -134,7 +164,14 @@ const resolvers = {
           }
         })
         .populate('dishRest')
-        .populate('dishPhotos');
+        .populate('dishPhotos')
+        .populate({
+          path: 'hearts',
+          populate: {
+            path: 'user',
+            select: '-__v -password'
+          }
+        });
     },
 
     // get comment
@@ -434,10 +471,95 @@ const resolvers = {
 
         return photo;
       }
+
+      throw new AuthenticationError('You need to be logged in');
     },
 
     // heart a restaurant (add to user's favorites)
-    heartRest: async (parent, { restId }, context) => {}
+    heartRest: async (parent, { restId }, context) => {
+      if (context.user) {
+        const rest = await Rest.findById(restId);
+        const user = await User.findById(context.user._id);
+        const heart = await Heart.create({
+          targetId: rest._id,
+          targetType: 'rest',
+          userId: user._id,
+          username: user.username,
+          user: user
+        });
+
+        rest.hearts.push(heart);
+        rest.save();
+
+        user.favRests.push(rest);
+        user.save();
+
+        return heart;
+      }
+
+      throw new AuthenticationError('You need to be logged in!');
+    },
+
+    // heart a dish
+    heartDish: async (parent, { dishId }, context) => {
+      if (context.user) {
+        const dish = await Dish.findById(dishId);
+        const user = await User.findById(context.user._id);
+        const heart = await Heart.create({
+          targetId: dish._id,
+          targetType: 'dish',
+          userId: user._id,
+          username: user.username,
+          user: user
+        });
+
+        dish.hearts.push(heart);
+        dish.save();
+
+        return heart;
+      }
+
+      throw new AuthenticationError('You need to be logged in!');
+    },
+
+    // heart a comment
+    heartComment: async (parent, { commentId }, context) => {
+      if (context.user) {
+        const comment = await Comment.findById(commentId);
+        const user = await User.findById(context.user._id);
+        const heart = await Heart.create({
+          targetId: comment._id,
+          targetType: 'comment',
+          user: user
+        });
+
+        comment.hearts.push(heart);
+        comment.save();
+
+        return heart;
+      }
+
+      throw new AuthenticationError('You need to be logged in!');
+    },
+
+    // unheart a restaurant (remove from user's favorites)
+    unheartRest: async (parent, { heartId }, context) => {
+      if (context.user) {
+        const heart = await Heart.findByIdAndDelete(heartId);
+        const rest = await Rest.findById(heart.targetId);
+        const user = await User.findById(context.user._id);
+
+        rest.hearts.pull(heart);
+        rest.save();
+
+        user.favRests.pull(rest);
+        user.save();
+
+        return heart;
+      }
+
+      throw new AuthenticationError('You need to be logged in!');
+    }
   }
 };
 

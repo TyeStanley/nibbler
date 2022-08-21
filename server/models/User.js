@@ -42,7 +42,7 @@ const UserSchema = new Schema(
         favRests: [
             {
                 type: Schema.Types.ObjectId,
-                ref: 'Restaurant'
+                ref: 'Rest'
             }
         ], 
         comments: [

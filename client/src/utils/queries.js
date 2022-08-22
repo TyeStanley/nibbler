@@ -41,6 +41,7 @@ export const QUERY_ME = gql`
 export const QUERY_RESTAURANTS = gql `
   {
     restaurants {
+      _id
       restName
       restState
       restCity

@@ -130,10 +130,8 @@ const typeDefs = gql`
     deletePhoto(targetId: ID!, photoId: ID!): Photo
     heartRest(restId: ID!): Heart
     heartDish(dishId: ID!): Heart
-    heartComment(userId: ID!, commentId: ID!): Comment
-    unheartRest(heartId: ID!): Heart
-    unheartDish(userId: ID!, dishId: ID!): Dish
-    unheartComment(userId: ID!, commentId: ID!): Comment
+    heartComment(commentId: ID!): Heart
+    unheart(heartId: ID!): Heart
   }
 `;
 

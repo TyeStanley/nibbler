@@ -7,7 +7,7 @@ const HeartSchema = new Schema({
   },
   targetType: {
     type: String,
-    enum: ['rest', 'dish'],
+    enum: ['rest', 'dish', 'comment'],
     required: true
   },
   user: {

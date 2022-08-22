@@ -51,10 +51,12 @@ export const QUERY_RESTAURANTS = gql `
         photoUrl
       } 
       comments {
-        user{
+        _id
+        commentText
+        createdAt
+        user {
           _id
           username
-          
         }
       }
       heartsCount

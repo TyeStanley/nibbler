@@ -80,13 +80,13 @@ const RestaurantCard = ({restaurants}) =>{
                                       className="col-12"
                                       onChange={handleChange}
                                     ></textarea>
-                                    <button tyoe="submit">
+                                    <button type="submit">
                                       Submit
                                     </button>                                     
                                   </form>
                                 </div>
                                 )}  
-                                {/* {comments && <UserReview comments={comments}></UserReview> } */}
+                                {comments && <UserReview comments={comments}></UserReview> }
     
                               </div>
                           </div>

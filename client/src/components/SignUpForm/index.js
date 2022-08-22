@@ -47,7 +47,8 @@ const SignupForm = () => {
       username: '',
       email: '',
       password: '',
-      tagline: ''
+      tagline: '',
+      profilepic: ''
     });
   };
 
@@ -116,6 +117,7 @@ const SignupForm = () => {
             type='file'
             placeholder='Profile Picture'
             name='profilepic'
+            accept= "image/*"
             onChange={handleInputChange}
             value={userFormData.profilepic}
           />

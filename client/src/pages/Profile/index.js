@@ -15,16 +15,11 @@ const Profile= () => {
 
 
   let faveRest =  data?.me.favRests;
-  let mostFave ='';
+  let profilePic = data?.me.profilepic;
 
-  if(faveRest?.length > 8){
-    const newFave = [...faveRest];
 
-     mostFave = [...faveRest];
-    faveRest = newFave.splice(-8);
 
-}
-else{  faveRest = data?.me.favRests};
+  
 
   
   
@@ -37,7 +32,7 @@ else{  faveRest = data?.me.favRests};
             <MDBCard>
               <div className="rounded-top text-white d-flex flex-row" style={{ backgroundColor: '#2C2f31fd', height: '250px' }}>
                 <div className="ms-4 mt-5 d-flex flex-column" style={{ width: '150px' }}>
-                  <MDBCardImage src="https://ca-times.brightspotcdn.com/dims4/default/46e9fc6/2147483647/strip/true/crop/3500x1969+0+0/resize/840x473!/format/webp/quality/90/?url=https%3A%2F%2Fcalifornia-times-brightspot.s3.amazonaws.com%2Fa3%2Fbc%2F967153f7443ab69d6b182b91b1f4%2Ffo-quickbites-07102022-02.jpg"
+                  <MDBCardImage src= {profilePic}
                     alt="Generic placeholder image" className="mt-4 mb-2 img-thumbnail" fluid style={{ width: '200px', zIndex: '1' }} />
                   <MDBBtn onClick={() => setShowModal2(true)} color="dark"  style={{height: '36px', overflow: 'visible'}}>
                     Edit profile
@@ -94,7 +89,7 @@ else{  faveRest = data?.me.favRests};
       <section class = 'container d-flex flex-row justify-content-between'>
       <div className='col-12 col-md-8 text-center d-flex flex-wrap' id='recent-uploads-div'>
         <h2>Favorite Restaurants</h2>
-          {mostFave && <RestaurantCard faveRest={mostFave}></RestaurantCard>}
+          {faveRest && <RestaurantCard faveRest={faveRest}></RestaurantCard>}
         </div>
         <div>
       <MDBBtn  color= "dark" style={{height: '36px', overflow: 'visible'}} onClick={() => setShowModal(true)}>

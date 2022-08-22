@@ -1,24 +1,25 @@
 // see SignupForm.js for comments
 import React, { useState } from 'react';
-import { Form, Button, Alert } from 'react-bootstrap';
+import { Form, Button } from 'react-bootstrap';
 
 import Auth from '../../utils/auth';
 import { useMutation } from '@apollo/client';
-import { ADD_RESTAURANT } from '../../utils/mutations';
+import { ADD_PHOTO } from '../../utils/mutations';
 
-const RestaurantForm = () => {
-  const [restaurantFormData, setRestaurantFormData] = useState({ restName: '', restState: '', restAddress:'', restDescript:'', restCity: ''});
+const PhotoForm = ({restId, dishId}) => {
+  const [photoFormData, setPhotoFormData] = useState({ photoUrl: '', restId: restId});
   const [validated] = useState(false);
-  const [showAlert, setShowAlert] = useState(false);
-  const [addRestaurant] = useMutation(ADD_RESTAURANT);
+  const [addPhoto] = useMutation(ADD_PHOTO);
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
     console.log(name +" "+ value) 
     console.log(event.target)
     
-    setRestaurantFormData({...restaurantFormData, [name]: value });
+    setPhotoFormData({...photoFormData, [name]: value });
   };
+
+console.log(photoFormData)
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
@@ -32,44 +33,41 @@ const RestaurantForm = () => {
     }
 
     try {
-      const { data } = await addRestaurant({
-        variables: {...restaurantFormData} 
+      const { data } = await addPhoto({
+        variables: {...photoFormData} 
       });
 
       Auth.login(data.login.token);
     } catch (err) {
       console.error(err);
-      setShowAlert(true);
+   
     }
     
-    setRestaurantFormData({
-        restName: '', 
-        restState: '', 
-        restAddress:'', 
-        restDescript:''
+    setPhotoFormData({
+      photoUrl: ''
     });
   };
 
   return (
     <>
       <Form noValidate validated={validated} onSubmit={handleFormSubmit}>
-      
+
         <Form.Group>
-          <Form.Label htmlFor='photo'>Photo</Form.Label>
+          <Form.Label htmlFor='photo'>Add A Link To Your Photo</Form.Label>
           <Form.Control
-            type='file'
-            placeholder='Restaurant Name'
-            name='restName'
+            type='text'
+            placeholder='Add A Photo Link Here'
+            name='photoUrl'
             onChange={handleInputChange}
-            value={restaurantFormData.restName}
+            value={photoFormData.photoUrl}
             required
           />
-          <Form.Control.Feedback type='invalid'>Restaurant name is required!</Form.Control.Feedback>
+          <Form.Control.Feedback type='invalid'>Link Required!</Form.Control.Feedback>
         </Form.Group>
 
 
         <Button
-          disabled={!(restaurantFormData.restName )}
+          disabled={!(photoFormData.photoUrl )}
           type='submit'
           variant='success'>
           Submit
@@ -79,7 +77,7 @@ const RestaurantForm = () => {
   );
 };
 
-export default RestaurantForm;
+export default PhotoForm;
 
 
 // Have to pull restaurant information for the click of the button and add that to the data being set to submission

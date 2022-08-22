@@ -91,10 +91,7 @@ const typeDefs = gql`
     dishesByName(dishName: String!): [Dish]
     dish(dishId: ID!): Dish
     comment(commentId: ID!): Comment
-<<<<<<< HEAD
-=======
     viewHearts(targetId: ID!): [Heart]
->>>>>>> server
     favRests(userId: ID!): [Restaurant]
   }
 
@@ -106,13 +103,11 @@ const typeDefs = gql`
       tagline: String
       profilePic: String
     ): Auth
-<<<<<<< HEAD
-=======
     login(email: String!, password: String!): Auth
     updateUser(username: String, tagline: String, profilePic: String): User
->>>>>>> server
     followUser(userToFollowId: ID!): User
     unfollowUser(userToUnfollowId: ID!): User
+    
     addRest(
       restName: String!
       restState: String!
@@ -120,6 +115,7 @@ const typeDefs = gql`
       restAddress: String!
       restDescript: String!
     ): Restaurant
+
     deleteRest(restId: ID!): Restaurant
     addDish(
       restId: ID!
@@ -132,22 +128,13 @@ const typeDefs = gql`
     commentDish(dishId: ID!, commentText: String!): Comment
     commentComment(commentId: ID!, commentText: String!): Comment
     deleteComment(commentId: ID!): Comment
-    addPhotoRest(photoUrl: String!, restId: ID!): Photo
-    addPhotoDish(photoUrl: String!, dishId: ID!): Photo
+    addPhoto(photoUrl: String!, restId: ID, dishId: ID): Photo
     deletePhoto(targetId: ID!, photoId: ID!): Photo
-<<<<<<< HEAD
-    heartRest(userId: ID!, restId: ID!): Restaurant
-    heartDish(userId: ID!, dishId: ID!): Dish
-    heartComment(userId: ID!, commentId: ID!): Comment
-    unheartRest(userId: ID!, restId: ID!): Restaurant
-    unheartDish(userId: ID!, dishId: ID!): Dish
-    unheartComment(userId: ID!, commentId: ID!): Comment
-=======
     heartRest(restId: ID!): Heart
     heartDish(dishId: ID!): Heart
     heartComment(commentId: ID!): Heart
     unheart(heartId: ID!): Heart
->>>>>>> server
+
   }
 `;
 

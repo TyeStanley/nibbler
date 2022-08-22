@@ -25,12 +25,6 @@ const DishSchema = new Schema(
     dishDescript: {
       type: String
     },
-<<<<<<< HEAD
-    dishPhotos: {
-      type: String
-    },
-    user: {
-=======
     dishPhotos: [
       {
         type: Schema.Types.ObjectId,
@@ -38,7 +32,6 @@ const DishSchema = new Schema(
       }
     ],
     userId: {
->>>>>>> server
       type: Schema.Types.ObjectId,
       ref: 'User'
     },

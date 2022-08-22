@@ -203,11 +203,7 @@ const resolvers = {
       const user = await User.create(args);
       const token = signToken(user);
 
-<<<<<<< HEAD
-      return { token, user };
-=======
       return { user, token };
->>>>>>> server
     },
 
     // login user
@@ -310,12 +306,7 @@ const resolvers = {
 
     // add a new dish
     addDish: async (parent, args, context) => {
-<<<<<<< HEAD
-      
-        const dish = await Dish.create({ ...args, userId: context.user._id });
-=======
       if (context.user) {
->>>>>>> server
         const rest = await Rest.findById(args.restId);
         const dish = await Dish.create({
           restName: rest.restName,
@@ -328,13 +319,8 @@ const resolvers = {
         rest.dishes.push(dish);
         rest.save();
 
-<<<<<<< HEAD
-        return dish, rest, context.user;
-   
-=======
         return dish;
       }
->>>>>>> server
 
       throw new AuthenticationError('You need to be logged in!');
     },
@@ -447,41 +433,42 @@ const resolvers = {
       throw new AuthenticationError('You need to be logged in');
     },
 
-    // add a photo to a restaurant
-    addPhotoRest: async (parent, { restId, photoUrl }, context) => {
-      if (context.user) {
-        const rest = await Rest.findById(restId);
-        const photo = await Photo.create({
-          targetId: rest._id,
-          targetType: 'rest',
-          photoUrl,
-          userId: context.user._id
-        });
-
-        rest.restPhotos.push(photo);
-        rest.save();
-
-        return photo;
-      }
-
-      throw new AuthenticationError('You need to be logged in!');
-    },
-
     // add a photo to a dish
-    addPhotoDish: async (parent, { dishId, photoUrl }, context) => {
+    addPhoto: async (parent, { dishId, photoUrl, restId }, context) => {
+
+
       if (context.user) {
-        const dish = await Dish.findById(dishId);
-        const photo = await Photo.create({
-          targetId: dish._id,
-          targetType: 'dish',
-          photoUrl,
-          userId: context.user._id
-        });
+        if(restId){
+          const rest = await Rest.findById(restId);
+          const photo = await Photo.create({
+            targetId: rest._id,
+            targetType: 'rest',
+            photoUrl,
+            userId: context.user._id
+          });
+  
+          rest.restPhotos.push(photo);
+          rest.save();
 
-        dish.dishPhotos.push(photo);
-        dish.save();
+          console.log(photo);
+          return photo;
+        }
+        else if(dishId){
+            const dish = await Dish.findById(dishId);
+            const photo = await Photo.create({
+              targetId: dish._id,
+              targetType: 'dish',
+              photoUrl,
+              userId: context.user._id
+            });
 
-        return photo;
+            dish.dishPhotos.push(photo);
+            dish.save();
+
+          return photo;
+
+        }
+
       }
 
       throw new AuthenticationError('You need to be logged in!');
@@ -620,3 +607,4 @@ const resolvers = {
 };
 
 module.exports = resolvers;
+

@@ -41,6 +41,7 @@ export const QUERY_ME = gql`
 export const QUERY_RESTAURANTS = gql `
   {
     restaurants {
+      _id
       restName
       restState
       restCity
@@ -49,18 +50,7 @@ export const QUERY_RESTAURANTS = gql `
       restPhotos{
         photoUrl
       } 
-      comments {
-        user{
-          _id
-          username
-          
-        }
-      }
       heartsCount
-      hearts {
-      _id
-      userId
-    }
     }
   }
 `

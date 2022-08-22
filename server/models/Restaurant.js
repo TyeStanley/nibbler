@@ -52,7 +52,7 @@ const RestSchema = new Schema(
     hearts: [
         {
             type: Schema.Types.ObjectId,
-            ref: 'User'
+            ref: 'Heart'
         }
     ]
   }, 
@@ -69,8 +69,8 @@ const RestSchema = new Schema(
 RestSchema.virtual("heartsCount").get(function () {
   return this.hearts.length;
 });
-
 // Create the virtual "commentsCount" variable
+
 RestSchema.virtual("commentsCount").get(function () {
   return this.comments.length;
 });

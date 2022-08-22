@@ -7,6 +7,7 @@ import AddRestaurant from '../../components/AddRestaurant';
 import { Form,  Alert } from 'react-bootstrap';
 import { useQuery } from '@apollo/client';
 import { QUERY_RESTAURANTS } from '../../utils/queries';
+import FileUpload from '../../components/FileUpload';
 
 const Profile= () => {
   const [showModal, setShowModal] = useState(false);
@@ -83,7 +84,7 @@ const Profile= () => {
           </Modal.Body>
           </Tab.Container>
       </Modal>
-      
+    <FileUpload></FileUpload>
 </section>
 </main>
 

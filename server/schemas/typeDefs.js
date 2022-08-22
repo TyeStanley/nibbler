@@ -24,6 +24,7 @@ const typeDefs = gql`
     restDescript: String
     restPhotos: [Photo]
     dishes: [Dish]
+    commentsCount: Int
     comments: [Comment]
     heartsCount: Int
     hearts: [Heart]
@@ -31,12 +32,15 @@ const typeDefs = gql`
 
   type Dish {
     _id: ID
+    restName: String
     dishRest: Restaurant
     dishName: String
     dishCost: Float
     dishDescript: String
-    user: ID
+    userId: ID
+    username: String
     dishPhotos: [Photo]
+    commentsCount: Int
     comments: [Comment]
     heartsCount: Int
     hearts: [Heart]
@@ -44,9 +48,12 @@ const typeDefs = gql`
 
   type Comment {
     _id: ID
+    targetId: ID
+    targetType: String
     commentText: String
     createdAt: String
-    username: String
+    user: User
+    commentsCount: Int
     comments: [Comment]
     heartsCount: Int
     hearts: [Heart]
@@ -54,11 +61,15 @@ const typeDefs = gql`
 
   type Heart {
     _id: ID
-    userId: ID
+    targetId: ID
+    targetType: String
+    user: User
   }
 
   type Photo {
     _id: ID
+    targetId: ID
+    targetType: String
     photoUrl: String
     userId: ID
   }
@@ -76,20 +87,24 @@ const typeDefs = gql`
     following(username: String!): [User]
     restaurant(restName: String!): [Restaurant]
     restaurants: [Restaurant]
-    dishes(restName: String!): [Dish]
-    dish(dishName: String!): [Dish]
+    dishesByRest(restName: String!): [Dish]
+    dishesByName(dishName: String!): [Dish]
+    dish(dishId: ID!): Dish
+    comment(commentId: ID!): Comment
+    viewHearts(targetId: ID!): [Heart]
     favRests(userId: ID!): [Restaurant]
   }
 
   type Mutation {
-    login(email: String!, password: String!): Auth
     addUser(
       username: String!
       email: String!
       password: String!
       tagline: String
       profilePic: String
-    ): User
+    ): Auth
+    login(email: String!, password: String!): Auth
+    updateUser(username: String, tagline: String, profilePic: String): User
     followUser(userToFollowId: ID!): User
     unfollowUser(userToUnfollowId: ID!): User
     addRest(
@@ -106,17 +121,18 @@ const typeDefs = gql`
       dishCost: Float!
       dishDescript: String!
     ): Dish
-    deleteDish(dishId: ID!, restId: ID!): Dish
+    deleteDish(dishId: ID!): Dish
     commentRest(restId: ID!, commentText: String!): Comment
-    commentDish(dishId: ID!, commentBody: String!): Comment
-    commentComment(commentId: ID!, commentBody: String!): Comment
-    removeComment(commentId: ID!): Comment
-    heartRest(userId: ID!, restId: ID!): Restaurant
-    heartDish(userId: ID!, dishId: ID!): Dish
-    heartComment(userId: ID!, commentId: ID!): Comment
-    unheartRest(userId: ID!, restId: ID!): Restaurant
-    unheartDish(userId: ID!, dishId: ID!): Dish
-    unheartComment(userId: ID!, commentId: ID!): Comment
+    commentDish(dishId: ID!, commentText: String!): Comment
+    commentComment(commentId: ID!, commentText: String!): Comment
+    deleteComment(commentId: ID!): Comment
+    addPhotoRest(photoUrl: String!, restId: ID!): Photo
+    addPhotoDish(photoUrl: String!, dishId: ID!): Photo
+    deletePhoto(targetId: ID!, photoId: ID!): Photo
+    heartRest(restId: ID!): Heart
+    heartDish(dishId: ID!): Heart
+    heartComment(commentId: ID!): Heart
+    unheart(heartId: ID!): Heart
   }
 `;
 

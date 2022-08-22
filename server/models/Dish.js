@@ -19,16 +19,33 @@ const DishSchema = new Schema(
       type: Schema.Types.ObjectId,
       ref: 'Rest'
     },
+    restName: {
+      type: String
+    },
     dishDescript: {
       type: String
     },
+<<<<<<< HEAD
     dishPhotos: {
       type: String
     },
     user: {
+=======
+    dishPhotos: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'Photo'
+      }
+    ],
+    userId: {
+>>>>>>> server
       type: Schema.Types.ObjectId,
       ref: 'User'
     },
+    username: {
+      type: String
+    },
+    
     comments: [
       {
         type: Schema.Types.ObjectId,
@@ -59,6 +76,11 @@ DishSchema.virtual('heartsCount').get(function () {
 // Create the virtual "commentsCount" variable
 DishSchema.virtual('commentsCount').get(function () {
   return this.comments.length;
+});
+
+// Create the virtual "dishphotosCount" variable
+DishSchema.virtual('dishphotosCount').get(function () {
+  return this.dishPhotos.length;
 });
 
 // Create the User model using UserSchema

@@ -224,6 +224,28 @@ const resolvers = {
       return { token, user };
     },
 
+    // update user
+    updateUser: async (parent, { username, tagline, profilePic }, context) => {
+      if (context.user) {
+        // grab previous user data for reference
+        const user = await User.findById(context.user._id);
+        const updatedUser = await User.findByIdAndUpdate(
+          context.user._id,
+          {
+            // use original values if no updated value is provided
+            username: username ? username : user.username,
+            tagline: tagline ? tagline : user.tagline,
+            profilePic: profilePic ? profilePic : user.profilePic
+          },
+          { new: true }
+        );
+
+        return updatedUser;
+      }
+
+      throw new AuthenticationError('Not logged in');
+    },
+
     // follow another user
     followUser: async (parent, { userToFollowId }, context) => {
       if (context.user) {
@@ -455,19 +477,18 @@ const resolvers = {
     deletePhoto: async (parent, { photoId, targetId }, context) => {
       if (context.user) {
         const photo = await Photo.findByIdAndDelete(photoId);
-        let target = null;
 
         // assign target to remove photo from and update based on type
         switch (photo.targetType) {
           case 'rest':
-            target = await Rest.findById(targetId);
-            target.restPhotos.pull(photo);
-            target.save();
+            const rest = await Rest.findById(targetId);
+            rest.restPhotos.pull(photo);
+            rest.save();
             break;
 
           case 'dish':
-            target = await Dish.findById(targetId);
-            target.dishPhotos.pull(photo);
+            const dish = await Dish.findById(targetId);
+            dish.dishPhotos.pull(photo);
             break;
 
           default: // invalid target type

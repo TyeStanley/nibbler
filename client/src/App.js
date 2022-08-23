@@ -9,6 +9,7 @@ import {
 import { setContext } from '@apollo/client/link/context';
 import Restaurants from './pages/Restaurants';
 import Navbar from './components/Navbar';
+import Footer from './components/Footer';
 import LoginForm from './components/LoginForm';
 import SignUpForm from './components/SignUpForm';
 import Home from './pages/Home'
@@ -43,22 +44,25 @@ function App() {
  
       <Navbar/>
       <Routes>
-              <Route 
-                exact path="/" 
-                element={<Home/>} 
-              />
+        <Route 
+          exact path="/" 
+          element={<Home/>} 
+        />
 
-              <Route 
-                path="/restaurants" 
-                element={<Restaurants/>} 
-              />
-            <Route 
-                path="/profile" 
-                element={<Profile/>} 
-             />
+        <Route 
+          path="/restaurants" 
+          element={<Restaurants/>} 
+        />
+        <Route 
+          path="/profile" 
+          element={<Profile/>} 
+        />
             
-            </Routes>
-</main>
+      </Routes>
+    </main>
+
+    <Footer />
+    
     </ApolloProvider>
   );
 }

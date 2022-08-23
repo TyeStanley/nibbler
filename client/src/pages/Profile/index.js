@@ -19,7 +19,7 @@ const Profile= () => {
  
   
 
-  console.log(userData)
+
 
   
   if(userData){

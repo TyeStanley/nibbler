@@ -27,7 +27,7 @@ const Home = () =>{
 
          <section className ='text-center pt-3' id='intro-statement'>
             <div className='intro-titles'>
-                <div className='intro-div'><h1 id='intro-h1'> Welcome to "PlaceHolder"</h1></div>
+                <div className='intro-div'><h1 id='intro-h1'> Welcome to Nibbler</h1></div>
                 <h2 className= 'pt-2 pb-3' id='intro-h2'> Save your favorite spots | Share them with friends | Find something new</h2>
             </div>
             <h3 className='p-3' id='recentUploads'> Recent Uploads </h3>

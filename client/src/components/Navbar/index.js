@@ -14,7 +14,7 @@ const AppNavbar = () => {
         <Navbar bg='dark' variant='dark' expand='lg'>
           <Container fluid>
           <Link  style={{paddingLeft: 13, textDecoration: 'none'}}   to="/">
-            <h1 id='nav-header'>PlaceHolder</h1>
+            <h1 id='nav-header'>Nibbler</h1>
           </Link>
             <Navbar.Toggle aria-controls='navbar' />
             <Navbar.Collapse id='navbar'>

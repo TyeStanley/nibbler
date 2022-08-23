@@ -12,7 +12,7 @@ const Restaurants = () =>{
     let restaurants =  data?.restaurants;
     let mostPop ='';
 
-    console.log(restaurants)
+   
 
     if(restaurants?.length > 5){
         const newRest = [...restaurants];

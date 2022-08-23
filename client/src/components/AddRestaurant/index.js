@@ -14,9 +14,6 @@ const RestaurantForm = () => {
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
-    console.log(name +" "+ value) 
-    console.log(event.target)
-    
     setRestaurantFormData({...restaurantFormData, [name]: value });
   };
 

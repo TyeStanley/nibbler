@@ -1,7 +1,7 @@
 // see SignupForm.js for comments
 import React, { useState } from 'react';
 import { Form, Button } from 'react-bootstrap';
-
+import './index.scss'
 import Auth from '../../utils/auth';
 import { useMutation } from '@apollo/client';
 import { ADD_PHOTO } from '../../utils/mutations';
@@ -18,7 +18,7 @@ const PhotoForm = ({restId, dishId}) => {
     setPhotoFormData({...photoFormData, [name]: value });
   };
 
-console.log(photoFormData)
+
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();

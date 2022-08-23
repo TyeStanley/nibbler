@@ -7,7 +7,7 @@ import { ADD_USER } from '../../utils/mutations';
 
 const SignupForm = () => {
   // set initial form state
-  const [userFormData, setUserFormData] = useState({ username: '', email: '', password: '' });
+  const [userFormData, setUserFormData] = useState({ username: '', email: '', password: '', tagline: '', profilepic: '' });
   // set state for form validation
   const [validated] = useState(false);
   // set state for alert
@@ -47,6 +47,8 @@ const SignupForm = () => {
       username: '',
       email: '',
       password: '',
+      tagline: '',
+      profilepic: ''
     });
   };
 
@@ -96,6 +98,29 @@ const SignupForm = () => {
             required
           />
           <Form.Control.Feedback type='invalid'>Password is required!</Form.Control.Feedback>
+        </Form.Group>
+
+        <Form.Group>
+          <Form.Label htmlFor='tagline'>Tagline</Form.Label>
+          <Form.Control
+            type='text'
+            placeholder='Tagline'
+            name='tagline'
+            onChange={handleInputChange}
+            value={userFormData.tagline}
+          />
+        </Form.Group>
+
+        <Form.Group>
+          <Form.Label htmlFor='profilepic'>Profile Picture</Form.Label>
+          <Form.Control
+            type='file'
+            placeholder='Profile Picture'
+            name='profilepic'
+            accept= "image/*"
+            onChange={handleInputChange}
+            value={userFormData.profilepic}
+          />
         </Form.Group>
         <Button
           disabled={!(userFormData.username && userFormData.email && userFormData.password)}

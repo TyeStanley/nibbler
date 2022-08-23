@@ -47,13 +47,25 @@ export const ADD_RESTAURANT = gql`
 
 `;
 
-export const ADD_REST_PHOTO =gql`
-  mutation Mutation($photoUrl: String!, $restId: ID!) {
-    addPhotoRest(photoUrl: $photoUrl, restId: $restId) {
+export const ADD_PHOTO =gql`
+  mutation addPhoto($photoUrl: String!, $restId: ID, $dishId: ID) {
+    addPhoto(photoUrl: $photoUrl, restId: $restId, dishId: $dishId) {
       _id
       photoUrl
     }
   }
 
 `
+
+export const EDIT_USER = gql`
+    mutation editUser($username: String!, $tagline: String!, $profile: String!) {
+      editUser(username: $username, email: $email, password: $password) {
+          token
+    user{ 
+          _id
+          username
+         }
+      }
+    }
+  `;
 

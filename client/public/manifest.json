@@ -9,8 +9,9 @@
       "purpose": "any"
     }
   ],
-  "start_url": ".",
+  "start_url": "./index.html",
   "display": "standalone",
   "theme_color": "#000000",
-  "background_color": "#ffffff"
+  "background_color": "#ffffff",
+  "description": "Nibbler is a web app that allows you share your dining experiences with friends."
 }

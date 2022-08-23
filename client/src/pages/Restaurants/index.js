@@ -21,7 +21,8 @@ const Restaurants = () =>{
         restaurants = newRest.splice(-5);
     
    }
-    else{  restaurants = data?.restaurants};
+    else{  restaurants = data?.restaurants
+            mostPop = [...restaurants]};
 
     return(
         <>

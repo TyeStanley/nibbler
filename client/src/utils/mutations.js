@@ -58,13 +58,12 @@ export const ADD_PHOTO =gql`
 `
 
 export const EDIT_USER = gql`
-    mutation editUser($username: String!, $tagline: String!, $profile: String!) {
-      editUser(username: $username, email: $email, password: $password) {
-          token
-    user{ 
-          _id
+    mutation updateUser($username: String!, $tagline: String!, $profilePic: String!) {
+      updateUser(username: $username, tagline: $tagline, profilePic: $profilePic) {
+  
           username
-         }
+          profilePic
+
       }
     }
   `;

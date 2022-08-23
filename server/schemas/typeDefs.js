@@ -104,7 +104,13 @@ const typeDefs = gql`
       profilePic: String
     ): Auth
     login(email: String!, password: String!): Auth
+
+
+    
     updateUser(username: String, tagline: String, profilePic: String): User
+
+
+
     followUser(userToFollowId: ID!): User
     unfollowUser(userToUnfollowId: ID!): User
 
@@ -124,7 +130,7 @@ const typeDefs = gql`
       dishDescript: String!
     ): Dish
     deleteDish(dishId: ID!): Dish
-    
+
     commentRest(restId: ID!, commentText: String!): Comment
     commentDish(dishId: ID!, commentText: String!): Comment
     commentComment(commentId: ID!, commentText: String!): Comment

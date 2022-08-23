@@ -3,40 +3,28 @@
 import { gql } from "@apollo/client";
 
 export const QUERY_ME = gql`
-  query me($_id: ID!) {
-    me(_id: $id) {
+  query Me {
+    me {
       _id
       username
+      email
       tagline
       profilePic
+      followerCount
+      followingCount
+      comments {
+        _id
+        targetId
+        targetType
+        commentText
+      }
       favRests {
         _id
         restName
-        createdAt
-        restPhotos {
-          _id
-          photoUrl
-          userId
-        }
-        comments {
-          _id
-          commentBody
-          createdAt
-          heartsCount
-        }
-        dishes {
-          _id
-          dishName
-          dishCost
-          dishPhotos {
-            _id
-            photoUrl
-            userId
-          }
-        }
+        restState
       }
     }
-  }
+}
 `;
 export const QUERY_RESTAURANTS = gql `
   {

@@ -15,15 +15,14 @@ const Profile= () => {
   const { data } = useQuery(QUERY_ME)
 
 
-  let faveRest =  data?.me.favRests;
-  let profilePic = data?.me.profilepic;
-
-
-
+  const userData =  data?.me;
+ 
   
 
+  console.log(userData)
+
   
-  
+  if(userData){
     return (
 
       <main>
@@ -33,8 +32,8 @@ const Profile= () => {
             <MDBCard>
               <div className="rounded-top text-white d-flex flex-row" style={{ backgroundColor: '#2C2f31fd', height: '250px' }}>
                 <div className="ms-4 mt-5 d-flex flex-column" style={{ width: '150px' }}>
-                  <MDBCardImage src= {profilePic}
-                    alt="Generic placeholder image" className="mt-4 mb-2 img-thumbnail" fluid style={{ width: '200px', zIndex: '1' }} />
+                  {userData.profilePic && <MDBCardImage src= {userData.profilePic}
+                    alt="Generic placeholder image" className="mt-4 mb-2 img-thumbnail" fluid style={{ width: '200px', zIndex: '1' }} />}
                   <MDBBtn onClick={() => setShowModal2(true)} color="dark"  style={{height: '36px', overflow: 'visible'}}>
                     Edit profile
                   </MDBBtn>
@@ -61,8 +60,9 @@ const Profile= () => {
       </Modal>
                 </div>
                 <div className="ms-3" style={{ marginTop: '130px' }}>
-                  <MDBTypography tag="h5">McKinley Wiltz</MDBTypography>
-                  <MDBCardText>Food is where the heart is</MDBCardText>
+                  {userData.username && <MDBTypography tag="h5">{userData.username}</MDBTypography> }
+                
+                  {userData.tagline && <MDBCardText>{userData.tagline}</MDBCardText>}
                 </div>
               </div>
               <div className="p-4 text-black" style={{ backgroundColor: '#f8f9fa' }}>
@@ -87,10 +87,10 @@ const Profile= () => {
       </MDBContainer>
 
 
-      <section class = 'container d-flex flex-row justify-content-between'>
+      <section className= 'container d-flex flex-row justify-content-between'>
       <div className='col-12 col-md-8 text-center d-flex flex-wrap' id='recent-uploads-div'>
         <h2>Favorite Restaurants</h2>
-          {faveRest && <RestaurantCard faveRest={faveRest}></RestaurantCard>}
+          {/* {faveRest && <RestaurantCard faveRest={faveRest}></RestaurantCard>} */}
         </div>
         <div>
       <MDBBtn  color= "dark" style={{height: '36px', overflow: 'visible'}} onClick={() => setShowModal(true)}>
@@ -122,6 +122,8 @@ const Profile= () => {
 
 
   );
+    }
+    return ( <div><h1>Loading.....</h1></div>)
 }
 
 

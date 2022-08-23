@@ -6,7 +6,7 @@ import { EDIT_USER } from '../../utils/mutations';
 
 
 const EditProfile = () => {
-    const [userFormData, setUserFormData] = useState({ username: '', tagline: '', profilepic: '' });
+    const [userFormData, setUserFormData] = useState({ username: '', tagline: '', profilePic: '' });
     const [validated] = useState(false);
     // set state for alert
     const [showAlert, setShowAlert] = useState(false);
@@ -16,7 +16,9 @@ const EditProfile = () => {
 
     const handleInputChange = (event) => {
         const { name, value } = event.target;
-    
+
+       
+
         setUserFormData({ ...userFormData, [name]: value });
       };
     
@@ -35,13 +37,14 @@ const EditProfile = () => {
             variables: { ...userFormData }
           });
     
-          Auth.login(data.addUser.token);
+          
           
         } catch (err) {
           console.error(err);
-          setShowAlert(true);
+  
         }
-    
+        
+        window.location.reload(true);
         setUserFormData({
           username: '',
           tagline: '',
@@ -54,9 +57,7 @@ const EditProfile = () => {
           {/* This is needed for the validation functionality above */}
           <Form noValidate validated={validated} onSubmit={handleFormSubmit}>
             {/* show alert if server response is bad */}
-            <Alert dismissible onClose={() => setShowAlert(false)} show={showAlert} variant='danger'>
-              Something went wrong with your signup!
-            </Alert>
+          
 
             <Form.Group>
           <Form.Label htmlFor='username'>Username</Form.Label>
@@ -83,13 +84,14 @@ const EditProfile = () => {
         <Form.Group>
           <Form.Label htmlFor='profilepic'>Profile Picture</Form.Label>
           <Form.Control
-            type='file'
+            type='String'
             placeholder='Profile Picture'
-            name='profilepic'
+            name='profilePic'
             onChange={handleInputChange}
-            value={userFormData.profilepic}
+            value={userFormData.profilePic}
           />
           </Form.Group>
+
           <Button
           disabled={!(userFormData.username || userFormData.tagline || userFormData.profilepic)}
           type='submit'

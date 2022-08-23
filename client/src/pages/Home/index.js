@@ -10,7 +10,7 @@ const Home = () =>{
 
     let restaurants =  data?.restaurants;
 
-    console.log(restaurants)
+    
 
     if(restaurants?.length > 5){
         const newRest = [...restaurants];

@@ -450,7 +450,7 @@ const resolvers = {
           rest.restPhotos.push(photo);
           rest.save();
 
-          console.log(photo);
+         
           return photo;
         }
         else if(dishId){

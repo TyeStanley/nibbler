@@ -107,7 +107,7 @@ const typeDefs = gql`
     updateUser(username: String, tagline: String, profilePic: String): User
     followUser(userToFollowId: ID!): User
     unfollowUser(userToUnfollowId: ID!): User
-    
+
     addRest(
       restName: String!
       restState: String!
@@ -124,11 +124,15 @@ const typeDefs = gql`
       dishDescript: String!
     ): Dish
     deleteDish(dishId: ID!): Dish
+    
     commentRest(restId: ID!, commentText: String!): Comment
     commentDish(dishId: ID!, commentText: String!): Comment
     commentComment(commentId: ID!, commentText: String!): Comment
+
     deleteComment(commentId: ID!): Comment
+
     addPhoto(photoUrl: String!, restId: ID, dishId: ID): Photo
+
     deletePhoto(targetId: ID!, photoId: ID!): Photo
     heartRest(restId: ID!): Heart
     heartDish(dishId: ID!): Heart

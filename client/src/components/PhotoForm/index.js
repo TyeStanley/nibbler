@@ -13,8 +13,7 @@ const PhotoForm = ({restId, dishId}) => {
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
-    console.log(name +" "+ value) 
-    console.log(event.target)
+   
     
     setPhotoFormData({...photoFormData, [name]: value });
   };
@@ -42,7 +41,7 @@ console.log(photoFormData)
       console.error(err);
    
     }
-    
+    window.location.reload(true);
     setPhotoFormData({
       photoUrl: ''
     });

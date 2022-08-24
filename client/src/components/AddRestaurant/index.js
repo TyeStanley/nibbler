@@ -1,7 +1,6 @@
 // see SignupForm.js for comments
 import React, { useState } from 'react';
 import { Form, Button } from 'react-bootstrap';
-import Auth from '../../utils/auth';
 import { useMutation } from '@apollo/client';
 import { ADD_RESTAURANT } from '../../utils/mutations';
 
@@ -27,7 +26,7 @@ const RestaurantForm = () => {
     }
 
     try {
-      const { data } = await addRestaurant({
+       await addRestaurant({
         variables: {...restaurantFormData} 
       });
 

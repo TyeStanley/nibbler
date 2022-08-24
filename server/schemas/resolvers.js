@@ -340,16 +340,20 @@ const resolvers = {
     commentRest: async (parent, { restId, commentText }, context) => {
       if (context.user) {
         const rest = await Rest.findById(restId);
+        const user = await User.findById(context.user._id);
         const comment = await Comment.create({
           targetId: rest._id,
           targetType: 'rest',
           commentText,
-          user: await User.findById(context.user._id),
+          user: user,
           username: context.user.username
         });
 
         rest.comments.push(comment);
         rest.save();
+
+        user.comments.push(comment);
+        user.save();
 
         return comment;
       }
@@ -361,16 +365,20 @@ const resolvers = {
     commentDish: async (parent, { dishId, commentText }, context) => {
       if (context.user) {
         const dish = await Dish.findById(dishId);
+        const user = await User.findById(context.user._id);
         const comment = await Comment.create({
           targetId: dish._id,
           targetType: 'dish',
           commentText,
-          user: await User.findById(context.user._id),
+          user: user,
           username: context.user.username
         });
 
         dish.comments.push(comment);
         dish.save();
+
+        user.comments.push(comment);
+        user.save();
 
         return comment;
       }
@@ -382,16 +390,20 @@ const resolvers = {
     commentComment: async (parent, { commentId, commentText }, context) => {
       if (context.user) {
         const comment = await Comment.findById(commentId);
+        const user = await User.findById(context.user._id);
         const commentReply = await Comment.create({
           targetId: comment._id,
           targetType: 'comment',
           commentText,
-          user: await User.findById(context.user._id),
+          user: user,
           username: context.user.username
         });
 
         comment.comments.push(commentReply);
         comment.save();
+
+        user.comments.push(commentReply);
+        user.save();
 
         return commentReply;
       }
@@ -401,6 +413,7 @@ const resolvers = {
     deleteComment: async (parent, { commentId }, context) => {
       if (context.user) {
         const comment = await Comment.findByIdAndDelete(commentId);
+        const user = await User.findById(context.user._id);
 
         // place holder for delete cascade
         let target = null;
@@ -427,6 +440,9 @@ const resolvers = {
         target.comments.pull(comment);
         target.save();
 
+        user.comments.pull(comment);
+        user.save();
+
         return comment;
       }
 
@@ -435,10 +451,8 @@ const resolvers = {
 
     // add a photo to a dish
     addPhoto: async (parent, { dishId, photoUrl, restId }, context) => {
-
-
       if (context.user) {
-        if(restId){
+        if (restId) {
           const rest = await Rest.findById(restId);
           const photo = await Photo.create({
             targetId: rest._id,
@@ -446,29 +460,25 @@ const resolvers = {
             photoUrl,
             userId: context.user._id
           });
-  
+
           rest.restPhotos.push(photo);
           rest.save();
 
-         
+          return photo;
+        } else if (dishId) {
+          const dish = await Dish.findById(dishId);
+          const photo = await Photo.create({
+            targetId: dish._id,
+            targetType: 'dish',
+            photoUrl,
+            userId: context.user._id
+          });
+
+          dish.dishPhotos.push(photo);
+          dish.save();
+
           return photo;
         }
-        else if(dishId){
-            const dish = await Dish.findById(dishId);
-            const photo = await Photo.create({
-              targetId: dish._id,
-              targetType: 'dish',
-              photoUrl,
-              userId: context.user._id
-            });
-
-            dish.dishPhotos.push(photo);
-            dish.save();
-
-          return photo;
-
-        }
-
       }
 
       throw new AuthenticationError('You need to be logged in!');
@@ -607,4 +617,3 @@ const resolvers = {
 };
 
 module.exports = resolvers;
-

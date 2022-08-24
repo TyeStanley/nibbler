@@ -56,6 +56,15 @@ export const ADD_PHOTO =gql`
   }
 
 `
+export const COMMENT_REST = gql`
+  mutation commentRest($restId: ID!, $commentText: String!) {
+    commentRest(restId: $restId, commentText: $commentText) {
+      _id
+      commentText
+    }
+  }
+`
+
 
 export const EDIT_USER = gql`
     mutation updateUser($username: String!, $tagline: String!, $profilePic: String!) {

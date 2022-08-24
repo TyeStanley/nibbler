@@ -2,7 +2,7 @@ import './index.scss'
 import React, { useState } from 'react';
 import { MDBCol, MDBContainer, MDBRow, MDBCard, MDBCardText, MDBCardImage, MDBBtn, MDBTypography } from 'mdb-react-ui-kit';
 import { Modal, Tab } from 'react-bootstrap';
-import RestaurantCard from '../../components/RestaurantCard';
+// import RestaurantCard from '../../components/RestaurantCard';
 import AddRestaurant from '../../components/AddRestaurant';
 import EditProfile from '../../components/EditProfile';
 import { useQuery } from '@apollo/client';

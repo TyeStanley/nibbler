@@ -1,5 +1,5 @@
 import './App.scss';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import {
   ApolloClient,
   InMemoryCache,
@@ -10,8 +10,6 @@ import { setContext } from '@apollo/client/link/context';
 import Restaurants from './pages/Restaurants';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
-import LoginForm from './components/LoginForm';
-import SignUpForm from './components/SignUpForm';
 import Home from './pages/Home'
 import Profile from './pages/Profile'
 

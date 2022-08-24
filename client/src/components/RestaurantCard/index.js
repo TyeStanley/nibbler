@@ -9,25 +9,25 @@ import { COMMENT_REST } from '../../utils/mutations';
 
 const RestaurantCard = ({restaurants}) =>{
 
+  // click handler for when hearts are clicked
   const heartClickHandler = () =>{
 
     console.log('hello')
 
-
-
-
-
   }
+
   // create loggedIn variable
   const loggedIn = Auth.loggedIn();
+
   // set initial restaurant comment text box state
   const [commentText, setRestCommText] = useState('');
   const [characterCount, setCharacterCount] = useState(0);
+
   // declare commentRest function and error variable
   const [commentRest, { error }] = useMutation(COMMENT_REST);
   const restId = restaurants[0]._id;
   
-  // create handleChange function to capture the restaurant value and characer count from user
+  // create handleChange function to capture the restaurant value and Character count from user
   const handleChange = event => {
     if (event.target.value.length <= 280) {
       setRestCommText(event.target.value);

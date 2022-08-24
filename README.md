@@ -45,6 +45,14 @@ SO THAT I can explore new restaurants<br>
 
 - Have a high-quality README 
 
+- Add PWA functionality:
+
+    - Uses a web manifest
+
+    - Uses a service worker for offline functionality
+
+    - Is installable
+
 ## **Contributing**
 The following individuals contributed to this project (listed in alphabetical order by last name):<br>
 Sapana Donde - Front End and Back End<br>

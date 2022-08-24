@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import { Form, Button, Alert } from 'react-bootstrap';
-import Auth from '../../utils/auth';
+import { Form, Button } from 'react-bootstrap';
 import { useMutation } from '@apollo/client';
 import { EDIT_USER } from '../../utils/mutations';
 
@@ -9,7 +8,7 @@ const EditProfile = () => {
     const [userFormData, setUserFormData] = useState({ username: '', tagline: '', profilePic: '' });
     const [validated] = useState(false);
     // set state for alert
-    const [showAlert, setShowAlert] = useState(false);
+    // const [showAlert, setShowAlert] = useState(false);
     // define mutation for adding a user
 
     const [editUser] = useMutation(EDIT_USER);
@@ -33,7 +32,7 @@ const EditProfile = () => {
         }
     
         try {
-          const { data } = await editUser({
+          await editUser({
             variables: { ...userFormData }
           });
     

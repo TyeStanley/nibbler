@@ -1,7 +1,6 @@
 // see SignupForm.js for comments
 import React, { useState } from 'react';
-import { Form, Button, Alert } from 'react-bootstrap';
-
+import { Form, Button } from 'react-bootstrap';
 import Auth from '../../utils/auth';
 import { useMutation } from '@apollo/client';
 import { ADD_RESTAURANT } from '../../utils/mutations';
@@ -9,7 +8,6 @@ import { ADD_RESTAURANT } from '../../utils/mutations';
 const RestaurantForm = () => {
   const [restaurantFormData, setRestaurantFormData] = useState({ restName: '', restState: '', restAddress:'', restDescript:'', restCity: ''});
   const [validated] = useState(false);
-  const [showAlert, setShowAlert] = useState(false);
   const [addRestaurant] = useMutation(ADD_RESTAURANT);
 
   const handleInputChange = (event) => {
@@ -36,7 +34,6 @@ const RestaurantForm = () => {
       Auth.login(data.login.token);
     } catch (err) {
       console.error(err);
-      setShowAlert(true);
     }
     
     setRestaurantFormData({

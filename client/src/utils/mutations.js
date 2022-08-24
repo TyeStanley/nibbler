@@ -77,3 +77,15 @@ export const EDIT_USER = gql`
     }
   `;
 
+export const DELETE_COMMENT = gql`
+  mutation Mutation($commentId: ID!) {
+  deleteComment(commentId: $commentId) {
+    commentText
+  }
+}
+
+
+
+
+
+`

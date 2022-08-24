@@ -1,7 +1,5 @@
 import './index.scss';
-import UserReview from '../../components/UserReview';
 import RestaurantCard from '../../components/RestaurantCard';
-import { useEffect } from 'react';
 import { useQuery } from '@apollo/client';
 import { QUERY_RESTAURANTS } from '../../utils/queries';
 

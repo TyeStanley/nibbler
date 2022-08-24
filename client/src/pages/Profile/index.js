@@ -7,6 +7,7 @@ import AddRestaurant from '../../components/AddRestaurant';
 import EditProfile from '../../components/EditProfile';
 import { useQuery } from '@apollo/client';
 import { QUERY_ME } from '../../utils/queries';
+import UserReview from '../../components/UserReview';
 
 
 const Profile= () => {
@@ -16,7 +17,7 @@ const Profile= () => {
 
 
   const userData =  data?.me;
-  console.log(userData)
+
  
   
 
@@ -94,11 +95,15 @@ const Profile= () => {
       </MDBContainer>
 
 
-      <section className= 'container d-flex flex-row justify-content-between'>
-      <div className='col-12 col-md-8 text-center d-flex flex-wrap' id='recent-uploads-div'>
-        <h2>Favorite Restaurants</h2>
-          {/* {faveRest && <RestaurantCard faveRest={faveRest}></RestaurantCard>} */}
-        </div>
+      <section className= 'd-flex flex-wrap justify-content-between'>
+        <div className='col-12 col-md-5 text-center d-flex flex-wrap' id='recent-uploads-div'>
+          <h2>Favorite Restaurants</h2>
+            {/* {faveRest && <RestaurantCard faveRest={faveRest}></RestaurantCard>} */}
+          </div>
+         <div className='col-12 col-md-6  m-3' >
+          <h2>My Comments</h2>
+          {userData.comments && <UserReview comments={userData.comments} _id={userData._id} username={userData.username} /> }
+         </div>
       
             <Modal
         size='lg'

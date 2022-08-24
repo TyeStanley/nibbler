@@ -1,6 +1,5 @@
 import './index.scss'
 import RestaurantCard from '../../components/RestaurantCard';
-import CategorySearchBar from '../../components/CategorySearchBar';
 import { useQuery } from '@apollo/client';
 import { QUERY_RESTAURANTS } from '../../utils/queries';
 

@@ -7,6 +7,7 @@ import Comments from '../Comments';
 
 const RestaurantCard = ({restaurants}) =>{
 
+
   // click handler for when hearts are clicked
   const heartClickHandler = () =>{
 
@@ -39,7 +40,7 @@ const RestaurantCard = ({restaurants}) =>{
                                     </div>   
                               
                                 <div  id='pop-res-bottom' onClick={heartClickHandler}> <i id='heart-svg' className="fa-solid fa-heart p-2 mx-1" key={restName}></i><span id='heart-span'>{`${heartsCount}`}</span></div>
-                                {comments && <UserReview comments={comments} ></UserReview>}
+                                {comments && <UserReview comments={comments}  ></UserReview>}
                                 {loggedIn && (
                                   
                                   <Comments restId={_id}/>

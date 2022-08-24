@@ -9,9 +9,24 @@ const RestaurantCard = ({restaurants}) =>{
 
 
   // click handler for when hearts are clicked
-  const heartClickHandler = () =>{
+  const heartClickHandler = (e) =>{
 
-    console.log('hello')
+    const restId = e.target.getAttribute("data-id");
+       
+       try {
+         deleteComment({
+          variables: { restId }
+        });
+  
+        
+        
+      } catch (err) {
+        console.error(err);
+
+      }
+      
+      window.location.reload(true);
+
 
   }
 
@@ -39,7 +54,7 @@ const RestaurantCard = ({restaurants}) =>{
                                         {loggedIn && <PhotoForm restId={_id} key={restName + "hoah123"}> </PhotoForm>} 
                                     </div>   
                               
-                                <div  id='pop-res-bottom' onClick={heartClickHandler}> <i id='heart-svg' className="fa-solid fa-heart p-2 mx-1" key={restName}></i><span id='heart-span'>{`${heartsCount}`}</span></div>
+                                <div  id='pop-res-bottom' data-id={_id} onClick={heartClickHandler}> <i id='heart-svg' className="fa-solid fa-heart p-2 mx-1" key={restName}></i><span id='heart-span'>{`${heartsCount}`}</span></div>
                                 {comments && <UserReview comments={comments}  ></UserReview>}
                                 {loggedIn && (
                                   

@@ -4,7 +4,7 @@ import { useMutation } from '@apollo/client';
 import { DELETE_COMMENT } from '../../utils/mutations'
 
 const UserReview = ({comments, _id, username}) =>{
-   console.log(comments)
+
     const [deleteComment] = useMutation(DELETE_COMMENT);
     
     
@@ -52,7 +52,7 @@ const UserReview = ({comments, _id, username}) =>{
         </>
     
         )}
-        console.log(comments)
+       
         return(
             <>
             <div id='comment-box-wrapper'>

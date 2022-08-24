@@ -36,7 +36,7 @@ const Profile= () => {
                 <div className="ms-4 mt-5 d-flex flex-column" style={{ width: '150px' }}>
                   {userData.profilePic && <MDBCardImage src= {userData.profilePic}
                     alt="Generic placeholder image" className="mt-4 mb-2 img-thumbnail" fluid style={{ width: '200px', zIndex: '1' }} />}
-                  <MDBBtn onClick={() => setShowModal2(true)} color="dark"  style={{height: '36px', overflow: 'visible'}}>
+                  <MDBBtn onClick={() => setShowModal2(true)} color="dark"   style={{height: '36px', overflow: 'visible'}}>
                     Edit profile
                   </MDBBtn>
                   <div className='mt-5'>

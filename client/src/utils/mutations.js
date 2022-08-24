@@ -83,7 +83,21 @@ export const DELETE_COMMENT = gql`
     commentText
   }
 }
+`
 
+
+export const ADD_HEART =gql`
+  mutation Mutation($restId: ID!) {
+  heartRest(restId: $restId) {
+    _id
+    targetId
+    targetType
+    user {
+      _id
+      username
+    }
+  }
+}
 
 
 

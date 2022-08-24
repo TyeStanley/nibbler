@@ -2,6 +2,7 @@ import './index.scss'
 import RestaurantCard from '../../components/RestaurantCard';
 import { useQuery } from '@apollo/client';
 import { QUERY_RESTAURANTS } from '../../utils/queries';
+import { faCommentsDollar } from '@fortawesome/free-solid-svg-icons';
 
 
 
@@ -16,13 +17,15 @@ const Restaurants = () =>{
     if(restaurants?.length > 5){
         const newRest = [...restaurants];
 
-         mostPop = [...restaurants];
+         mostPop = restaurants
         restaurants = newRest.splice(-5);
+
+        
     
    }
     else{  restaurants = data?.restaurants
             mostPop = [...restaurants]};
-
+        
     return(
         <>
         <div>

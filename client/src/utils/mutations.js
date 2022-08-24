@@ -98,7 +98,14 @@ export const ADD_HEART =gql`
     }
   }
 }
+`
 
+export const REMOVE_HEART=gql`
+  mutation Mutation($heartId: ID!) {
+  unheart(heartId: $heartId) {
+    _id
+  }
+}
 
 
 

@@ -22,7 +22,7 @@ const RestaurantForm = () => {
     const form = event.currentTarget;
     if (form.checkValidity() === false) {
       event.preventDefault();
-      event.stopPropagation();
+      
     
     }
 
@@ -31,17 +31,15 @@ const RestaurantForm = () => {
         variables: {...restaurantFormData} 
       });
 
-      Auth.login(data.login.token);
+      
     } catch (err) {
       console.error(err);
     }
     
     setRestaurantFormData({
-        restName: '', 
-        restState: '', 
-        restAddress:'', 
-        restDescript:''
+      restName: '', restState: '', restAddress:'', restDescript:'', restCity: ''
     });
+    window.location.reload(true)
   };
 
   return (

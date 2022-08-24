@@ -48,6 +48,13 @@ export const QUERY_RESTAURANTS = gql `
         }
       }
       heartsCount
+      hearts {
+        _id
+        user {
+          _id
+          username
+        }
+      }
     }
   }
 `

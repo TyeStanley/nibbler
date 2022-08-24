@@ -5,8 +5,6 @@
 ## **Description**
 The purpose of this project was to build a full-stack MERN application that would create an online social network to directly connect foodies. Users are able to compare restaurants and their dishes, reviews and prices in order to find the right restaurant for them.
 
-<br>
-
 ## **Table of Contents**
 [User Story](#user-story)<br>
 [Acceptance Criteria](#acceptance-criteria)<br>
@@ -16,7 +14,6 @@ The purpose of this project was to build a full-stack MERN application that woul
 [Deliverables](#deliverables)<br>
 <br>
 
-<br>
 
 ## **User Story**
 AS A USER that loves food and loves going out to eat<br>
@@ -47,7 +44,6 @@ SO THAT I can explore new restaurants<br>
 - Have a clean repository that meets quality coding standards 
 
 - Have a high-quality README 
-<br>
 
 ## **Contributing**
 The following individuals contributed to this project (listed in alphabetical order by last name):<br>

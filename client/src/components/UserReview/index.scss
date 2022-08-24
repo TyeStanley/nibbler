@@ -1,8 +1,13 @@
+#comment-box-wrapper{
+    height: 15rem;
+    overflow-y: auto;
+    background-color: rgb(102, 104, 107);
+
+}
 #comment-box{
     background-color: rgb(102, 104, 107);
     border-top: 1px solid rgb(73, 70, 70);
-    overflow-x: hidden;
-    overflow-y: scroll;
+    
 }
 
 #desc-box{
@@ -15,10 +20,10 @@
         
     }
     #userName{
-        font-size: 22px
+        font-size: 20px
     }
     #resDesName{
-        font-size: 22px;
+        font-size: 23px;
     }
 
 

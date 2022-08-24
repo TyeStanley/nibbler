@@ -26,7 +26,7 @@ function Footer() {
 
   return (
     <footer>
-      <div className="borderOutline">
+      <div >
         <div className="GitHubNameContainer">&copy;2022 by{' '}
           <a href="https://github.com/millerchase" target="blank">
             <FontAwesomeIcon icon={faGithub} /> Chase Miller,{' '}

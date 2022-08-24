@@ -4,6 +4,14 @@ main{
   background-color: rgba(68, 75, 80, 0.993);
   
 }
+.navbar-toggler{
+  border: 1px solid white;
+  &::after{
+    
+    color: white;
+
+  }
+}
 html{
   background-color: rgba(68, 75, 80, 0.993);
 

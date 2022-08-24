@@ -18,7 +18,8 @@ const PhotoForm = ({restId, dishId}) => {
     setPhotoFormData({...photoFormData, [name]: value });
   };
 
-
+    // create loggedIn variable
+    const loggedIn = Auth.loggedIn();
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();

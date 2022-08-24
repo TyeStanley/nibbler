@@ -26,11 +26,7 @@ const RestaurantForm = () => {
     }
 
     try {
-<<<<<<< HEAD
-       await addRestaurant({
-=======
      await addRestaurant({
->>>>>>> 2493cdc21335ea1c6c7354422b6cfc7019b70a3b
         variables: {...restaurantFormData} 
       });
 

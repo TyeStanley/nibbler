@@ -55,6 +55,7 @@ SO THAT I can explore new restaurants<br>
 
 ## **Contributing**
 The following individuals contributed to this project (listed in alphabetical order by last name):<br>
+<br>
 Sapana Donde - Front End and Back End<br>
 Scott Heier - Front End and Back End<br>
 Chase Miller - Back End<br>

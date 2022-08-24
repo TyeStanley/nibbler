@@ -1,15 +1,15 @@
+import Comments from '../Comments';
 import './index.scss'
 
 
 
 const UserReview = ({comments}) =>{
 
-
-    
+    if(comments.length > 0){
         return(
         <>
         <div id='comment-box-wrapper'>
-        {comments.map(({commentText}) =>{ if(commentText){
+        {comments.map(({commentText}) =>{ 
     
             return(
              <div className='d-flex  justify-content-start' id='comment-box'  key={commentText}>
@@ -22,12 +22,13 @@ const UserReview = ({comments}) =>{
                 </article>
             </div>
             )
-        }})}
+        })}
           </div>
         </>
     
-       )
-  
+        )}
+      
+        
 };
 
 

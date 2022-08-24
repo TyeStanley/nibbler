@@ -1,9 +1,7 @@
-import React, { useState } from 'react';
+
 import './index.scss';
 import UserReview from '../UserReview';
 import Auth from '../../utils/auth';
-import { useMutation } from '@apollo/client';
-import { COMMENT_REST } from '../../utils/mutations';
 import PhotoForm from '../PhotoForm';
 import Comments from '../Comments';
 
@@ -20,44 +18,6 @@ const RestaurantCard = ({restaurants}) =>{
   const loggedIn = Auth.loggedIn();
 
 
-
-  // declare commentRest function and error variable
-  // const [commentRest, { error }] = useMutation(COMMENT_REST);
-
-
-  
-  // create handleChange function to capture the restaurant value and Character count from user
-  // const handleChange = event => {
-     
-  //   if (event.target.value.length <= 280) {
-  //     event.preventDefault();
-  //     setRestCommText( event.target.value);
-  //     setCharacterCount(event.target.value.length);
-  //   }
-  // };
-
-
-
-  // create handleFormSubmit function to clear the restaurant comment text box and handle data
-  // const handleFormSubmit = async event => {
-  //   event.preventDefault();
-
-
-
-  //   try {
-  //     // add restaurant comment from user to database
-  //     await commentRest({
-  //       variables: { commentText }
-  //     });
-
-  //     console.log(commentText.textArea);
-  //     // clear restaurant comment box
-  //     setRestCommText('');
-  //     setCharacterCount(0);
-  //   } catch(e) {
-  //     console.error(e);
-  //   }
-  // };
 
 
   return(
@@ -79,10 +39,10 @@ const RestaurantCard = ({restaurants}) =>{
                                     </div>   
                               
                                 <div  id='pop-res-bottom' onClick={heartClickHandler}> <i id='heart-svg' className="fa-solid fa-heart p-2 mx-1" key={restName}></i><span id='heart-span'>{`${heartsCount}`}</span></div>
-                                {comments && <UserReview comments={comments}></UserReview>}
+                                {comments && <UserReview comments={comments} ></UserReview>}
                                 {loggedIn && (
                                   
-                                  <Comments/>
+                                  <Comments restId={_id}/>
                                   
                   
                                 )}  

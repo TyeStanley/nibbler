@@ -1,5 +1,4 @@
-import React, { useState } from 'react';
-import Auth from '../../utils/auth';
+import React, { useEffect, useState } from 'react';
 import { useMutation } from '@apollo/client';
 import { COMMENT_REST } from '../../utils/mutations';
 import './index.scss';
@@ -7,7 +6,7 @@ import './index.scss';
 
 
 // component for leaving comments
-const Comments= () =>{
+const Comments= ({restId}) =>{
 
  // setup use state to take care of the comment text field
   const [message, setMessage] = useState('');
@@ -24,9 +23,30 @@ const Comments= () =>{
   };
 
 
-  const handleFormSubmit = (event) =>{
 
-  }
+  // declare commentRest function and error variable
+  const [commentRest] = useMutation(COMMENT_REST);
+
+
+  // create handleFormSubmit function to clear the restaurant comment text box and handle data
+  const handleFormSubmit = async event => {
+    event.preventDefault();
+
+    try {
+      // add restaurant comment from user to database
+      await commentRest({
+        variables: { commentText: message, restId }
+      });
+     
+      // clear restaurant comment box
+      setMessage('');
+      setCharacterCount(0);
+      window.location.reload(true);
+    this.forceUpdate()
+    } catch(e) {
+      console.error(e);
+    }
+  };
 
   return (
     

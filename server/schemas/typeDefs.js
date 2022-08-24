@@ -138,7 +138,6 @@ const typeDefs = gql`
     heartDish(dishId: ID!): Heart
     heartComment(commentId: ID!): Heart
     unheart(heartId: ID!): Heart
-
   }
 `;
 

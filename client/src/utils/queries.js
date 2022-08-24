@@ -50,6 +50,15 @@ export const QUERY_RESTAURANTS = gql `
       restPhotos{
         photoUrl
       } 
+      comments {
+        _id
+        commentText
+        createdAt
+        user {
+          _id
+          username
+        }
+      }
       heartsCount
     }
   }

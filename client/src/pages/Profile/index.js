@@ -1,7 +1,7 @@
 import './index.scss'
 import React, { useState } from 'react';
 import { MDBCol, MDBContainer, MDBRow, MDBCard, MDBCardText, MDBCardImage, MDBBtn, MDBTypography } from 'mdb-react-ui-kit';
-import { Modal, Tab, Button } from 'react-bootstrap';
+import { Modal, Tab } from 'react-bootstrap';
 import RestaurantCard from '../../components/RestaurantCard';
 import AddRestaurant from '../../components/AddRestaurant';
 import EditProfile from '../../components/EditProfile';
@@ -16,6 +16,7 @@ const Profile= () => {
 
 
   const userData =  data?.me;
+  console.log(userData)
  
   
 
@@ -37,7 +38,13 @@ const Profile= () => {
                   <MDBBtn onClick={() => setShowModal2(true)} color="dark"  style={{height: '36px', overflow: 'visible'}}>
                     Edit profile
                   </MDBBtn>
+                  <div className='mt-5'>
+      <MDBBtn  color= "dark" style={{height: '60px', overflow: 'visible'}} onClick={() => setShowModal(true)}>
+                    Add Restaurant
+              </MDBBtn>
+            </div>
                   <Modal 
+                  
                   
               
                   size='lg'
@@ -92,11 +99,7 @@ const Profile= () => {
         <h2>Favorite Restaurants</h2>
           {/* {faveRest && <RestaurantCard faveRest={faveRest}></RestaurantCard>} */}
         </div>
-        <div>
-      <MDBBtn  color= "dark" style={{height: '36px', overflow: 'visible'}} onClick={() => setShowModal(true)}>
-                    Add Restaurant
-              </MDBBtn>
-            </div>
+      
             <Modal
         size='lg'
         show={showModal}

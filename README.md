@@ -69,9 +69,9 @@ McKinley Wiltz - Front End<br>
 * GraphQL
 * Heroku
 * JWT 
-* Multer
 * MongoDB
 * Mongoose ODM
+* Multer
 * Node.js
 * React
 * SASS

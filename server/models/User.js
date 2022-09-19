@@ -50,6 +50,12 @@ const UserSchema = new Schema(
                 type: Schema.Types.ObjectId,
                 ref: 'Comment'
             }
+        ],
+        photos: [
+            {
+                type: Schema.Types.ObjectId,
+                ref: 'Photo'
+            }
         ]
     },
     // Add virtuals for followerCount and followingCount
@@ -88,6 +94,11 @@ UserSchema.virtual('followerCount').get(function() {
 // Create the virtual "followerCount" variable 
 UserSchema.virtual('followingCount').get(function() {
     return this.following.length;
+});
+
+// Create the virtual "photosCount" variable 
+UserSchema.virtual('photosCount').get(function() {
+    return this.photos.length;
 });
   
 // Create the User model using UserSchema

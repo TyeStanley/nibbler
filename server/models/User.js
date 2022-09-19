@@ -42,13 +42,19 @@ const UserSchema = new Schema(
         favRests: [
             {
                 type: Schema.Types.ObjectId,
-                ref: 'Rest'
+                ref: 'Restaurant'
             }
         ], 
         comments: [
             {
                 type: Schema.Types.ObjectId,
                 ref: 'Comment'
+            }
+        ],
+        photos: [
+            {
+                type: Schema.Types.ObjectId,
+                ref: 'Photo'
             }
         ]
     },
@@ -88,6 +94,11 @@ UserSchema.virtual('followerCount').get(function() {
 // Create the virtual "followerCount" variable 
 UserSchema.virtual('followingCount').get(function() {
     return this.following.length;
+});
+
+// Create the virtual "photosCount" variable 
+UserSchema.virtual('photosCount').get(function() {
+    return this.photos.length;
 });
   
 // Create the User model using UserSchema

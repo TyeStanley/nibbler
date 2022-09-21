@@ -235,7 +235,8 @@ const resolvers = {
             // use original values if no updated value is provided
             username: username ? username : user.username,
             tagline: tagline ? tagline : user.tagline,
-            profilePic: profilePic ? profilePic : user.profilePic
+            profilePic: profilePic ? profilePic : user.profilePic,
+            favRests: favRests ? favRests: user.favRests
           },
           { new: true }
         );

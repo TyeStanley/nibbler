@@ -11,6 +11,10 @@ import { ADD_HEART, REMOVE_HEART } from '../../utils/mutations';
 import { QUERY_ME} from '../../utils/queries';
 
 const RestaurantCard = ({restaurants}) =>{
+
+  //setup a state for the current restaurants 
+  const [currentRests, setCurrentRests] = useState();
+  const [currentUser, setUser] = useState();
     // create loggedIn variable
     const loggedIn = Auth.loggedIn();
 
@@ -18,60 +22,38 @@ const RestaurantCard = ({restaurants}) =>{
       const { data } = useQuery(QUERY_ME)
 
 
-      const userData =  data?.me;
+      let userData =  data?.me;
+      
 
-
+    
   // hold saved favorite restaurants
   const [savedFavRestIds, setFavRestIds ] = useState(getFavRestIds());
 
   const [addHeart] = useMutation(ADD_HEART);
   const [removeHeart] = useMutation(REMOVE_HEART);
   
+  let restState = restaurants;
+
   
   useEffect(() =>{
+    if(restState){
+
+      setCurrentRests(restState);
+    }
+  
+
     
-    return () => saveFavRestIds(savedFavRestIds);
-  })
+  },[restState,userData])
+
+  
 
 
   // click handler for when hearts are clicked
   const heartClickHandler = (e) =>{
     let restToSave = e.target.getAttribute("data-id");
-    const existingHeart = savedFavRestIds.filter(item => item === restToSave);
+    // const existingHeart = savedFavRestIds.filter(item => item === restToSave);
     // logic to remove hearts / check if the post has been hearted
-    console.log(existingHeart)
-    if(existingHeart.length){
-              // filters out the restaurant that was selected
-              const restaurantArr = restaurants.filter(restaurant => restaurant._id === restToSave);
-              console.log(restaurantArr)
-              // sets the restaurant
-              const restaurant = restaurantArr[0];
-              console.log(restaurantArr[0])
-
-              const findHeart = restaurant.hearts.filter(heart => heart.user._id === userData._id);
-      
-              const heartToBreak = findHeart[0]._id;
-          
-          
-
-              try {
-                removeHeart({
-                variables:  {heartId: heartToBreak}  }
-              );
-              
-              // setups of a list of new restaruants
-              const newFavRests = savedFavRestIds.filter(id => id !== restToSave);
-              // if book successfully saves to user's account
-              setFavRestIds([...newFavRests]);
-              
-            } catch (err) {
-              console.error(err);
-            }
-        
-        
-
-      }
-    else{
+  
 
         try {
         
@@ -86,37 +68,50 @@ const RestaurantCard = ({restaurants}) =>{
 
     }
 
+const handleTestBtn = (e) =>{
+  
+    //  if(userData){userData = {...userData, favRests:['hello']};}
+    
+   
+    //  restState[0] = {[{...restState}]}
+        setCurrentRests(restState.map(rest=> {
+          if(rest.restName=== 'Ramen Tatsu-ya'){
+            return {...rest, restName: "Hello"}
+          }
+          else{
+            return rest
+          }
+        }))
 
-  }
-
+    
+}
+  
+if(currentRests){
   return(
-        <>
-                {restaurants.map(({restName,restPhotos,heartsCount,comments, _id}) =>(
-                  
-                    
-                        
+        <>      
+                <button id='testbutton'  onClick={handleTestBtn}>testbutton</button>
+                {currentRests.map(({restName,restPhotos,heartsCount,comments, _id}) =>(
                         <div className="card m-1 border border-dark " key={_id + Date.now()}>
-                         
                               <h5 className="card-header" id='rest-card-header' >{restName}</h5>
                                 <div className="" id='rest-card-body'>
                                   <div id='card-img-container' className='d-flex carousel slide' data-ride='carousel'>  
                                     {restPhotos && restPhotos.map(({photoUrl}) => (
-                                      
                                       <img src={photoUrl} className='col-8 col-md-4 p-1 card-photo' alt={photoUrl} key={photoUrl + '534'} ></img>
                                         ))}
                                         {loggedIn && <PhotoForm restId={_id} key={restName + "hoah123"}> </PhotoForm>} 
                                     </div>   
                               
-                                {savedFavRestIds?.some((savedId) =>  savedId === _id) ? <div  id='pop-res-bottom' data-id={_id} onClick={heartClickHandler}> <i id='heart-svg' data-id={_id}  className={`fa-solid fa-heart p-2 mx-1 pink-heart`} key={restName}></i><span id='heart-span'>{`${heartsCount +1}`}</span></div> : <div  id='pop-res-bottom' data-id={_id} onClick={heartClickHandler}> <i id='heart-svg' data-id={_id}  className={`fa-solid fa-heart p-2 mx-1`} key={restName}></i><span id='heart-span'>{`${heartsCount}`}</span></div>}
+                                {/* {savedFavRestIds?.some((savedId) =>  savedId === _id) ? <div  id='pop-res-bottom' data-id={_id} onClick={heartClickHandler}> <i id='heart-svg' data-id={_id}  className={`fa-solid fa-heart p-2 mx-1 pink-heart`} key={restName}></i><span id='heart-span'>{`${heartsCount +1}`}</span></div> : <div  id='pop-res-bottom' data-id={_id} onClick={heartClickHandler}> <i id='heart-svg' data-id={_id}  className={`fa-solid fa-heart p-2 mx-1`} key={restName}></i><span id='heart-span'>{`${heartsCount}`}</span></div>} */}
                                 {comments && <UserReview comments={comments}  ></UserReview>}
                                 {loggedIn && (
                                   
                                   <Comments restId={_id}/>
                                   
+                                  
                   
                                 )}  
                                 
-    
+                                
                               </div>
                           </div>
                         
@@ -128,7 +123,10 @@ const RestaurantCard = ({restaurants}) =>{
               
 
     );
-};
+
+  }
+
+}
 
 
 

@@ -107,7 +107,7 @@ const typeDefs = gql`
 
 
     
-    updateUser(username: String, tagline: String, profilePic: String): User
+    updateUser(username: String, tagline: String, profilePic: String, favRests: String): User
 
 
 

@@ -225,10 +225,20 @@ const resolvers = {
     },
 
     // update user
-    updateUser: async (parent, { username, tagline, profilePic }, context) => {
+    updateUser: async (parent, { username, tagline, profilePic, favRests }, context) => {
       if (context.user) {
         // grab previous user data for reference
         const user = await User.findById(context.user._id);
+
+        if(favRests){
+          const updatedUser = await User.findByIdAndUpdate(
+            context.user._id,
+          );
+          updatedUser.favRests.push(favRests)
+          updatedUser.save();
+          return updatedUser;
+
+        }
         const updatedUser = await User.findByIdAndUpdate(
           context.user._id,
           {
@@ -236,7 +246,6 @@ const resolvers = {
             username: username ? username : user.username,
             tagline: tagline ? tagline : user.tagline,
             profilePic: profilePic ? profilePic : user.profilePic,
-            favRests: favRests ? favRests: user.favRests
           },
           { new: true }
         );

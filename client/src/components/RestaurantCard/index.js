@@ -4,7 +4,6 @@ import UserReview from '../UserReview';
 import Auth from '../../utils/auth';
 import PhotoForm from '../PhotoForm';
 import Comments from '../Comments';
-import { saveFavRestIds, getFavRestIds } from '../../utils/localStorage';
 import { useEffect, useState } from 'react';
 import { useMutation,useQuery } from '@apollo/client';
 import { ADD_HEART, REMOVE_HEART } from '../../utils/mutations';
@@ -15,24 +14,17 @@ const RestaurantCard = ({restaurants}) =>{
   //setup a state for the current restaurants 
   const [currentRests, setCurrentRests] = useState();
   const [currentUser, setUser] = useState();
-    // create loggedIn variable
-    const loggedIn = Auth.loggedIn();
-
- 
-      const { data } = useQuery(QUERY_ME)
-
-
-      let userData =  data?.me;
-      
-
-    
-  // hold saved favorite restaurants
-  const [savedFavRestIds, setFavRestIds ] = useState(getFavRestIds());
+  // create loggedIn variable
+  const loggedIn = Auth.loggedIn();
+  // pull user data
+  const { data } = useQuery(QUERY_ME)
+  const userData =  data?.me;
+  let restState = restaurants;
 
   const [addHeart] = useMutation(ADD_HEART);
   const [removeHeart] = useMutation(REMOVE_HEART);
   
-  let restState = restaurants;
+  
 
   
   useEffect(() =>{
@@ -40,28 +32,48 @@ const RestaurantCard = ({restaurants}) =>{
 
       setCurrentRests(restState);
     }
-  
 
-    
   },[restState,userData])
 
-  
+
 
 
   // click handler for when hearts are clicked
   const heartClickHandler = (e) =>{
     let restToSave = e.target.getAttribute("data-id");
-    // const existingHeart = savedFavRestIds.filter(item => item === restToSave);
-    // logic to remove hearts / check if the post has been hearted
-  
+     
+    // check if heart exists in the users favorite restaurant if it does remove it from the restaurant and the user
+      if(currentUser.favRests.indexOf(restToSave) != -1){
+        const keyToRemove = currentUser.favRests.indexOf(restToSave);
 
+          try{
+            removeHeart({
+              variables: {restId: restToSave}
+            })
+          }
+            catch(err){
+              console.error(err);
+            }
+
+          // try{
+          //   addFavoriteRest({
+          //       variable: {restId: restToSave}
+          //   })
+          // }  
+          // catch(err){
+          //   console.error(err)
+          // }
+
+
+         return setUser({...currentUser, favRests: currentUser.favRests.pull(keyToRemove)})
+      }
+      // if heart does not exists add to users favorite restaurant and hearts 
         try {
         
           addHeart({
           variables:  {restId: restToSave}  }
         );
-        // if book successfully saves to user's account, save restId to state
-        setFavRestIds([...savedFavRestIds, restToSave]);
+    
       } catch (err) {
         console.error(err);
       }
@@ -70,10 +82,10 @@ const RestaurantCard = ({restaurants}) =>{
 
 const handleTestBtn = (e) =>{
   
-    //  if(userData){userData = {...userData, favRests:['hello']};}
-    
+  
+  
    
-    //  restState[0] = {[{...restState}]}
+ 
         setCurrentRests(restState.map(rest=> {
           if(rest.restName=== 'Ramen Tatsu-ya'){
             return {...rest, restName: "Hello"}
@@ -85,7 +97,9 @@ const handleTestBtn = (e) =>{
 
     
 }
-  
+  if(userData){
+    console.log(userData)
+  }
 if(currentRests){
   return(
         <>      

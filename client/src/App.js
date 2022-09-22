@@ -12,6 +12,7 @@ import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import Home from './pages/Home'
 import Profile from './pages/Profile'
+import RestDashboard from './pages/RestDashboard';
 
 const httpLink = createHttpLink({
   uri: '/graphql',
@@ -54,6 +55,10 @@ function App() {
         <Route 
           path="/profile" 
           element={<Profile/>} 
+        />
+        <Route 
+          path="/restdash" 
+          element={<RestDashboard/>} 
         />
             
       </Routes>

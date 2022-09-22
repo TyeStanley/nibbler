@@ -6,7 +6,7 @@ import PhotoForm from '../PhotoForm';
 import Comments from '../Comments';
 import { useEffect, useState } from 'react';
 import { useMutation,useQuery } from '@apollo/client';
-import { ADD_HEART, REMOVE_HEART } from '../../utils/mutations';
+import { ADD_HEART, REMOVE_HEART,UPDATE_FAV_RESTS } from '../../utils/mutations';
 import { QUERY_ME} from '../../utils/queries';
 
 const RestaurantCard = ({restaurants}) =>{
@@ -23,6 +23,7 @@ const RestaurantCard = ({restaurants}) =>{
 
   const [addHeart] = useMutation(ADD_HEART);
   const [removeHeart] = useMutation(REMOVE_HEART);
+  const [addFavoriteRest] = useMutation(UPDATE_FAV_RESTS);
   
   
 
@@ -55,16 +56,6 @@ const RestaurantCard = ({restaurants}) =>{
               console.error(err);
             }
 
-          // try{
-          //   addFavoriteRest({
-          //       variable: {restId: restToSave}
-          //   })
-          // }  
-          // catch(err){
-          //   console.error(err)
-          // }
-
-
          return setUser({...currentUser, favRests: currentUser.favRests.pull(keyToRemove)})
       }
       // if heart does not exists add to users favorite restaurant and hearts 
@@ -77,15 +68,12 @@ const RestaurantCard = ({restaurants}) =>{
       } catch (err) {
         console.error(err);
       }
+  
 
     }
 
 const handleTestBtn = (e) =>{
   
-  
-  
-   
- 
         setCurrentRests(restState.map(rest=> {
           if(rest.restName=== 'Ramen Tatsu-ya'){
             return {...rest, restName: "Hello"}

@@ -109,3 +109,13 @@ export const REMOVE_HEART=gql`
 
 
 `
+
+export const UPDATE_FAV_RESTS=gql`
+  mutation Mutation($favRests: String) {
+  updateUser(favRests: $favRests) {
+    favRests {
+      _id
+    }
+  }
+}
+`

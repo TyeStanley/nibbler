@@ -95,17 +95,55 @@ const Profile= () => {
       </MDBContainer>
 
 
-      <section className= 'd-flex flex-wrap justify-content-between'>
-        <div className='col-12 col-md-5 text-center d-flex flex-wrap' id='recent-uploads-div'>
+
+
+
+
+      <section className="container">
+        
+        <div className="col-12 col-md-5 top-ten text-center d-flex">
+        <h2>Top Friends</h2>
+        </div>
+        <div className="col friend-container border border-3 border-white rounded-pill d-flex justify-content-evenly">
+        <img src="https://i.pinimg.com/564x/65/25/a0/6525a08f1df98a2e3a545fe2ace4be47.jpg" alt="Profile" style={{width: '75px', height: '75px'}}></img>
+        <img src="https://i.pinimg.com/564x/65/25/a0/6525a08f1df98a2e3a545fe2ace4be47.jpg" alt="Profile" style={{width: '75px', height: '75px'}}></img>
+        <img src="https://i.pinimg.com/564x/65/25/a0/6525a08f1df98a2e3a545fe2ace4be47.jpg" alt="Profile" style={{width: '75px', height: '75px'}}></img>
+        <img src="https://i.pinimg.com/564x/65/25/a0/6525a08f1df98a2e3a545fe2ace4be47.jpg" alt="Profile" style={{width: '75px', height: '75px'}}></img>
+        <img src="https://i.pinimg.com/564x/65/25/a0/6525a08f1df98a2e3a545fe2ace4be47.jpg" alt="Profile" style={{width: '75px', height: '75px'}}></img>
+        </div>
+        
+        
+        
+
+
+        
+        <div className="col-12 col-md-5 top-ten text-center d-flex mt-5">
           <h2>Favorite Restaurants</h2>
-            {/* {faveRest && <RestaurantCard faveRest={faveRest}></RestaurantCard>} */}
           </div>
-         <div className='col-12 col-md-6  m-3' >
+          <div className="col friend-container border border-3 border-white grid">
+          <img src="https://cdn.dribbble.com/users/104635/screenshots/17458264/media/a5a239cd3d0acce4e4ff8ff689773210.jpg" alt="Restaurant" style={{width: '150px', height: '150px'}}></img>
+          <img src="https://cdn.dribbble.com/users/632872/screenshots/14336979/media/2be2afb420a88231305e2c41b82f231f.jpg" alt="Restaurant" style={{width: '150px', height: '150px'}}></img>
+          <img src="https://cdn.dribbble.com/users/2214836/screenshots/15234553/media/41bde57ee6525bc76f47283a00c13464.png" alt="Restaurant" style={{width: '150px', height: '150px'}}></img>
+            {/* {faveRest && <RestaurantCard faveRest={faveRest}></RestaurantCard>} */}
+            </div>
+          
+            <div className="col-12 col-md-5 top-ten text-center d-flex mt-5">
+          <h2>My Reviews</h2>
+          </div>
+          <div className="col friend-container border border-3 border-white grid">
+          <img src="https://cdn.dribbble.com/users/118756/screenshots/16083679/media/b1a9e8aedb357bd9d0f8350a040b1237.png" alt="Review" style={{width: '150px', height: '150px'}}></img>
+          <img src="https://cdn.dribbble.com/users/6827497/screenshots/18389829/media/dbfaaa145fa1a42aea1e20a00e7d7655.jpg" alt="Review" style={{width: '150px', height: '150px'}}></img>
+            </div>
+            
+
+
+          
+         <div className='col-12 col-md-6 m-3 mt-5'>
           <h2>My Comments</h2>
           {userData.comments && <UserReview comments={userData.comments} _id={userData._id} username={userData.username} /> }
          </div>
       
-            <Modal
+      <Modal
         size='lg'
         show={showModal}
         onHide={() => setShowModal(false)}
@@ -124,8 +162,7 @@ const Profile= () => {
           </Modal.Body>
           </Tab.Container>
       </Modal>
-   
-</section>
+      </section>
 </main>
 
 

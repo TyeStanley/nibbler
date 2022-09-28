@@ -19,10 +19,16 @@ export const QUERY_ME = gql`
         commentText
       }
       favRests {
+      _id
+      hearts {
         _id
-        restName
-        restState
+        user {
+          _id
+        }
       }
+    }
+  
+
     }
 }
 `;
@@ -49,10 +55,10 @@ export const QUERY_RESTAURANTS = gql `
       }
       heartsCount
       hearts {
+        targetId
         _id
         user {
           _id
-          username
         }
       }
     }

@@ -37,18 +37,33 @@ const RestaurantCard = ({restaurants}) =>{
 
   },[restState])
 
+  console.log(currentUser)
 
 
 
   // click handler for when hearts are clicked
   const heartClickHandler = (e) =>{
     let restToSave = e.target.getAttribute("data-id");
-    setUser({...userData});
+    if(currentUser === undefined){
+      setUser({...userData});
+    }
+    let restExists = currentUser.favRests.filter(rest =>{
+            if(restToSave === rest._id){
+              return rest
+            }
+            else{
+              return
+            }
+    })
+    console.log(restExists.length);
     console.log(currentUser)
     console.log(currentRests)
+
     // check if heart exists in the users favorite restaurant if it does remove it from the restaurant and the user
-      if(currentUser.favRests.map(rest => rest._id === restToSave)){
+    // Checks to see if the user has any favorite restauarnts and then checks if one of them matches the currently selected ones
+      if(restExists.length > 0){
         console.log('hello true')
+        // if it does exit remove the heart from the restaurant
           try{
             removeHeart({
               variables: {heartId: restToSave}
@@ -57,18 +72,21 @@ const RestaurantCard = ({restaurants}) =>{
             catch(err){
               console.error(err);
             }
-
+            // change this to a splice????? === 
             let newFavRests = currentUser.favRests.filter(favRest => favRest._id !== restToSave);
-            console.log(newFavRests)
-
-            // setCurrentRests(restState.map(rest=> {
-            //   if(rest._id === restToSave){
-            //     return {...rest, favRests: newFavRests}
-            //   }
-            //   else{
-            //     return rest
-            //   }
-            // }))
+            let currentSelectedRest = currentRests.filter(rest => rest._id === restToSave );
+            let currentHeartsArray = currentSelectedRest[0].hearts.filter(heart => heart.targetId !== restToSave);
+            let updateRest = currentRests.map(rest =>{
+              
+                        if(rest._id === currentSelectedRest[0]._id){
+                         
+                          return rest = { ...rest, hearts: currentHeartsArray, heartsCount: rest.heartsCount - 1}
+                        }
+                        else{
+                          return rest
+                        }
+            } );
+            setCurrentRests(updateRest)
          return setUser({...currentUser, favRests: newFavRests})
       }
       // if heart does not exists add to users favorite restaurant and hearts 
@@ -82,7 +100,21 @@ const RestaurantCard = ({restaurants}) =>{
         console.error(err);
       }
       let favRestArray = [...currentUser.favRests, {_id: restToSave}];
-      console.log("This is the fav array " + favRestArray);
+      
+      let newFavRests = currentUser.favRests.filter(favRest => favRest._id !== restToSave);
+      let currentSelectedRest = currentRests.filter(rest => rest._id === restToSave );
+      let currentHeartsArray = currentSelectedRest[0].hearts.filter(heart => heart.targetId !== restToSave);
+      let updateRest = currentRests.map(rest =>{
+        
+                  if(rest._id === currentSelectedRest[0]._id){
+                   
+                    return rest = { ...rest, hearts: currentHeartsArray, heartsCount: rest.heartsCount + 1}
+                  }
+                  else{
+                    return rest
+                  }
+      } );
+      setCurrentRests(updateRest)
       
       return setUser({...currentUser, favRests: favRestArray})
 

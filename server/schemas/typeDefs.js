@@ -62,7 +62,6 @@ const typeDefs = gql`
   type Heart {
     _id: ID
     targetId: ID
-    targetType: String
     user: User
   }
 

@@ -90,7 +90,6 @@ export const ADD_HEART =gql`
   heartRest(restId: $restId) {
     _id
     targetId
-    targetType
     user {
       _id
       username

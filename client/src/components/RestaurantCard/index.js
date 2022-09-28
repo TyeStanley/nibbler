@@ -23,18 +23,17 @@ const RestaurantCard = ({restaurants}) =>{
 
   const [addHeart] = useMutation(ADD_HEART);
   const [removeHeart] = useMutation(REMOVE_HEART);
-  const [addFavoriteRest] = useMutation(UPDATE_FAV_RESTS);
-  
-  
-
   
   useEffect(() =>{
     if(restState){
 
       setCurrentRests(restState);
     }
-
-
+    if(currentUser === undefined){
+      setUser(userData);
+      console.log(currentUser)
+    }
+  
   },[restState])
 
   console.log(currentUser)
@@ -47,17 +46,18 @@ const RestaurantCard = ({restaurants}) =>{
     if(currentUser === undefined){
       setUser({...userData});
     }
+    console.log(currentUser)
     let restExists = currentUser.favRests.filter(rest =>{
             if(restToSave === rest._id){
+              console.log(rest)
               return rest
             }
             else{
               return
             }
     })
-    console.log(restExists.length);
-    console.log(currentUser)
-    console.log(currentRests)
+    console.log('this is rest ' + restExists);
+ 
 
     // check if heart exists in the users favorite restaurant if it does remove it from the restaurant and the user
     // Checks to see if the user has any favorite restauarnts and then checks if one of them matches the currently selected ones
@@ -148,7 +148,7 @@ if(currentRests){
                                         {loggedIn && <PhotoForm restId={_id} key={restName + "hoah123"}> </PhotoForm>} 
                                     </div>   
                               
-                                {heartsCount ? <div  id='pop-res-bottom' data-id={_id} onClick={heartClickHandler}> 
+                                {loggedIn && heartsCount ? <div  id='pop-res-bottom' data-id={_id} onClick={heartClickHandler}> 
                                                   <i id='heart-svg' data-id={_id}  className={`fa-solid fa-heart p-2 mx-1 pink-heart`} key={restName}></i>
                                                   <span id='heart-span'>{`${heartsCount}`}</span></div> 
                                                 : 

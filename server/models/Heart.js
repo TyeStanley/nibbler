@@ -5,6 +5,11 @@ const HeartSchema = new Schema({
     type: Schema.Types.ObjectId,
     required: true
   },
+  targetType: {
+    type: String,
+    enum: ['rest', 'dish', 'comment'],
+    required: true
+  },
   user: {
     type: Schema.Types.ObjectId,
     ref: 'User'

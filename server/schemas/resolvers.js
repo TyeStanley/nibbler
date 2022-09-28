@@ -529,6 +529,7 @@ const resolvers = {
         const user = await User.findById(context.user._id);
         const heart = await Heart.create({
           targetId: rest._id,
+          targetType: 'rest',
           user: user
         });
 
@@ -587,48 +588,44 @@ const resolvers = {
     // take away heart (remove rest from user's favorites)
     unheart: async (parent, { heartId }, context) => {
       if (context.user) {
-        const heart = await Heart.find({targetId:heartId});
+        let heart = await Heart.find({targetId:heartId});
         const user = await User.findById(context.user._id);
-        const rest = await Rest.findById(heartId);
-   
-        heart.map(hrt =>{
-          console.log(hrt)
-          await = Heart.findByIdAndDelete(hrt._id);
-          rest.hearts.pull(hrt);
-         
-          // remove rest from user's favorites
-          user.favRests.pull(hrt);
-        
+        // console.log(heart)
+    
+        heart = heart.filter(hearts => hearts.user.toString() === user._id.toString());
+        heart = heart[0]
+        console.log(heart)
+        // assign target to remove heart from and update based on type
+        switch (heart.targetType) {
+          case 'rest':
+            await Heart.findByIdAndDelete(heart._id)
+            const rest = await Rest.findById(heart.targetId);
+            console.log('this is rest'+ rest);
+            rest.hearts.pull(heart);
+            console.log('this is rest two' + rest)
+            rest.save();
+            // remove rest from user's favorites
+            user.favRests.pull(rest);
+            user.save();
+            break;
 
-        })
-        // // assign target to remove heart from and update based on type
-        // switch (heart.targetType) {
-        //   case 'rest':
-        //     const rest = await Rest.findById(heart.targetId);
-            // rest.hearts.pull(heart);
-            // rest.save();
-            // // remove rest from user's favorites
-            // user.favRests.pull(heart);
-            // user.save();
-           
+          case 'dish':
+            const dish = await Dish.findById(heart.targetId);
+            dish.hearts.pull(heart);
+            dish.save();
+            break;
 
-        //   case 'dish':
-        //     const dish = await Dish.findById(heart.targetId);
-        //     dish.hearts.pull(heart);
-        //     dish.save();
-        //     break;
+          case 'comment':
+            const comment = await Comment.findById(heart.targetId);
+            comment.hearts.pull(heart);
+            comment.save();
+            break;
 
-        //   case 'comment':
-        //     const comment = await Comment.findById(heart.targetId);
-        //     comment.hearts.pull(heart);
-        //     comment.save();
-        //     break;
+          default: // invalid target type
+            throw new Error('Invalid target type');
+        }
 
-        //   default: // invalid target type
-        //     throw new Error('Invalid target type');
-        // }
-
-        
+        return heart;
       }
 
       throw new AuthenticationError('You need to be logged in!');

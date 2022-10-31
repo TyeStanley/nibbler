@@ -3,11 +3,11 @@ import React, { useState } from 'react';
 import { MDBCol, MDBContainer, MDBRow, MDBCard, MDBCardText, MDBCardImage, MDBBtn, MDBTypography } from 'mdb-react-ui-kit';
 import { Modal, Tab } from 'react-bootstrap';
 // import RestaurantCard from '../../components/RestaurantCard';
-import AddRestaurant from '../../components/AddRestaurant';
-import EditProfile from '../../components/EditProfile';
+import AddRestaurant from '../components/AddRestaurant';
+import EditProfile from '../components/EditProfile';
 import { useQuery } from '@apollo/client';
-import { QUERY_ME } from '../../utils/queries';
-import UserReview from '../../components/UserReview';
+import { QUERY_ME } from '../utils/queries';
+import UserReview from '../components/UserReview';
 
 
 const Profile= () => {

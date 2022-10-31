@@ -1,4 +1,3 @@
-
 import './index.scss'
 import { useMutation } from '@apollo/client';
 import { DELETE_COMMENT } from '../../utils/mutations'

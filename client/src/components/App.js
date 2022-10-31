@@ -1,4 +1,3 @@
-import './App.scss';
 import { Routes, Route } from 'react-router-dom';
 import {
   ApolloClient,
@@ -7,11 +6,11 @@ import {
   createHttpLink,
 } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
-import Restaurants from './pages/Restaurants';
-import Navbar from './components/Navbar';
-import Footer from './components/Footer';
-import Home from './pages/Home'
-import Profile from './pages/Profile'
+import Navbar from './Navbar';
+import Footer from './Footer';
+import Home from '../pages/HomePage'
+import Profile from '../pages/ProfilePage'
+import Restaurants from '../pages/RestaurantsPage';
 
 const httpLink = createHttpLink({
   uri: '/graphql',
@@ -27,9 +26,6 @@ const authLink = setContext((_, { headers }) => {
   };
 });
 
-
-
-
 const client = new ApolloClient({
   link: authLink.concat(httpLink),
   cache: new InMemoryCache(),
@@ -37,30 +33,25 @@ const client = new ApolloClient({
 
 function App() {
   return (
-    <ApolloProvider  client ={client}>
+    <ApolloProvider client={client}>
     <main>
- 
       <Navbar/>
       <Routes>
         <Route 
           exact path="/" 
-          element={<Home/>} 
+          element={<Home />} 
         />
-
         <Route 
           path="/restaurants" 
-          element={<Restaurants/>} 
+          element={<Restaurants />} 
         />
         <Route 
           path="/profile" 
-          element={<Profile/>} 
+          element={<Profile />} 
         />
-            
       </Routes>
     </main>
-
     <Footer />
-    
     </ApolloProvider>
   );
 }

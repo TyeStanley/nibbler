@@ -1,7 +1,7 @@
 import './index.scss'
-import RestaurantCard from '../../components/RestaurantCard';
+import RestaurantCard from '../components/RestaurantCard';
 import { useQuery } from '@apollo/client';
-import { QUERY_RESTAURANTS } from '../../utils/queries';
+import { QUERY_RESTAURANTS } from '../utils/queries';
 
 
 

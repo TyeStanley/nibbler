@@ -2,10 +2,18 @@
 import React, { useState } from 'react';
 import { Form, Button } from 'react-bootstrap';
 import { useMutation } from '@apollo/client';
-import { ADD_RESTAURANT } from '../../utils/mutations';
+import { ADD_RESTAURANT } from '../utils/mutations';
 
-const RestaurantForm = () => {
-  const [restaurantFormData, setRestaurantFormData] = useState({ restName: '', restState: '', restAddress:'', restDescript:'', restCity: ''});
+export default function RestaurantForm() {
+  const [restaurantFormData, setRestaurantFormData] = useState(
+    {
+      restName: '',
+      restState: '',
+      restAddress:'',
+      restDescript:'',
+      restCity: ''
+    }
+  );
   const [validated] = useState(false);
   const [addRestaurant] = useMutation(ADD_RESTAURANT);
 
@@ -21,30 +29,35 @@ const RestaurantForm = () => {
     const form = event.currentTarget;
     if (form.checkValidity() === false) {
       event.preventDefault();
-      
-    
     }
 
     try {
      await addRestaurant({
         variables: {...restaurantFormData} 
       });
-
-      
     } catch (err) {
       console.error(err);
     }
     
-    setRestaurantFormData({
-      restName: '', restState: '', restAddress:'', restDescript:'', restCity: ''
-    });
+    setRestaurantFormData(
+      {
+        restName: '',
+        restState: '',
+        restAddress:'',
+        restDescript:'',
+        restCity: ''
+      }
+    );
     window.location.reload(true)
   };
 
   return (
     <>
-      <Form noValidate validated={validated} onSubmit={handleFormSubmit}>
-      
+      <Form
+        noValidate
+        validated={validated}
+        onSubmit={handleFormSubmit}
+      >
         <Form.Group>
           <Form.Label htmlFor='name'>Name</Form.Label>
           <Form.Control
@@ -70,6 +83,7 @@ const RestaurantForm = () => {
           />
           <Form.Control.Feedback type='invalid'>State is required!</Form.Control.Feedback>
         </Form.Group>
+
         <Form.Group>
           <Form.Label htmlFor='city'>City</Form.Label>
           <Form.Control
@@ -109,16 +123,14 @@ const RestaurantForm = () => {
           <Form.Control.Feedback type='invalid'>Description is required!</Form.Control.Feedback>
         </Form.Group>
 
-        
         <Button
           disabled={!(restaurantFormData.restName && restaurantFormData.restAddress && restaurantFormData.restState && restaurantFormData.restDescript )}
           type='submit'
-          variant='success'>
+          variant='success'
+        >
           Submit
         </Button>
       </Form>
     </>
   );
 };
-
-export default RestaurantForm;

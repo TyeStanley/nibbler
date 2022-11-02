@@ -1,10 +1,9 @@
 import { useEffect, useState } from 'react';
-import './index.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowUp } from '@fortawesome/free-solid-svg-icons';
 import { faGithub } from "@fortawesome/free-brands-svg-icons";
 
-function Footer() {
+export default function Footer() {
   const [showButton, setShowButton] = useState(false);
 
   useEffect(() => {
@@ -49,12 +48,11 @@ function Footer() {
       {showButton && (
         <button 
           onClick={scrollToTop}
-          className="back-to-top">
-            <FontAwesomeIcon icon={faArrowUp} />
+          className="back-to-top"
+        >
+          <FontAwesomeIcon icon={faArrowUp} />
         </button>
       )}
     </footer>
   )
-} 
-
-export default Footer;
+}

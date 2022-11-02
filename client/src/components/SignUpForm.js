@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { Form, Button, Alert } from 'react-bootstrap';
-import Auth from '../../utils/auth';
+import Auth from '../utils/auth';
 import { useMutation } from '@apollo/client';
-import { ADD_USER } from '../../utils/mutations';
+import { ADD_USER } from '../utils/mutations';
 
 
-const SignupForm = () => {
+export default function SignupForm() {
   // set initial form state
   const [userFormData, setUserFormData] = useState({ username: '', email: '', password: '', tagline: '' });
   // set state for form validation
@@ -48,7 +48,6 @@ const SignupForm = () => {
       email: '',
       password: '',
       tagline: '',
-      
     });
   };
 
@@ -100,18 +99,14 @@ const SignupForm = () => {
           <Form.Control.Feedback type='invalid'>Password is required!</Form.Control.Feedback>
         </Form.Group>
 
-    
-
-
         <Button
           disabled={!(userFormData.username && userFormData.email && userFormData.password)}
           type='submit'
-          variant='success'>
+          variant='success'
+        >
           Submit
         </Button>
       </Form>
     </>
   );
 };
-
-export default SignupForm;

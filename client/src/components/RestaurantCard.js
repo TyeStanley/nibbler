@@ -27,18 +27,18 @@ export default function RestaurantCard({ restaurants }) {
   })
 
   // useStates
-  const state = useState({
-    open: false,
-    index: this.index,
-  });
+  // const state = useState({
+  //   open: false,
+  //   index: this.index,
+  // });
 
-  const handleOpen = index => {
-    this.setState({ open: true, index})
-  }
+  // const handleOpen = index => {
+  //   this.setState({ open: true, index})
+  // }
 
-  const handleClose = () => {
-    this.setState({ open: false })
-  }
+  // const handleClose = () => {
+  //   this.setState({ open: false })
+  // }
 
   // click handler for when hearts are clicked
   function heartClickHandler(e) {

@@ -1,0 +1,25 @@
+@import-normalize;
+@import 'navbar.css';
+@import 'footer.css';
+/* homepage + components imports */
+@import 'homepage.css';
+
+/* profilepage + components imports */
+@import 'profilepage.css';
+
+/* restaurantspage + components imports */
+@import 'restaurantspage';
+
+*, *::before, *::after {
+  font-family: sans-serif;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 25px;
+}
+
+body {
+  padding: 0;
+  margin: 0;
+}

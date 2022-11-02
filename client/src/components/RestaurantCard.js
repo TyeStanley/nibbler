@@ -10,7 +10,7 @@ import PhotoForm from './PhotoForm';
 import Comments from './Comments';
 import UserReview from './UserReview';
 
-export default function RestaurantCard({restaurants}) {
+export default function RestaurantCard({ restaurants }) {
   // create loggedIn variable
   const loggedIn = Auth.loggedIn();
   const { data } = useQuery(QUERY_ME)

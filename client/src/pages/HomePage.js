@@ -1,6 +1,6 @@
-import RestaurantCard from '../components/RestaurantCard';
 import { useQuery } from '@apollo/client';
 import { QUERY_RESTAURANTS } from '../utils/queries';
+import RestaurantCard from '../components/RestaurantCard';
 
 export default function Home() {
   const { data } = useQuery(QUERY_RESTAURANTS)

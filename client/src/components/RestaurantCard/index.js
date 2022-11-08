@@ -31,7 +31,7 @@ const RestaurantCard = ({restaurants}) =>{
     }
     if(currentUser === undefined){
       setUser(userData);
-      console.log(currentUser)
+  
     }
   
   },[restState])
@@ -42,21 +42,28 @@ const RestaurantCard = ({restaurants}) =>{
 
   // click handler for when hearts are clicked
   const heartClickHandler = (e) =>{
+    
     let restToSave = e.target.getAttribute("data-id");
+
     if(currentUser === undefined){
       setUser({...userData});
     }
-    console.log(currentUser)
-    let restExists = currentUser.favRests.filter(rest =>{
-            if(restToSave === rest._id){
+
+    let restExists = '';
+
+    if(currentUser.favRests !== undefined){
+       restExists = currentUser.favRests.filter(rest =>{
+            if(restToSave  === rest._id){
               console.log(rest)
               return rest
             }
             else{
               return
             }
-    })
-    console.log('this is rest ' + restExists);
+      })
+  }
+
+    
  
 
     // check if heart exists in the users favorite restaurant if it does remove it from the restaurant and the user
@@ -120,23 +127,28 @@ const RestaurantCard = ({restaurants}) =>{
 
     }
 
-const handleTestBtn = (e) =>{
-  
-        setCurrentRests(restState.map(rest=> {
-          if(rest.restName=== 'Ramen Tatsu-ya'){
-            return {...rest, restName: "Hello"}
-          }
-          else{
-            return rest
-          }
-        }))
+    const checkHeartedStatus = (id)=>{
 
-    
-}
+      let heartedRest = '';
+      // make sure there is favorited restaurants and if there is check and see if the current restaurant is hearted
+      if(currentUser.favRests){
+         heartedRest = currentUser.favRests.find(rest => rest._id === id);
+      
+      }
+
+      if(heartedRest !== undefined){
+        return true;
+
+      }
+      else{
+        return false
+      }
+    }
+console.log(checkHeartedStatus('6333d81bf8d94d15c0bf27ad'))
 if(currentRests){
   return(
         <>      
-                <button id='testbutton'  onClick={handleTestBtn}>testbutton</button>
+               
                 {currentRests.map(({restName,restPhotos,heartsCount,comments, _id}) =>(
                         <div className="card m-1 border border-dark " key={_id + Date.now()}>
                               <h5 className="card-header" id='rest-card-header' >{restName}</h5>
@@ -148,14 +160,17 @@ if(currentRests){
                                         {loggedIn && <PhotoForm restId={_id} key={restName + "hoah123"}> </PhotoForm>} 
                                     </div>   
                               
-                                {loggedIn && heartsCount ? <div  id='pop-res-bottom' data-id={_id} onClick={heartClickHandler}> 
-                                                  <i id='heart-svg' data-id={_id}  className={`fa-solid fa-heart p-2 mx-1 pink-heart`} key={restName}></i>
-                                                  <span id='heart-span'>{`${heartsCount}`}</span></div> 
-                                                : 
-                                                <div  id='pop-res-bottom' data-id={_id} onClick={heartClickHandler}> 
-                                                  <i id='heart-svg' data-id={_id}  className={`fa-solid fa-heart p-2 mx-1`} key={restName}></i>
-                                                  <span id='heart-span'>{`${heartsCount}`}</span>
-                                               </div>}
+                                {checkHeartedStatus(_id)
+                                  ? <div  id='pop-res-bottom' data-id={_id}  onClick={heartClickHandler} >  
+                                    <i id='heart-svg' data-id={_id} className={`fa-solid fa-heart p-2 mx-1 pink-heart`}key={restName}></i>
+                                    <span id='heart-span'>{`${heartsCount}`} </span></div> 
+                                  :
+                                  <div  id='pop-res-bottom' data-id={_id}  onClick={heartClickHandler} >  
+                                  <i id='heart-svg' data-id={_id} className={`fa-solid fa-heart p-2 mx-1 `}key={restName}></i>
+                                  <span id='heart-span'>{`${heartsCount}`} </span></div>
+                                                  
+                                                  }
+                                               
                                 {comments && <UserReview comments={comments}  ></UserReview>}
                                 {loggedIn && (
                                   

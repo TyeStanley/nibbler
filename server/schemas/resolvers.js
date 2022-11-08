@@ -590,19 +590,15 @@ const resolvers = {
       if (context.user) {
         let heart = await Heart.find({targetId:heartId});
         const user = await User.findById(context.user._id);
-        // console.log(heart)
-    
         heart = heart.filter(hearts => hearts.user.toString() === user._id.toString());
         heart = heart[0]
-        console.log(heart)
+
         // assign target to remove heart from and update based on type
         switch (heart.targetType) {
           case 'rest':
             await Heart.findByIdAndDelete(heart._id)
             const rest = await Rest.findById(heart.targetId);
-            console.log('this is rest'+ rest);
             rest.hearts.pull(heart);
-            console.log('this is rest two' + rest)
             rest.save();
             // remove rest from user's favorites
             user.favRests.pull(rest);

@@ -129,22 +129,24 @@ const RestaurantCard = ({restaurants}) =>{
 
     const checkHeartedStatus = (id)=>{
 
-      let heartedRest = '';
+   
       // make sure there is favorited restaurants and if there is check and see if the current restaurant is hearted
-      if(currentUser.favRests){
-         heartedRest = currentUser.favRests.find(rest => rest._id === id);
+      if(currentUser && currentUser.favRests){
+        let heartedRest = '';
+          heartedRest = currentUser.favRests.find(rest => rest._id === id); 
       
+         if(heartedRest !== undefined){
+          return true;
+  
+        }
+        else{
+          return false
+        }
       }
 
-      if(heartedRest !== undefined){
-        return true;
-
-      }
-      else{
-        return false
-      }
+    
     }
-console.log(checkHeartedStatus('6333d81bf8d94d15c0bf27ad'))
+
 if(currentRests){
   return(
         <>      

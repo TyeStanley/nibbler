@@ -2,6 +2,7 @@ import './index.scss';
 import RestaurantCard from '../../components/RestaurantCard';
 import { useQuery } from '@apollo/client';
 import { QUERY_RESTAURANTS } from '../../utils/queries';
+import SmallRestCard from '../../components/SmallRestCard';
 
 const Home = () =>{
     const { data} = useQuery(QUERY_RESTAURANTS)
@@ -35,7 +36,9 @@ const Home = () =>{
 
             <div className=' d-flex flex-column' id='recent-uploads-div'>
          
-             {restaurants && <RestaurantCard restaurants={restaurants} ></RestaurantCard> }
+             {/* {restaurants && <RestaurantCard restaurants={restaurants} ></RestaurantCard> } */}
+
+             {restaurants && <SmallRestCard restaurants={restaurants}/>}
               
 
          

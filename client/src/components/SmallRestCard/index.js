@@ -27,7 +27,7 @@ if(currentRests){
 
 
 {currentRests.map(({restPhotos}) =>(
-                           <div id='smallRestCarBody' key={restPhotos + Date.now()}>
+                           <div id='smallRestCardBody' key={restPhotos + Date.now()}>
                            {restPhotos[0] ? <img src={restPhotos[0].photoUrl} alt=''></img> : <img src="" alt=''></img> }
     
                             </div>

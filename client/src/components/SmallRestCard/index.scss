@@ -1,16 +1,18 @@
 #smallRestCardBody{
-//     display: flex;
-//     justify-content: center;
-//     align-items: center;
-//     overflow: hidden
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    height: 350px;
+    width: 300px;
 
-//     img{
-//         flex-shrink: 0;
-//         min-width: 100%;
-//         min-height: 100%
-//     }
-// }
- width: 500px;
- height: 500px;
- border: 5px solid black;
+    img{
+        border: 3px solid black;
+        border-radius: 5%;
+        flex-shrink: 0;
+        width: 80%;
+        height: 80%
+    }
 }
+

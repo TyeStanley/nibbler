@@ -126,13 +126,13 @@ function Hearts({_id,currentRests,setCurrentRests, currentUser,setUser, heartsCo
         <>
 
         {checkHeartedStatus(_id)
-            ? <div  id='pop-res-bottom' data-id={_id}  onClick={heartClickHandler} >  
-              <i id='heart-svg' data-id={_id} className={`fa-solid fa-heart p-2 mx-1 pink-heart`}key={restName}></i>
+            ? <div  id='pop-res-bottom' data-id={_id} className="d-flex flex-row hearts" onClick={heartClickHandler} >  
+              <i id='heart-svg' data-id={_id} className={`fa-solid fa-heart p-2 mx-1 pink-heart `}key={restName}></i>
               <span id='heart-span'>{`${heartsCount}`} </span></div> 
             :
-            <div  id='pop-res-bottom' data-id={_id}  onClick={heartClickHandler} >  
-            <i id='heart-svg' data-id={_id} className={`fa-solid fa-heart p-2 mx-1 `}key={restName}></i>
-            <span id='heart-span'>{`${heartsCount}`} </span></div>
+            <div  id='pop-res-bottom' data-id={_id} className="d-flex flex-row hearts" onClick={heartClickHandler} >  
+              <i id='heart-svg' data-id={_id} className={`fa-solid fa-heart p-2 mx-1`}key={restName}></i>
+              <span id='heart-span'>{`${heartsCount}`} </span></div> 
                             
         }
 

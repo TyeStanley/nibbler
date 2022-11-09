@@ -1,18 +1,51 @@
 #smallRestCardBody{
-    
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden;
-    height: 350px;
-    width: 300px;
+   
+   
+   
+   
+    width: 200px;
+    height: 300px;
+    border: 2.4px solid black;
+    border-radius: 2%;
 
-    img{
-        border: 3px solid black;
-        border-radius: 5%;
-        flex-shrink: 0;
-        width: 80%;
-        height: 80%
+    opacity: 70%;
+  
+  
+    img {
+        position: relative;
+        top: -77px;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+  
+    
+        
+      }
+    h1{
+        text-align: center;
+        background-color: rgba(0, 0, 0, 0.075);
+        width: 100%;
+        position: relative;
+        top: 1px;
+        left: 2px;
+        overflow: hidden;
+        z-index: 99;
+        font-size: 25px;
+        font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        opacity: 100%;
+        font-weight:bolder;
+        color: rgb(5, 5, 5);
+        text-shadow: 1px 1px 2px rgb(255, 255, 255);
+
     }
+ 
+
+}
+#smallRestCardBody:hover{
+    opacity: 100%;
 }
 
+.hearts{
+    position: relative;
+    top: 220px;
+}

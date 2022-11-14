@@ -1,4 +1,5 @@
-import './App.scss';
+// import './App.scss';
+import './app.css';
 import { Routes, Route } from 'react-router-dom';
 import {
   ApolloClient,
@@ -27,42 +28,32 @@ const authLink = setContext((_, { headers }) => {
   };
 });
 
-
-
-
 const client = new ApolloClient({
   link: authLink.concat(httpLink),
   cache: new InMemoryCache(),
 });
 
-function App() {
+export default function App() {
   return (
-    <ApolloProvider  client ={client}>
+    <ApolloProvider client={client}>
     <main>
- 
-      <Navbar/>
+      <Navbar />
       <Routes>
-        <Route 
-          exact path="/" 
-          element={<Home/>} 
+        <Route
+          exact path="/"
+          element={<Home/>}
         />
-
-        <Route 
-          path="/restaurants" 
-          element={<Restaurants/>} 
+        <Route
+          path="/restaurants"
+          element={<Restaurants/>}
         />
-        <Route 
-          path="/profile" 
-          element={<Profile/>} 
+        <Route
+          path="/profile"
+          element={<Profile/>}
         />
-            
       </Routes>
     </main>
-
     <Footer />
-    
     </ApolloProvider>
   );
 }
-
-export default App;

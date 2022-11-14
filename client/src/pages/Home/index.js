@@ -1,6 +1,8 @@
 // import './index.scss';
 import './home.css';
+// Components
 import RestaurantCard from '../../components/RestaurantCard';
+// GraphQL
 import { useQuery } from '@apollo/client';
 import { QUERY_RESTAURANTS } from '../../utils/queries';
 

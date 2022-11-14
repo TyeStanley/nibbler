@@ -1,5 +1,6 @@
 // import './index.scss';
 import './userReview.css';
+// GraphQL
 import { useMutation } from '@apollo/client';
 import { DELETE_COMMENT } from '../../utils/mutations';
 

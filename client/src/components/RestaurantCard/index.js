@@ -1,5 +1,6 @@
 // import './index.scss';
 import './restaurantCard.css';
+import uuid from 'uuid';
 // Components
 import UserReview from '../UserReview';
 import PhotoForm from '../PhotoForm';
@@ -8,7 +9,7 @@ import Comments from '../Comments';
 import { saveFavRestIds, getFavRestIds } from '../../utils/localStorage';
 import Auth from '../../utils/auth';
 import { useEffect, useState } from 'react';
-// Queries and Mutation
+// GraphQL
 import { useMutation, useQuery } from '@apollo/client';
 import { ADD_HEART, REMOVE_HEART } from '../../utils/mutations';
 import { QUERY_ME } from '../../utils/queries';
@@ -44,7 +45,7 @@ export default function RestaurantCard({restaurants}) {
 
       try {
         removeHeart(
-          { variables: {heartId: heartToBreak} }
+          { variables: { heartId: heartToBreak } }
         );
               
         // setups of a list of new restaruants

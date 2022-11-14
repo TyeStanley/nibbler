@@ -1,6 +1,6 @@
 // import './index.scss';
 import './restaurantCard.css';
-import uuid from 'uuid';
+import {v4 as uuidv4 } from 'uuid';
 // Components
 import UserReview from '../UserReview';
 import PhotoForm from '../PhotoForm';
@@ -25,7 +25,7 @@ export default function RestaurantCard({restaurants}) {
   const [addHeart] = useMutation(ADD_HEART);
   const [removeHeart] = useMutation(REMOVE_HEART);
   
-  useEffect(() =>{
+  useEffect(() => {
     return () => saveFavRestIds(savedFavRestIds);
   })
 
@@ -71,20 +71,21 @@ export default function RestaurantCard({restaurants}) {
     }
   }
 
-  return(
+  return (
     <>
-      {restaurants.map(({ restName, restPhotos, heartsCount, comments, _id }) => (                         
+      {restaurants.map(({ restName, restPhotos, heartsCount, comments, _id }) => (
         <div key={_id + Date.now()}>
-                          
+
           <h5>{restName}</h5>
 
           <div>
             <div data-ride='carousel'>  
+              {/* Previous Key for the below img " photoUrl + '534' " it caused two children with the same key */}
               {restPhotos && restPhotos.map(({photoUrl}) => (                      
                 <img 
                   src={photoUrl}
                   alt={photoUrl}
-                  key={photoUrl + '534'} 
+                  key={uuidv4()}
                 />
               ))}
               {loggedIn && <PhotoForm restId={_id} key={restName + "hoah123"} />} 
@@ -109,8 +110,7 @@ export default function RestaurantCard({restaurants}) {
                 </div>}
                 {comments && <UserReview comments={comments} />}
                 {loggedIn && (<Comments restId={_id} />
-            )}  
-                                  
+            )}                     
           </div>
         </div>
       ))}

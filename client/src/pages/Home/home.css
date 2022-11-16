@@ -1,0 +1,42 @@
+.home__hero {
+  display: flex;
+
+}
+
+.home__fill {
+  /* margin-top: 5vh; */
+}
+
+.home__hero {
+  margin-top: 20px;
+  height: 100vh;
+  background-image: url('../../assets/images/foodie-hero-img.jpg');
+  background-position: center;
+  background-size: cover;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.home__text-container {
+  background-color: #1B2522;
+  opacity: 85%;
+  text-align: center;
+  padding: 1.5rem;
+  border-radius: 10000px;
+}
+
+.home__text-container h1 {
+  color: white;
+}
+
+.home__text-container h2 {
+  color: white;
+}
+
+@media (min-width: 768px) {
+  .home__text-container h2 {
+    padding: .3em 1em;
+  }
+}

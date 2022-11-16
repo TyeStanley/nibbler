@@ -18,17 +18,17 @@ export default function Home() {
 
   return (
     <>
-      <section></section>
+      <section className="home__fill"></section>
 
-      <section>
-        <div>
-          <div><h1>Welcome to Nibbler</h1></div>
+      <section className="home__hero">
+        <div className="home__text-container">
+          <h1>Welcome to Nibbler</h1>
           <h2>Save your favorite spots | Share them with friends | Find something new</h2>
         </div>
-            <h3>Recent Uploads</h3>
       </section>
 
-      <section>
+      <section className="home__restaurant-cards">
+        <h3>Recent Uploads</h3>
         <div>
           {restaurants && <RestaurantCard restaurants={restaurants} />}
         </div>

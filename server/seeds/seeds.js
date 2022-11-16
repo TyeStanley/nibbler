@@ -12,8 +12,6 @@ db.once('open', async () => {
   await Photo.deleteMany({});
   await Comment.deleteMany({});
 
-
-  
   console.log('all done!');
   process.exit(0);
 });

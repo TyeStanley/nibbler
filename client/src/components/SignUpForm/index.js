@@ -113,6 +113,7 @@ export default function SignupForm() {
           disabled={!(userFormData.username && userFormData.email && userFormData.password)}
           type='submit'
           variant='success'
+          className="SignUpForm__button"
         >
           Submit
         </Button>

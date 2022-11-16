@@ -91,14 +91,15 @@ export default function RestaurantCard({restaurants}) {
               {loggedIn && <PhotoForm restId={_id} key={restName + "hoah123"} />} 
             </div>   
                                 
-            {savedFavRestIds?.some((savedId) => savedId === _id)
+            {
+              savedFavRestIds?.some((savedId) => savedId === _id)
               ? <div data-id={_id} onClick={heartClickHandler}> 
                   <i 
                     data-id={_id} 
                     className={`fa-solid fa-heart p-2 mx-1 pink-heart`}
                     key={restName} 
                   />
-                  <span>{`${heartsCount +1}`}</span>
+                  <span>{`${heartsCount + 1}`}</span>
                 </div>
               : <div data-id={_id} onClick={heartClickHandler}>
                   <i 
@@ -107,10 +108,10 @@ export default function RestaurantCard({restaurants}) {
                     key={restName} 
                   />
                   <span id='heart-span'>{`${heartsCount}`}</span>
-                </div>}
-                {comments && <UserReview comments={comments} />}
-                {loggedIn && (<Comments restId={_id} />
-            )}                     
+                </div>
+            }
+            {comments && <UserReview comments={comments} />}
+            {loggedIn && <Comments restId={_id} />}            
           </div>
         </div>
       ))}

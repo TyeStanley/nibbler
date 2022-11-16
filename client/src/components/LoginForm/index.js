@@ -1,11 +1,10 @@
-
 import React, { useState } from 'react';
 import { Form, Button, Alert } from 'react-bootstrap';
 import Auth from '../../utils/auth';
 import { useMutation } from '@apollo/client';
 import { LOGIN_USER } from '../../utils/mutations';
 
-const LoginForm = () => {
+export default function LoginForm() {
   const [userFormData, setUserFormData] = useState({ email: '', password: '' });
   const [validated] = useState(false);
   const [showAlert, setShowAlert] = useState(false);
@@ -24,7 +23,6 @@ const LoginForm = () => {
     if (form.checkValidity() === false) {
       event.preventDefault();
       event.stopPropagation();
-    
     }
 
     try {
@@ -79,12 +77,12 @@ const LoginForm = () => {
         <Button
           disabled={!(userFormData.email && userFormData.password)}
           type='submit'
-          variant='success'>
+          variant='success'
+          className="LoginForm__button"
+        >
           Submit
         </Button>
       </Form>
     </>
   );
 };
-
-export default LoginForm;

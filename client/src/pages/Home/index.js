@@ -23,8 +23,8 @@ export default function Home() {
       <section>
         <div>
           <div><h1>Welcome to Nibbler</h1></div>
-            <h2>Save your favorite spots | Share them with friends | Find something new</h2>
-            </div>
+          <h2>Save your favorite spots | Share them with friends | Find something new</h2>
+        </div>
             <h3>Recent Uploads</h3>
       </section>
 

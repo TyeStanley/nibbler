@@ -1,0 +1,34 @@
+.modal__header {
+  background-color: #1B2522;
+}
+
+.modal__title {
+  background-color: white;
+  border-radius: 1rem;
+}
+
+.modal__buttons-wrapper {
+  margin: 2px;
+  padding: 2px;
+}
+
+.modal__button-signup,
+.modal__button-login {
+  color: white !important;
+  background-color: #444 !important;
+}
+
+.modal__button-signup:focus,
+.modal__button-login:focus {
+  color: black !important;
+  background-color: white !important;
+}
+
+.btn-close {
+  background-color: #888 !important;
+}
+
+.SignUpForm__button,
+.LoginForm__button {
+  margin-top: 1rem;
+}

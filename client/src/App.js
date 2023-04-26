@@ -44,10 +44,10 @@ function App() {
           element={<Home/>} 
         />
 
-        <Route 
+        {/* <Route 
           path="/restaurants" 
           element={<Restaurants/>} 
-        />
+        /> */}
         <Route 
           path="/profile" 
           element={<Profile/>} 

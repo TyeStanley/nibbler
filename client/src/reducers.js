@@ -1,3 +1,4 @@
+// Import combined is from Redux library to combine reducers into one.
 import { combineReducers } from 'redux';
 import { QUERY_RESTAURANTS } from './utils/queries';
 import { useQuery } from '@apollo/client';

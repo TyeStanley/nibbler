@@ -1,15 +1,30 @@
-import './index.scss';
-import { useQuery } from '@apollo/client';
+import React, { useEffect} from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import {
+  selectRestaurants,
+  
+} from '../../reducers';
 import { QUERY_RESTAURANTS } from '../../utils/queries';
+import { useQuery } from '@apollo/client';
 import SmallRestCard from '../../components/SmallRestCard';
 
 const Home = () => {
-    const { data } = useQuery(QUERY_RESTAURANTS);
-    let restaurants = data?.restaurants;
+     // setup state for current page
+     const restaurants = useSelector(selectRestaurants);
+     // setup dispatch
+     const dispatch = useDispatch();
+     // This is going to query for initial restaurant data
+     const { data } = useQuery(QUERY_RESTAURANTS);
+     // If we have data, we will set the restaurants in the store
+     useEffect(() => {
+         if (data) {
+             // sends the new found data to the store in the form of an action
+           dispatch({ type: 'restaurant/setRestaurants', payload: data.restaurants });
+         }
+       }, [data, dispatch]);
 
-    if (restaurants?.length > 5) {
-        restaurants = [...restaurants].splice(-5);
-    }
+
+
 
     return (
         <>

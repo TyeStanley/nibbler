@@ -1,45 +1,56 @@
-import React from 'react';
-import SmallRestCard from '../../components/SmallRestCard';
-import Pagination from 'react-paginate';
-import { useSelector, useDispatch } from 'react-redux';
-import {
-  selectRestaurants,
-  selectCurrentPage,
-  setCurrentPage,
-  selectPerPage,
-  useRestaurantQuery,
-} from '../../reducers';
+// import React, { useEffect} from 'react';
+// import SmallRestCard from '../../components/SmallRestCard';
+// import Pagination from 'react-paginate';
+// import { useSelector, useDispatch } from 'react-redux';
+// import {
+//   selectRestaurants,
+//   selectCurrentPage,
+//   setCurrentPage,
+//   selectPerPage,
+//   rootReducer,
+// } from '../../reducers';
+// import { QUERY_RESTAURANTS } from '../../utils/queries';
+// import { useQuery } from '@apollo/client';
 
-function RestaurantList() {
-  const restaurants = useSelector(selectRestaurants);
-  const currentPage = useSelector(selectCurrentPage);
-  const perPage = useSelector(selectPerPage);
-  const dispatch = useDispatch();
-  const currentRests = restaurants.slice(currentPage * perPage, currentPage * perPage + perPage);
+// function RestaurantList() {
+//   // setup state for current page
+//   const restaurants = useSelector(selectRestaurants);
+//   const currentPage = useSelector(selectCurrentPage);
+//   const perPage = useSelector(selectPerPage);
+// // setup dispatch
+//   const dispatch = useDispatch();
+//   const { data } = useQuery(QUERY_RESTAURANTS);
 
-  function handlePageClick({ selected }) {
-    dispatch(setCurrentPage(selected));
-  }
+//   // const currentRests = restaurants.slice(currentPage * perPage, currentPage * perPage + perPage);
+  
+  
 
-  const data = useRestaurantQuery();
-  dispatch({ type: 'restaurant/setRestaurants', payload: data });
+//   useEffect(() => {
+//     if (data) {
+//       setLoadedRestaurants(data.restaurants);
+//     }
+//   }, [data]);
 
-  const totalPages = Math.ceil(restaurants.length / perPage);
+//   function handlePageClick({ selected }) {
+//     dispatch(setCurrentPage(selected));
+//   }
+//   console.log(data)
+//   const totalPages = Math.ceil(loadedRestaurants.length / perPage);
 
-  return (
-    <>
-      <div className="restaurant-list">
-        {currentRests.map((restaurant) => (
-          <SmallRestCard restaurant={restaurant} key={restaurant._id} />
-        ))}
-      </div>
-      <Pagination
-        pageCount={totalPages}
-        onPageChange={handlePageClick}
-        forcePage={currentPage}
-      />
-    </>
-  );
-}
+//   return (
+//     <>
+//       <div className="restaurant-list">
+//         {currentRests.map((restaurant) => (
+//           <SmallRestCard restaurant={restaurant} key={restaurant._id} />
+//         ))}
+//       </div>
+//       <Pagination
+//         pageCount={totalPages}
+//         onPageChange={handlePageClick}
+//         forcePage={currentPage}
+//       />
+//     </>
+//   );
+// }
 
-export default RestaurantList;
+// export default RestaurantList;

@@ -1,54 +1,35 @@
-main{
+main {
   margin: 0;
   padding: 0;
-  background-color: rgba(73, 85, 102, 0.836);
-  
+  background-color: rgba(185, 183, 146, 0.836);
 }
-.navbar-toggler{
-  border: 1px solid white;
-  &::after{
-    
-    color: white;
 
-  }
-}
-html{
-  background-color: rgba(68, 75, 80, 0.993);
-
-}
 
 footer {
-  background-color: rgba(68, 75, 80, 0.993);
+  background-color: rgba(161, 154, 143, 0.993);
+  box-shadow: 0px -5px 10px rgba(0, 0, 0, 0.5);
 }
 
 /* width */
 ::-webkit-scrollbar {
-  width: 15px;
+  width: 10px;
 }
 
 /* Track */
 ::-webkit-scrollbar-track {
-  box-shadow: inset 0 0 5px grey; 
+  background-color: rgba(0, 0, 0, 0.1);
   border-radius: 10px;
 }
  
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: rgb(107, 123, 138); 
+  background-color: rgba(107, 123, 138, 0.8); 
   border-radius: 10px;
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: #008fb3; 
+  background-color: #008fb3; 
 }
 
-#nav-header{
-  color:rgb(158, 151, 151);
-  &:hover{
-    color: white;
-    
-  }
-}
-
-@import url('https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@1,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');

@@ -1,0 +1,91 @@
+body {
+  background-color: #f1f1f1;
+  margin: 0;
+  padding: 0;
+}
+
+.navbar {
+  background-color: #333;
+  color: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: .5rem;
+  
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 2;
+}
+
+.navbar a {
+  color: #fff;
+  text-decoration: none;
+}
+
+.navbar h1 {
+  font-size: 1.5rem;
+  margin: 0;
+  padding: 0;
+}
+
+.navbar .nav-links {
+  display: flex;
+  justify-content: space-between;
+  width: 50%;
+}
+
+.navbar .nav-links a {
+  margin: 0 1rem;
+  padding: 1rem 0;
+  transition: all 0.2s ease-in-out;
+}
+
+.navbar a:hover {
+  color: #333;
+  transition: all 0.2s ease-in-out;
+}
+
+.navbar a:hover:after {
+  content: '';
+  display: block;
+  width: 100%;
+  background-color: #333;
+  transition: all 0.2s ease-in-out;
+}
+.modal{
+  background-color: rgba(0, 0, 0, 0.61);
+}
+.modal-header {
+  background-color: rgb(131, 118, 118);
+  color: #fff;
+  border-bottom: 1px solid #ccc;
+}
+
+.modal-title {
+  text-align: center;
+}
+
+.modal-body{
+  background-color: rgb(179, 170, 160);
+
+}
+.modal-footer {
+  background-color: #333;
+  color: #fff;
+  border-top: 1px solid #ccc;
+  text-align: center;
+  padding: 1rem;
+}
+
+.modal-tabs .nav-item .nav-link {
+  color: #333;
+  font-weight: bold;
+}
+
+.modal-tabs .nav-item .nav-link.active {
+  background-color: #333;
+  color: #fff;
+  border: 1px solid #ccc;
+  border-bottom: none;
+}

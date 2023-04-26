@@ -1,45 +1,54 @@
-#hero-section{
-   
-    background-image: url('../../assets/images/foodie-hero-img.jpg');
+#hero-section {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('../../assets/images/foodie-hero-img.jpg');
     background-position: center;
     background-size: cover;
     height: 50vh;
-    width: 75%;
+    width: 100%;
     margin: auto;
-    opacity: 85%;
-    box-shadow: 1px 1px 5px black ;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: white;
 }
-#intro-statement{
-    font-family: 'Merriweather', serif;
-    width: 75%;
+
+#intro-statement {
+    font-family: 'Montserrat', sans-serif;
+    width: 100%;
     margin: auto;
-    text-shadow: 2px 2px 4px rgb(32, 31, 31);
-    color: rgb(230, 187, 132);
+    text-align: center;
 
-    #intro-h1{
-        font-size: 2.1rem;
-    }
-    #intro-h2{
-        font-size:18px;
-        text-shadow: 2px 2px 4px rgb(32, 31, 31);
-        color: rgb(226, 226, 226);
-
-    }
-    #recentUploads{
-        font-size: 22px;
-        border-bottom: 1px solid grey;
-        font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif
+    #intro-h1 {
+        font-size: 3rem;
     }
 
-      
+    #intro-h2 {
+        font-size: 1.5rem;
+        margin: 1rem 0;
+        color: rgba(255, 255, 255, 0.8);
+    }
+
+    #recentUploads {
+        font-size: 2.5rem;
+        margin: 2rem 0;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        color: rgba(255, 255, 255, 0.8);
+    }
 }
-#intro-restaurants{
-    width: 75%;
+
+#intro-restaurants {
+    width: 100%;
     margin: auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
 }
 
 @media only screen and (max-width: 600px) {
     #intro-restaurants {
-      width: 95%;
+        width: 95%;
     }
-  }
+}

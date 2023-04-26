@@ -7,14 +7,18 @@ import reportWebVitals from './reportWebVitals';
 import { BrowserRouter as Router} from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import * as serviceWorkerRegistration from './serviceWorkerRegistration';
+import { Provider } from 'react-redux';
+import store from './store';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
+  <Provider store={store}>
   <React.StrictMode>
     <Router>
       <App />
     </Router>
   </React.StrictMode>
+</Provider>
 );
 
 // If you want your app to work offline and load faster, you can change

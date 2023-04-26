@@ -1,79 +1,45 @@
-import './index.scss'
-import RestaurantCard from '../../components/RestaurantCard';
-import { useQuery } from '@apollo/client';
-import { QUERY_RESTAURANTS } from '../../utils/queries';
+import React from 'react';
+import SmallRestCard from '../../components/SmallRestCard';
+import Pagination from 'react-paginate';
+import { useSelector, useDispatch } from 'react-redux';
+import {
+  selectRestaurants,
+  selectCurrentPage,
+  setCurrentPage,
+  selectPerPage,
+  useRestaurantQuery,
+} from '../../reducers';
 
+function RestaurantList() {
+  const restaurants = useSelector(selectRestaurants);
+  const currentPage = useSelector(selectCurrentPage);
+  const perPage = useSelector(selectPerPage);
+  const dispatch = useDispatch();
+  const currentRests = restaurants.slice(currentPage * perPage, currentPage * perPage + perPage);
 
+  function handlePageClick({ selected }) {
+    dispatch(setCurrentPage(selected));
+  }
 
+  const data = useRestaurantQuery();
+  dispatch({ type: 'restaurant/setRestaurants', payload: data });
 
-const Restaurants = () =>{
-    const { data} = useQuery(QUERY_RESTAURANTS)
+  const totalPages = Math.ceil(restaurants.length / perPage);
 
-    let restaurants =  data?.restaurants;
-    let mostPop ='';
-
-    
-   
-
-    if(restaurants?.length > 5){
-        const newRest = [...restaurants];
-
-         mostPop = restaurants
-        restaurants = newRest.splice(-5).reverse();
-   
-
-        
-    
-   }
-    else{
-
-            mostPop = restaurants
-        
-        };
-      
-            
-if(restaurants && mostPop) {       
-    return(
-        <>
-        <div>
-                   {/* <CategorySearchBar></CategorySearchBar> */}
-        </div>
-        <section className='d-flex justify-content-center' id='restSection'>
-                
-
-
-
-
-            <section className='d-flex flex-column restaurant-containers mx-2'  >
-
-                <h2 className='col-12 text-center mt-5 flex-wrap'>All Restaurants</h2>
-                
-                {mostPop && <RestaurantCard restaurants={mostPop} ></RestaurantCard> }
-               
-
-
-
-
-            </section>
-            <section className='d-flex flex-column restaurant-containers'  >
-
-                <h2 className='col-12 text-center mt-5 flex-wrap'>Most Recent</h2>
-
-
-                {restaurants && <RestaurantCard restaurants={restaurants} ></RestaurantCard>}
-
-
-
-
-            </section>
-            
-        </section>
-        
-        
-        
-        </>
-    )
-    }
+  return (
+    <>
+      <div className="restaurant-list">
+        {currentRests.map((restaurant) => (
+          <SmallRestCard restaurant={restaurant} key={restaurant._id} />
+        ))}
+      </div>
+      <Pagination
+        pageCount={totalPages}
+        onPageChange={handlePageClick}
+        forcePage={currentPage}
+      />
+    </>
+  );
 }
 
-export default Restaurants;
+export default RestaurantList;

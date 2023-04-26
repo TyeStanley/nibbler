@@ -9,12 +9,16 @@
     "install": "cd server && npm i && cd ../client && npm i",
     "seed": "cd server && npm run seed",
     "build": "cd client && npm run build"
-    
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "concurrently": "^5.1.0"
+  },
+  "dependencies": {
+    "@reduxjs/toolkit": "^1.9.5",
+    "react-bootstrap": "^2.7.0",
+    "react-paginate": "^8.1.4"
   }
 }

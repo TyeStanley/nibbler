@@ -1,6 +1,47 @@
-
-
-.restaurant-containers{
- width: 40%;
+.restaurant-list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
   
-}
+  .restaurant-list__container {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    max-width: 1080px;
+    margin-bottom: 24px;
+  }
+  
+  .restaurant-list__pagination {
+    width: 100%;
+    max-width: 1080px;
+  }
+  
+  .pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px 0;
+  }
+  
+  .pagination__page {
+    width: 30px;
+    height: 30px;
+    border: 1px solid #ccc;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 10px;
+    cursor: pointer;
+  }
+  
+  .pagination__page.selected {
+    background-color: #333;
+    color: #fff;
+  }
+  
+  .pagination__page:hover {
+    background-color: #eee;
+  }
+  

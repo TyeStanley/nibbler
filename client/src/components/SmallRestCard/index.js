@@ -1,63 +1,54 @@
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { setCurrentPage } from '../../reducers';
+import { selectRestaurants } from '../../reducers';
 import './index.scss';
-import { useEffect, useState } from 'react';
-import {useQuery } from '@apollo/client';
-import { QUERY_ME} from '../../utils/queries';
-import Hearts from '../Hearts';
-import Auth from '../../utils/auth';
+import { Carousel } from 'react-bootstrap';
 
-function SmallRestCard ({restaurants}){
-    
-    
+function SmallRestCard() {
+  const dispatch = useDispatch();
+  const restaurants = useSelector(selectRestaurants);
 
-   //setup a state for the current restaurants 
-  const [currentRests, setCurrentRests] = useState();
-  const [currentUser, setUser] = useState();
-  const loggedIn = Auth.loggedIn();
-  // pull user data
-  const { data } = useQuery(QUERY_ME)
-  let userData =  data?.me;
-  let restState = restaurants;
+  useEffect(() => {
+    dispatch(setCurrentPage(0));
+  }, []);
 
-  useEffect(() =>{
-    if(restState){
+  const handleHeartClick = (e, index) => {
+    let updatedRests = [...restaurants];
+    updatedRests[index].heartsCount = updatedRests[index].heartsCount + 1;
+    dispatch({ type: 'restaurant/setRestaurants', payload: updatedRests });
+  }
 
-      setCurrentRests(restState);
-    }
-    if(currentUser === undefined){
-      setUser(userData);
-  
-    }
-  },[restState])
-
-if(currentRests){
-    return(
-        <>
-
-
-
-{currentRests.map(({restName,restPhotos,heartsCount,comments, _id}) =>(
-                           <div id='smallRestCardBody' key={_id + Date.now()}>
-                             <div>
-                              <h1>{restName}</h1>
-                            <Hearts _id ={_id} currentRests ={currentRests} setCurrentRests={setCurrentRests} currentUser={currentUser} setUser={setUser} heartsCount ={heartsCount} restName={restName}  />
-                           </div>
-                            {restPhotos[0] ? <img src={restPhotos[0].photoUrl} alt=''></img> : <img src="" alt=''></img> }
-                          
-                            
-                            </div>
-                        
-                ))}
-     
-     </>
-
-     
-    )
-
-
-
-
-}
-
+  if (restaurants) {
+    return (
+      <div className="rest-card-container">
+        {restaurants.map(({ restName, restPhotos, heartsCount, comments, _id }, index) => (
+          <div className="rest-card" key={_id}>
+            <Carousel>
+              {restPhotos.map(({photoUrl}, i) => (
+                <Carousel.Item key={i}>
+                  <img src={photoUrl} alt="" />
+                </Carousel.Item>
+              ))}
+            </Carousel>
+            <div className="rest-card-info">
+              <h2 className="rest-card-title">{restName}</h2>
+              <div className="rest-card-details">
+                <div className="rest-card-hearts" onClick={(e) => handleHeartClick(e, index)}>
+                  <i className="fas fa-heart"></i> {heartsCount}
+                </div>
+                <div className="rest-card-comments">
+                  <i className="fas fa-comment"></i> {comments.length}
+                </div>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    );
+  } else {
+    return null;
+  }
 }
 
 export default SmallRestCard;

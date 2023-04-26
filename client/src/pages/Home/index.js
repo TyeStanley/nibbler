@@ -7,6 +7,7 @@ import {
 import { QUERY_RESTAURANTS } from '../../utils/queries';
 import { useQuery } from '@apollo/client';
 import SmallRestCard from '../../components/SmallRestCard';
+import './index.scss';
 
 const Home = () => {
      // setup state for current page
@@ -22,9 +23,6 @@ const Home = () => {
            dispatch({ type: 'restaurant/setRestaurants', payload: data.restaurants });
          }
        }, [data, dispatch]);
-
-
-
 
     return (
         <>

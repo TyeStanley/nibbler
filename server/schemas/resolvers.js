@@ -586,15 +586,15 @@ const resolvers = {
     },
 
     // take away heart (remove rest from user's favorites)
-    unheart: async (parent, { heartId }, context) => {
+    unheart: async (parent, { heartId, targetType }, context) => {
       if (context.user) {
-        let heart = await Heart.find({targetId:heartId});
-        const user = await User.findById(context.user._id);
-        heart = heart.filter(hearts => hearts.user.toString() === user._id.toString());
-        heart = heart[0]
+        // let heart = await Heart.find({targetId:heartId});
+        // // const user = await User.findById(context.user._id);
+        // // heart = heart.filter(hearts => hearts.user.toString() === user._id.toString());
+        // // heart = heart[0]
 
         // assign target to remove heart from and update based on type
-        switch (heart.targetType) {
+        switch (targetType) {
           case 'rest':
             await Heart.findByIdAndDelete(heart._id)
             const rest = await Rest.findById(heart.targetId);

@@ -142,7 +142,7 @@ const typeDefs = gql`
     heartRest(restId: ID!): Heart
     heartDish(dishId: ID!): Heart
     heartComment(commentId: ID!): Heart
-    unheart(heartId: ID!): Heart
+    unheart(heartId: ID!, targetType: String!): Heart
   }
 `;
 

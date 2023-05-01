@@ -1,13 +1,27 @@
 // Import combined is from Redux library to combine reducers into one.
 import { combineReducers } from 'redux';
+// Import Query Restaurants - this is the query that will be used to get the restaurants from the database.
 import { QUERY_RESTAURANTS } from './utils/queries';
+// Import useQuery from Apollo Client library to make the query request.
 import { useQuery } from '@apollo/client';
 
+// Create initial state for the reducers.
 const initialState = {
   restaurants: [],
   currentPage: 0,
   perPage: 10,
+  userHearts: [],
 };
+
+// Create a reducer to handle user heart data.
+function userHeartReducer(state = initialState.userHearts, action) {
+  switch (action.type) {
+    case 'userHearts/setUserHearts':
+      return action.payload;
+    default:
+      return state;
+  }
+}
 
 function restaurantReducer(state = initialState.restaurants, action) {
   switch (action.type) {
@@ -40,6 +54,7 @@ const rootReducer = combineReducers({
   restaurants: restaurantReducer,
   currentPage: currentPageReducer,
   perPage: perPageReducer,
+  userHearts: userHeartReducer,
 });
 
 export function setCurrentPage(currentPage) {
@@ -54,6 +69,8 @@ export function useRestaurantQuery() {
 }
 
 export default rootReducer;
+
+export const selectUserHearts = state => state.userHearts;
 export const selectRestaurants = state => state.restaurants;
 export const selectCurrentPage = state => state.currentPage;
 export const selectPerPage = state => state.perPage;

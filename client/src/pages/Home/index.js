@@ -10,6 +10,8 @@ import SmallRestCard from '../../components/SmallRestCard';
 import './index.scss';
 
 const Home = () => {
+    
+
      // setup state for current page
      const restaurants = useSelector(selectRestaurants);
      // setup dispatch
@@ -36,11 +38,11 @@ const Home = () => {
                         Save your favorite spots | Share them with friends | Find something new
                     </h2>
                 </div>
-                <h3 className='p-3' id='recentUploads'>Recent Uploads</h3>
+                <h3 className='p-3' id='recentUploads'>PLACEHOLDER FOR FILTER BAR</h3>
             </section>
             <section id='intro-restaurants' className='border-primary d-flex flex-column'>
                 <div className='d-flex flex-column' id='recent-uploads-div'>
-                    {restaurants && <SmallRestCard restaurants={restaurants} />}
+                    {restaurants && <SmallRestCard  />}
                 </div>
             </section>
         </>

@@ -588,10 +588,13 @@ const resolvers = {
     // take away heart (remove rest from user's favorites)
     unheart: async (parent, { heartId, targetType }, context) => {
       if (context.user) {
-        // let heart = await Heart.find({targetId:heartId});
-        // // const user = await User.findById(context.user._id);
-        // // heart = heart.filter(hearts => hearts.user.toString() === user._id.toString());
-        // // heart = heart[0]
+        // This logic is taking the heartId which is actually the restaurant id and finding the hearts that the restaurant has
+        let heart = await Heart.find({targetId:heartId});
+        // This is taking the user id from context and finding the user
+        const user = await User.findById(context.user._id);
+        // this is filtering the found hearts user second to match the user id to user id from context
+        heart = heart.filter(hearts => hearts.user.toString() === user._id.toString());
+        heart = heart[0]
 
         // assign target to remove heart from and update based on type
         switch (targetType) {

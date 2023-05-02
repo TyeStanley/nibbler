@@ -7,7 +7,6 @@ import { useSelector } from 'react-redux';
 import Auth from '../../utils/auth';
 //import useMutation and useQuery from '@apollo/client';
 import { useMutation } from '@apollo/client';
-
 import { REMOVE_HEART,ADD_HEART } from '../../utils/mutations';
 import { QUERY_ME } from '../../utils/queries';
 import { useQuery } from '@apollo/client';
@@ -36,35 +35,24 @@ function SmallRestCard() {
   const restaurants = useSelector(selectRestaurants);
   // setup up const for userHeart count using selectUserHears from the reducer
   const userHearts = useSelector(selectUserHearts);
-
+  // mutations for adding and removing hearts
   const [addHeart] = useMutation(ADD_HEART);
   const [removeHeart] = useMutation(REMOVE_HEART);
 
  
-  const handleHeartClick = (e,_id) => {
-    // Check to see if user has already hearted the restaurant
-    const userHearted = userHearts.includes(_id);
-    
-    let updatedUserHearts;
-    // map the restaurant hearts to a new array
-    let updatedRestHearts = restaurants.map((rest) => rest.hearts)
-  
-    let findRestTarget = updatedRestHearts.map((rest) => rest.filter((rest) => rest.targetId === _id));
-    
-    let hasHeart = findRestTarget.filter((rest) => rest.length > 0 );
- 
-    let findUserHeart = hasHeart[0].map((user) => user.user);
-    let findUserIndex =  findUserHeart.findIndex((user) => user._id === userData._id);
-  
-    console.log(findUserIndex)
-    const restId = _id;
-    const heartId = hasHeart[0][findUserIndex]._id
-    const targetType = 'rest'
+  const handleHeartClick = (e,_id) =>{ 
    
-
+    const restId = _id;
+    // Check to see if user has already hearted the restaurant from global state
+     const userHearted = userHearts.includes(restId); 
+  //  // init updatedUserHearts variable
+    let updatedUserHearts;
+    const targetType = 'rest'
+    const heartId = restId;
+    // if the user has not hearted the restaurant then add the restaurant id to the userHearts array
       if(!userHearted) {
       updatedUserHearts = [...userHearts, _id];
-      addHeart({ variables: { restId } });
+      addHeart({ variables: { restId} });
     } else {
       updatedUserHearts = userHearts.filter((heart) => heart !== _id);
       removeHeart({ variables: { heartId,targetType } });
@@ -95,8 +83,6 @@ function SmallRestCard() {
   };
   
   
-
-  
   if (restaurants) {
     return (
       <div className="rest-card-container">
@@ -112,6 +98,7 @@ function SmallRestCard() {
             <div className="rest-card-info">
               <h2 className="rest-card-title">{restName}</h2>
               <div className="rest-card-details">
+            
               {Auth.loggedIn() ? (
                         <div className="rest-card-hearts" onClick={(e) => handleHeartClick(e, _id)}>
                           <i className="fas fa-heart"></i> {heartsCount}

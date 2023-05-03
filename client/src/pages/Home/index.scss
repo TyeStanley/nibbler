@@ -1,8 +1,8 @@
 #hero-section {
-    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('../..//assets/images/foodie-hero-img.jpg');
+    background-image: linear-gradient(rgba(54, 52, 48, 0.5), rgba(0, 0, 0, 0.5)), url('../..//assets/images/foodie-hero-img.jpg');
     background-position: center;
     background-size: cover;
-    height: 50vh;
+    height: 20vh;
     width: 100%;
     margin: auto;
     display: flex;
@@ -10,6 +10,8 @@
     justify-content: center;
     text-align: center;
     color: white;
+    box-shadow:  0px 0px 15px white;
+    
 }
 
 #intro-statement {

@@ -41,6 +41,7 @@ function SmallRestCard() {
 
  
   const handleHeartClick = (e,_id) =>{ 
+    console.log(_id)
    
     const restId = _id;
     // Check to see if user has already hearted the restaurant from global state
@@ -65,10 +66,10 @@ function SmallRestCard() {
         return {
           ...rest,
           heartsCount: rest.heartsCount + 1, 
-          userHearts: [...userHearts, _id],
+          userHearts: updatedUserHearts,
         };
       }
-      else if (userHearted && userHearts.includes(rest._id)) {
+      else if (rest._id === _id  && userHearted && userHearts.includes(rest._id)) {
         return {
           ...rest,
           heartsCount: rest.heartsCount - 1,
@@ -80,13 +81,17 @@ function SmallRestCard() {
     });
     dispatch({ type: 'restaurant/setRestaurants', payload: updatedRests });
     
+    
   };
   
+  const handleHasLiked = (restId) => {  
+    return userHearts.includes(restId);
+  };
   
   if (restaurants) {
     return (
       <div className="rest-card-container">
-        {restaurants.map(({ restName, restPhotos, heartsCount, comments, _id }, index) => (
+        {restaurants.map(({ restName, restPhotos, heartsCount, _id }, index) => (
           <div className="rest-card" key={_id}>
             <Carousel>
               {restPhotos.map(({photoUrl}, i) => (
@@ -95,23 +100,25 @@ function SmallRestCard() {
                 </Carousel.Item>
               ))}
             </Carousel>
-            <div className="rest-card-info">
-              <h2 className="rest-card-title">{restName}</h2>
-              <div className="rest-card-details">
+            <div className="rest-card-info d-flex flex-row align-items-start pt-2">
+              <h2 className="rest-card-title col-md-8">{restName}</h2>
+              <div className="rest-card-details rest-card-hearts col-md-4">
             
               {Auth.loggedIn() ? (
-                        <div className="rest-card-hearts" onClick={(e) => handleHeartClick(e, _id)}>
-                          <i className="fas fa-heart"></i> {heartsCount}
-                        </div>
+                        <div className={`rest-card-hearts d-flex ${handleHasLiked(_id) ? "red" : "white"}`}>
+                          <i className="fas fa-heart col-sm-10  px-2 " onClick={(e) => handleHeartClick(e, _id)}></i>
+                          <p className='heart-count-p col-sm-2 '>{heartsCount}</p>
+                         
+                      </div>
+                      
                     ) : (
-                        <div className="rest-card-hearts">
-                          <i className="fas fa-heart"></i> {heartsCount}
+                        <div className="rest-card-hearts d-flex white">
+                          <i className="fas fa-heart col-sm-10  px-2 "></i> 
+                          <p className='heart-count-p col-sm-2 p-1'>{heartsCount}</p>
                         </div>
                     )}
   
-                <div className="rest-card-comments">
-                  <i className="fas fa-comment"></i> {comments.length}
-                </div>
+            
               </div>
             </div>
           </div>

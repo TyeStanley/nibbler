@@ -15,7 +15,7 @@ const AppNavbar = () => {
 
   return (
     <>
-      <Navbar className='navbar' expand='lg' bg='dark' variant='dark'>
+      <Navbar className='navbar' expand='lg'  variant='dark'>
         <Container fluid>
           <Link className='navbar-brand' to='/'>
             <h1 id='nav-header'>Nibbler</h1>

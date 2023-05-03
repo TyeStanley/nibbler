@@ -43,6 +43,7 @@ function App() {
           exact path="/" 
           element={<Home/>} 
         />
+        
 
         {/* <Route 
           path="/restaurants" 

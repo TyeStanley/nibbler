@@ -1,13 +1,16 @@
 main {
   margin: 0;
   padding: 0;
-  background-color: rgba(185, 183, 146, 0.836);
+  background: linear-gradient(180deg, #adada9, #837771);
+
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 
 
 footer {
-  background-color: rgba(161, 154, 143, 0.993);
-  box-shadow: 0px -5px 10px rgba(0, 0, 0, 0.5);
+  box-shadow: 0px -5px 10px rgba(224, 218, 216, 0.226);
+  
 }
 
 /* width */

@@ -31,9 +31,6 @@ const Home = () => {
             <section className='p-5 bg-primary text-white text-center' id='hero-section'></section>
             <section className='text-center pt-3' id='intro-statement'>
                 <div className='intro-titles'>
-                    <div className='intro-div'>
-                        <h1 id='intro-h1'>Welcome to Nibbler</h1>
-                    </div>
                     <h2 className='pt-2 pb-3' id='intro-h2'>
                         Save your favorite spots | Share them with friends | Find something new
                     </h2>

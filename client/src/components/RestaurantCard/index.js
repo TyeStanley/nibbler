@@ -7,7 +7,7 @@ import Comments from '../Comments';
 import { useEffect, useState } from 'react';
 import {useQuery } from '@apollo/client';
 import { QUERY_ME} from '../../utils/queries';
-import Hearts from '../Hearts';
+
 
 const RestaurantCard = ({restaurants}) =>{
 
@@ -50,7 +50,7 @@ if(currentRests){
                               
                       
                                             
-                                <Hearts _id ={_id} currentRests ={currentRests} setCurrentRests={setCurrentRests} currentUser={currentUser} setUser={setUser} heartsCount ={heartsCount} restName={restName}  />
+                                
                                                          
                                 {comments && <UserReview comments={comments}  ></UserReview>}
 

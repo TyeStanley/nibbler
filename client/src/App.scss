@@ -1,11 +1,10 @@
 main {
-  margin: 0;
-  padding: 0;
+  height: 100vh;
   background: linear-gradient(180deg, #adada9, #837771);
+  overflow: auto;
 
-  background-size: cover;
-  background-repeat: no-repeat;
 }
+
 
 
 footer {

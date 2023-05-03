@@ -1,17 +1,20 @@
 footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
   box-sizing: border-box;
   text-align: center;
-  color: white;
-
+  background-color: rgb(88, 83, 79);
+  display: flex;
+  justify-content: center;
   
-
   .borderOutline {
     border: 2px solid white;
     border-bottom: 0px;
   }
 
   .GitHubNameContainer {
-    background-color: rgb(58, 54, 51);
+    background-color: rgb(88, 83, 79);
     padding: 8px 20px 20px 2px;
   }
 
@@ -41,6 +44,7 @@ footer {
   .back-to-top:hover {
     opacity: 1;
   }
+
   @keyframes zoom-in {
     0% {
       transform: scale(0, 0);

@@ -23,11 +23,11 @@ const AppNavbar = () => {
           <Navbar.Toggle aria-controls='navbar' />
           <Navbar.Collapse id='navbar'>
             <Nav className='ml-auto'>
-              <NavItem>
+              {/* <NavItem>
                 <Link className='nav-link' to='/restaurants'>
                   Restaurants
                 </Link>
-              </NavItem>
+              </NavItem> */}
               {Auth.loggedIn() ? (
                 <>
                   <NavItem>

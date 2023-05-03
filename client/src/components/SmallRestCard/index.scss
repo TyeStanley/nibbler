@@ -3,10 +3,7 @@
     flex-wrap: wrap;
     align-items: center;
     justify-content: center;
-    margin-left: 5%;
-    margin-right: 5%;
-    margin-top: -2%;
-    margin-bottom: 2%;
+    padding: 0rem 3rem 6rem 3rem;
 
     
   }
@@ -16,7 +13,6 @@
     border: solid 1px black;
     overflow: hidden;
     margin: .09%;
-    transition: all 0.2s ease-in-out;
     
     
   }
@@ -24,13 +20,13 @@
   .rest-card img {
     object-fit: cover;
     width:100%;
-    height: 15.5rem;
+    height: 16.2rem;
   }
 
   .rest-card-info {
     width: 100%;
     height: 100%;
-    border-top:#3a12ec9f 1px solid;
+    border-top:#ffbb02 1.9px solid;
     background-color: rgba(102, 101, 97, 0.9);
     background: linear-gradient(283deg, rgba(93,77,59,1) 0%, rgba(92,91,90,1) 20%, rgba(75,73,69,1) 71%, rgba(126,118,111,1) 100%, rgba(255,189,57,1) 100%);
 }
@@ -53,7 +49,7 @@
   .rest-card-hearts {
     padding-right: .4rem;
     text-shadow: 1px 1px 2px black;
-    font-size: 1.9rem;
+    font-size: 1.7rem;
     
  
   }

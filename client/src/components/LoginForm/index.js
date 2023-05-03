@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Form, Button, Alert } from 'react-bootstrap';
 import Auth from '../../utils/auth';
@@ -6,50 +5,64 @@ import { useMutation } from '@apollo/client';
 import { LOGIN_USER } from '../../utils/mutations';
 
 const LoginForm = () => {
+  // Set up state using the useState hook
   const [userFormData, setUserFormData] = useState({ email: '', password: '' });
-  const [validated] = useState(false);
+  const [validated, setValidated] = useState(true);
   const [showAlert, setShowAlert] = useState(false);
+  
+  // Set up mutation using the useMutation hook
   const [loginUser] = useMutation(LOGIN_USER);
 
+  // Handle form input changes
   const handleInputChange = (event) => {
     const { name, value } = event.target;
     setUserFormData({ ...userFormData, [name]: value });
   };
 
+  // Handle form submission
   const handleFormSubmit = async (event) => {
     event.preventDefault();
 
-    // check if form has everything (as per react-bootstrap docs)
+    // Check if form is valid
     const form = event.currentTarget;
     if (form.checkValidity() === false) {
-      event.preventDefault();
       event.stopPropagation();
-    
     }
 
+    // Set form as validated
+    setValidated(true);
+
     try {
+      // Call the loginUser mutation with userFormData
       const { data } = await loginUser({
         variables: {...userFormData} 
       });
 
+      // If successful, log user in and redirect to homepage
       Auth.login(data.login.token);
     } catch (err) {
+      // If unsuccessful, show error alert and reset form
       console.error(err);
       setShowAlert(true);
+      setTimeout(() => setShowAlert(false), 3000);
+      
+      // Reset form
+      setShowAlert(true);
+      setTimeout(() => setShowAlert(false), 3000);
     }
 
+    // Reset form inputs
     setUserFormData({
-      username: '',
       email: '',
       password: '',
     });
   };
 
+  // Render the form using React Bootstrap components
   return (
     <>
       <Form noValidate validated={validated} onSubmit={handleFormSubmit}>
         <Alert dismissible onClose={() => setShowAlert(false)} show={showAlert} variant='danger'>
-          Something went wrong with your login credentials!
         </Alert>
         <Form.Group>
           <Form.Label htmlFor='email'>Email</Form.Label>
@@ -61,7 +74,7 @@ const LoginForm = () => {
             value={userFormData.email}
             required
           />
-          <Form.Control.Feedback type='invalid'>Email is required!</Form.Control.Feedback>
+          
         </Form.Group>
 
         <Form.Group>
@@ -74,7 +87,7 @@ const LoginForm = () => {
             value={userFormData.password}
             required
           />
-          <Form.Control.Feedback type='invalid'>Password is required!</Form.Control.Feedback>
+          
         </Form.Group>
         <Button
           disabled={!(userFormData.email && userFormData.password)}

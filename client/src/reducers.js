@@ -11,7 +11,18 @@ const initialState = {
   currentPage: 0,
   perPage: 10,
   userHearts: [],
+  user:[],
 };
+
+//Create a reducer to handle user data.
+function userReducer(state = initialState.user, action) {
+  switch (action.type) {
+    case 'user/setUser':
+      return action.payload;
+    default:
+      return state;
+  }
+}
 
 // Create a reducer to handle user heart data.
 function userHeartReducer(state = initialState.userHearts, action) {
@@ -55,6 +66,7 @@ const rootReducer = combineReducers({
   currentPage: currentPageReducer,
   perPage: perPageReducer,
   userHearts: userHeartReducer,
+  user: userReducer,
 });
 
 export function setCurrentPage(currentPage) {
@@ -74,3 +86,5 @@ export const selectUserHearts = state => state.userHearts;
 export const selectRestaurants = state => state.restaurants;
 export const selectCurrentPage = state => state.currentPage;
 export const selectPerPage = state => state.perPage;
+export const selectUser = state => state.user;
+

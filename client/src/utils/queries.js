@@ -19,18 +19,15 @@ export const QUERY_ME = gql`
         commentText
       }
       favRests {
-      _id
-      hearts {
         _id
-        user {
-          _id
-        }
-      }
+      
+    }
+  
     }
   
 
     }
-}
+
 `;
 export const QUERY_RESTAURANTS = gql `
   {

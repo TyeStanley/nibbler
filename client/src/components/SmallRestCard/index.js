@@ -13,13 +13,20 @@ import { useQuery } from '@apollo/client';
 //import useEffect from react
 import { useEffect} from 'react';
 
-function SmallRestCard() { 
-  
+function SmallRestCard({restProps}) { 
+  // setup state for current page - this is how we access the current store state
+  let restaurants = useSelector(selectRestaurants);  
   // initialize dispatch - dispatches actions to the store - this is how we update the store
   const dispatch = useDispatch();
   // if user is logged in then try QUERY_ME and save data to variable
   let userData;
   
+  if(restProps){
+    restaurants = restProps;
+  }
+  
+  console.log(restaurants)
+  console.log(restProps)
     const { data } = useQuery(QUERY_ME);
     userData = data?.me;
 
@@ -31,8 +38,10 @@ function SmallRestCard() {
       }
     }, [data, dispatch]);
 
-  // setup state for current page - this is how we access the current store state
-  const restaurants = useSelector(selectRestaurants);
+
+   
+ 
+
   // setup up const for userHeart count using selectUserHears from the reducer
   const userHearts = useSelector(selectUserHearts);
   // mutations for adding and removing hearts
@@ -41,8 +50,7 @@ function SmallRestCard() {
 
  
   const handleHeartClick = (e,_id) =>{ 
-    console.log(_id)
-   
+    
     const restId = _id;
     // Check to see if user has already hearted the restaurant from global state
      const userHearted = userHearts.includes(restId); 
@@ -60,7 +68,7 @@ function SmallRestCard() {
     }
     dispatch({ type: 'userHearts/setUserHearts', payload: updatedUserHearts });
 
-    const updatedRests = restaurants.map((rest) => {
+    const updatedRests = restaurants?.map((rest) => {
       if (rest._id === _id && !userHearted) {
         // if user has not hearted the restaurant then A
         return {
@@ -87,26 +95,27 @@ function SmallRestCard() {
   const handleHasLiked = (restId) => {  
     return userHearts.includes(restId);
   };
-  
+
   if (restaurants) {
+    console.log("Yes " + restaurants)
     return (
       <div className="rest-card-container">
-        {restaurants.map(({ restName, restPhotos, heartsCount, _id }, index) => (
+        {restaurants?.map(({ restName, restPhotos, heartsCount, _id }, index) => (
           <div className="rest-card" key={_id}>
-            <Carousel>
+            <Carousel prevIcon={null} nextIcon={null}>
               {restPhotos.map(({photoUrl}, i) => (
                 <Carousel.Item key={i}>
                   <img src={photoUrl} alt="" />
                 </Carousel.Item>
               ))}
             </Carousel>
-            <div className="rest-card-info d-flex flex-row align-items-start pt-2">
+            <div className="rest-card-info d-flex flex-row align-items-start pt-1">
               <h2 className="rest-card-title col-md-8">{restName}</h2>
               <div className="rest-card-details rest-card-hearts col-md-4">
             
               {Auth.loggedIn() ? (
                         <div className={`rest-card-hearts d-flex ${handleHasLiked(_id) ? "red" : "white"}`}>
-                          <i className="fas fa-heart col-sm-10  px-2 " onClick={(e) => handleHeartClick(e, _id)}></i>
+                          <i className="fas fa-heart col-sm-10  px-1 " onClick={(e) => handleHeartClick(e, _id)}></i>
                           <p className='heart-count-p col-sm-2 '>{heartsCount}</p>
                          
                       </div>
@@ -114,7 +123,7 @@ function SmallRestCard() {
                     ) : (
                         <div className="rest-card-hearts d-flex white">
                           <i className="fas fa-heart col-sm-10  px-2 "></i> 
-                          <p className='heart-count-p col-sm-2 p-1'>{heartsCount}</p>
+                          <p className='heart-count-p col-sm-2 '>{heartsCount}</p>
                         </div>
                     )}
   

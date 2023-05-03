@@ -4,18 +4,20 @@ import {
   selectRestaurants,
   
 } from '../../reducers';
-import { QUERY_RESTAURANTS } from '../../utils/queries';
+import { QUERY_RESTAURANTS,QUERY_ME } from '../../utils/queries';
 import { useQuery } from '@apollo/client';
 import SmallRestCard from '../../components/SmallRestCard';
 import './index.scss';
+import Auth from '../../utils/auth';
+
+
+
 
 const Home = () => {
-    
 
+      const dispatch = useDispatch();
      // setup state for current page
      const restaurants = useSelector(selectRestaurants);
-     // setup dispatch
-     const dispatch = useDispatch();
      // This is going to query for initial restaurant data
      const { data } = useQuery(QUERY_RESTAURANTS);
      // If we have data, we will set the restaurants in the store
